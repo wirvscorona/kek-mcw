@@ -1,36 +1,82 @@
 import React, { Component } from 'react'
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-class DiaryTable extends Component {
-  render() {
-    return (
-        <table class="table-auto">
-        <thead>
-          <tr>
-            <th class="px-4 py-2">Title</th>
-            <th class="px-4 py-2">Author</th>
-            <th class="px-4 py-2">Views</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="border px-4 py-2">Intro to CSS</td>
-            <td class="border px-4 py-2">Adam</td>
-            <td class="border px-4 py-2">858</td>
-          </tr>
-          <tr class="bg-gray-100">
-            <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools and the Impact on Design</td>
-            <td class="border px-4 py-2">Adam</td>
-            <td class="border px-4 py-2">112</td>
-          </tr>
-          <tr>
-            <td class="border px-4 py-2">Intro to JavaScript</td>
-            <td class="border px-4 py-2">Chris</td>
-            <td class="border px-4 py-2">1,280</td>
-          </tr>
-        </tbody>
-      </table>
-    )
-  }
+import Select from 'react-select'
+
+import {Bootstrap, Table, Row, Col} from 'react-bootstrap';
+
+const contactOptions = [
+    { value: 'none', label: 'Kein Kontakt' },
+    { value: 'talk', label: 'Gespräch' }
+  ]
+
+class DiaryTable extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            date: new Date(),
+            contact: null,
+            protection: 'Schutzart eintragen',
+            fever: false
+        };
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleContactChange = this.handleContactChange.bind(this);
+        this.handleProtectionChange = this.handleProtectionChange.bind(this);
+        this.handleFeverChange = this.handleFeverChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    handleDateChange(date) {
+        this.setState({ date: date });
+    }
+
+    handleContactChange(contact) {
+        console.log('contact', contact.value)
+        this.setState({ contact: contact.value });
+    }
+
+    handleProtectionChange(event) {
+        this.setState({ protection: event.target.value });
+    }
+
+    handleFeverChange(event) {
+        this.setState({ fever: event.target.checked });
+    }
+
+    handleSubmit(event) {
+        alert('A date was submitted: ' + this.state.date);
+        event.preventDefault();
+    }
+
+    render() {
+        return (
+            <div class="ml-10">
+                <Table>
+                    <Row>
+                        <Col>
+                        <DatePicker
+                            selected={this.state.date}
+                            onChange={this.handleDateChange}
+                            className="red-border"
+                        />
+                        </Col>
+                        <Col>
+                            <Select 
+                                options={contactOptions} 
+                                onChange={this.handleContactChange}
+
+                            />
+                        </Col>
+                   </Row>
+                </Table>
+            </div >
+
+        );
+    }
 }
 
+
 export default DiaryTable;
+
