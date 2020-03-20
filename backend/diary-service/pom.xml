@@ -33,7 +33,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <start-class>de.wirvsvirus.kek.service.diary.BackendServiceWebApplication</start-class>
+        <start-class>de.wirvsvirus.kek.service.BackendServiceWebApplication</start-class>
     </properties>
 
     <dependencies>
@@ -102,7 +102,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>de.wirvsvirus.kek.service.diary.BackendServiceWebApplication</mainClass>
+                    <mainClass>de.wirvsvirus.kek.service.BackendServiceWebApplication</mainClass>
                 </configuration>
             </plugin>
 
