@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import './Navigation.css'
 
 const Navigation = _ => (
-    <div className='navigation'>
-        <nav className='navigation'>
+    <div>
+        <nav>
             <ul>
                 <li>
                     <Link to="/">Home</Link>
