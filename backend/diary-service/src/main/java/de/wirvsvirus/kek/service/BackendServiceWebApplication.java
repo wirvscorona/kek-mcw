@@ -1,11 +1,10 @@
-package de.wirvsvirus.kek.service.diary;
+package de.wirvsvirus.kek.service;
 
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,19 +20,18 @@ import org.springframework.web.client.HttpServerErrorException;
 @SpringBootApplication
 @EnableSwagger2
 @EnableZuulProxy
-@EnableFeignClients(defaultConfiguration = DiaryServiceWebApplication.FeignConfiguration.class)
-@ComponentScan(basePackages={"de.wirvsvirus.kek.service"})
-public class DiaryServiceWebApplication extends SpringBootServletInitializer {
+@EnableFeignClients(defaultConfiguration = BackendServiceWebApplication.FeignConfiguration.class)
+public class BackendServiceWebApplication extends SpringBootServletInitializer {
 
-	Logger logger = LoggerFactory.getLogger(DiaryServiceWebApplication.class);
+	Logger logger = LoggerFactory.getLogger(BackendServiceWebApplication.class);
 
 	public static void main(String[] args) {
-		SpringApplication.run(DiaryServiceWebApplication.class, args);
+		SpringApplication.run(BackendServiceWebApplication.class, args);
 	}
 
 	@Override
 	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(DiaryServiceWebApplication.class);
+		return application.sources(BackendServiceWebApplication.class);
 	}
 
 	@Configuration
@@ -41,11 +39,11 @@ public class DiaryServiceWebApplication extends SpringBootServletInitializer {
 
 		@Override
 		public Exception decode(String methodKey, Response response) {
-            if (response.status() >= 500) {
-                return new HttpServerErrorException(HttpStatus.valueOf(response.status()), response.reason());
+			if (response.status() >= 500) {
+				return new HttpServerErrorException(HttpStatus.valueOf(response.status()), response.reason());
 			} else {
-                return new HttpClientErrorException(HttpStatus.valueOf(response.status()), response.reason());
-            }
+				return new HttpClientErrorException(HttpStatus.valueOf(response.status()), response.reason());
+			}
 		}
 	}
 
