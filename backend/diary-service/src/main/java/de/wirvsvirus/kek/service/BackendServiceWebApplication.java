@@ -1,10 +1,14 @@
 package de.wirvsvirus.kek.service;
 
+import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
+import de.wirvsvirus.kek.service.locations.repository.LocationHistoryRepository;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -47,4 +51,17 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 		}
 	}
 
+	// FIXME: only for demo purposes, ensuring LocationRepository works as expected.
+	@Bean
+	public CommandLineRunner demo(LocationHistoryRepository repository) {
+		return (args -> {
+			repository.save(new LocationHistory(-1, -1, -1, -1, -1));
+
+			logger.info("Stored one new location history....");
+
+			for (LocationHistory queriedHistory : repository.findAll()) {
+				logger.info(queriedHistory.toString());
+			}
+		});
+	}
 }
