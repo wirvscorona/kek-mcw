@@ -34,7 +34,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <start-class>se.kth.airquality.mqttservice.MQTTServiceWebApplication</start-class>
+        <start-class>de.wirvsvirus.kek.service.diary.DiaryServiceWebApplication</start-class>
     </properties>
  
     <dependencies>
@@ -103,7 +103,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>se.kth.airquality.mqttservice.MQTTServiceWebApplication</mainClass>
+                    <mainClass>de.wirvsvirus.kek.service.diary.DiaryServiceWebApplication</mainClass>
                 </configuration>
             </plugin>
             
