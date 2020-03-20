@@ -19,7 +19,7 @@ public class Diary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne() // TODO add relationship from USER to DIARY ??
+    @OneToOne()
     private User user;
 
     @OneToMany()
