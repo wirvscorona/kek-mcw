@@ -5,6 +5,7 @@ import feign.codec.ErrorDecoder;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,6 +22,7 @@ import org.springframework.web.client.HttpServerErrorException;
 @EnableSwagger2
 @EnableZuulProxy
 @EnableFeignClients(defaultConfiguration = DiaryServiceWebApplication.FeignConfiguration.class)
+@ComponentScan(basePackages={"de.wirvsvirus.kek.service"})
 public class DiaryServiceWebApplication extends SpringBootServletInitializer {
 
 	Logger logger = LoggerFactory.getLogger(DiaryServiceWebApplication.class);
