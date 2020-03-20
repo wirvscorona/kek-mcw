@@ -1,5 +1,6 @@
 import React from 'react';
 import App from './App';
+import Diary from './Diary'
 import Navigation from './Navigation';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
@@ -13,7 +14,7 @@ const AppRouter = _ => (
         </Switch>
         <Switch>
             <Route path='/diary'>
-                <App/>
+                <Diary/>
             </Route>
         </Switch>
     </Router>
