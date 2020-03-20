@@ -1,0 +1,11 @@
+ul {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li + li {
+    padding-left: 1em;
+}
