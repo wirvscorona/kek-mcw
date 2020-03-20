@@ -32,7 +32,7 @@ public class DiaryController {
     @GetMapping("/{id}")
     public ResponseEntity<Diary> findDiary(@PathVariable Long id) {
         Optional<Diary> diaryCandidate = diaryRepo.findById(id);
-        if (diaryCandidate.isEmpty()) {
+        if (!diaryCandidate.isPresent()) {
             return new ResponseEntity<Diary>(new Diary(), HttpStatus.NOT_FOUND);
         }
 
