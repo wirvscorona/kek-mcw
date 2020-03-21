@@ -64,7 +64,7 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 
 			logger.info("Stored one new location history....");
 
-			for (LocationHistory queriedHistory : repository.findAll()) {
+			for (LocationHistory queriedHistory : repository.findAllByLatitudeBetweenAndLongitudeBetween(-2, 0, -2, 0)) {
 				logger.info(queriedHistory.toString());
 			}
 		});
