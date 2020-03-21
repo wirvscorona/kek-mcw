@@ -1,13 +1,11 @@
 package de.wirvsvirus.kek.service.locations.controller;
 
 import de.wirvsvirus.kek.service.locations.model.LocationMatch;
-import de.wirvsvirus.kek.service.locations.repository.PlaceVisit;
+import de.wirvsvirus.kek.service.locations.model.pojo.Duration;
+import de.wirvsvirus.kek.service.locations.model.pojo.Location;
+import de.wirvsvirus.kek.service.locations.repository.*;
 import de.wirvsvirus.kek.service.locations.model.pojo.TimeLineObject;
 import de.wirvsvirus.kek.service.locations.model.pojo.TimelineJsonRoot;
-import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
-import de.wirvsvirus.kek.service.locations.repository.LocationHistoryRepository;
-import de.wirvsvirus.kek.service.locations.repository.Place;
-import de.wirvsvirus.kek.service.locations.repository.PlaceVisitRepository;
 import de.wirvsvirus.kek.service.locations.service.TrivialLocationMappingService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,12 +33,14 @@ public class LocationDataController {
     private final TrivialLocationMappingService trivialLocationMappingService;
 
     private final PlaceVisitRepository placeVisitRepository;
+    private final PlaceRepository placeRepository;
 
     @Autowired
-    public LocationDataController(LocationHistoryRepository locationHistoryRepository, TrivialLocationMappingService trivialLocationMappingService, PlaceVisitRepository placeVisitRepository) {
+    public LocationDataController(LocationHistoryRepository locationHistoryRepository, TrivialLocationMappingService trivialLocationMappingService, PlaceVisitRepository placeVisitRepository, PlaceRepository placeRepository) {
         this.locationHistoryRepository = locationHistoryRepository;
         this.trivialLocationMappingService = trivialLocationMappingService;
         this.placeVisitRepository = placeVisitRepository;
+        this.placeRepository = placeRepository;
     }
 
     @PostMapping("/locations/upload")
@@ -86,14 +86,11 @@ public class LocationDataController {
     }
 
     private PlaceVisit extractPlaceVisitData(TimeLineObject timeLineObject) {
-        long lat = timeLineObject.getPlaceVisit().getLocation().getLatitudeE7();
-        long lon = timeLineObject.getPlaceVisit().getLocation().getLongitudeE7();
-        String id = timeLineObject.getPlaceVisit().getLocation().getPlaceId();
-        String name = timeLineObject.getPlaceVisit().getLocation().getName();
-        long startTimestampMs = timeLineObject.getPlaceVisit().getDuration().getStartTimestampMs();
-        long endTimestampMs = timeLineObject.getPlaceVisit().getDuration().getEndTimestampMs();
-        long updateTime = System.currentTimeMillis();
-        Place place = new Place(lat, lon, name, id);
-        return new PlaceVisit(place, startTimestampMs, endTimestampMs, updateTime);
+        de.wirvsvirus.kek.service.locations.model.pojo.PlaceVisit placeVisit = timeLineObject.getPlaceVisit();
+        Location location = placeVisit.getLocation();
+        Duration duration = placeVisit.getDuration();
+        Place place = new Place(location.getLatitudeE7(), location.getLongitudeE7(), location.getName(), location.getPlaceId());
+        placeRepository.save(place);
+        return new PlaceVisit(place, duration.getStartTimestampMs(), duration.getEndTimestampMs(), System.currentTimeMillis());
     }
 }

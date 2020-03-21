@@ -7,7 +7,7 @@ public class PlaceVisit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     private Place place;
     private long startTimestamp;
     private long endTimestamp;
