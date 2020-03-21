@@ -86,7 +86,6 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 		return (args -> {
 			Symptom symptom = new Symptom();
 			symptom.setName("rote augen");
-			symptom.setValue(1000);
 			repository.save(symptom);
 		});
 	}

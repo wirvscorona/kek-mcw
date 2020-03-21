@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class CorrespondenceDetails {
 
     @Id
@@ -20,11 +20,14 @@ public class CorrespondenceDetails {
     private Long id;
 
     public enum Type {
-        HOME, MOBILE, EMAIL
+        HOME,
+        MOBILE,
+        EMAIL
     };
 
     private Type contactMethodType;
     private String detail;
+
 
     public static CorrespondenceDetails toDomainObject(CorrespondenceDetailsDTO dto) {
         CorrespondenceDetails.Type type = CorrespondenceDetails.Type.HOME;
@@ -32,16 +35,17 @@ public class CorrespondenceDetails {
         switch (dto.getContactMethodType()) {
             case HOME:
                 type = CorrespondenceDetails.Type.HOME;
-                break;
+            break;
 
             case MOBILE:
                 type = CorrespondenceDetails.Type.MOBILE;
-                break;
+            break;
 
             case EMAIL:
                 type = CorrespondenceDetails.Type.EMAIL;
-                break;
+            break;
         }
+
 
         return new CorrespondenceDetails(dto.getId(), type, dto.getDetail());
     }
@@ -52,15 +56,15 @@ public class CorrespondenceDetails {
         switch (this.contactMethodType) {
             case HOME:
                 type = CorrespondenceDetailsDTO.Type.HOME;
-                break;
+            break;
 
             case MOBILE:
                 type = CorrespondenceDetailsDTO.Type.MOBILE;
-                break;
+            break;
 
             case EMAIL:
                 type = CorrespondenceDetailsDTO.Type.EMAIL;
-                break;
+            break;
         }
 
         return new CorrespondenceDetailsDTO(this.getId(), type, this.detail);
