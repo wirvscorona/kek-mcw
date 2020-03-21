@@ -7,18 +7,20 @@ public class PlaceVisit {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Place place;
-    private long timestamp;
-    private long duration;
+    private long startTimestamp;
+    private long endTimestamp;
+    private long updateTimestamp;
 
     private PlaceVisit() {
     }
 
-    public PlaceVisit(Place place, long timestamp, long duration) {
+    public PlaceVisit(Place place, long startTimestamp, long endTimestamp, long updateTimestamp) {
         this.place = place;
-        this.timestamp = timestamp;
-        this.duration = duration;
+        this.startTimestamp = startTimestamp;
+        this.endTimestamp = endTimestamp;
+        this.updateTimestamp = updateTimestamp;
     }
 
     @Override
@@ -26,8 +28,9 @@ public class PlaceVisit {
         return "PlaceVisit{" +
                 "id=" + id +
                 ", place=" + place +
-                ", timestamp=" + timestamp +
-                ", duration=" + duration +
+                ", startTimestamp=" + startTimestamp +
+                ", endTimestamp=" + endTimestamp +
+                ", updateTimestamp=" + updateTimestamp +
                 '}';
     }
 }

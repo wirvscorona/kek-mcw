@@ -45,14 +45,17 @@ public class LocationDataController {
 
     @PostMapping("/locations/upload")
     @ApiOperation(value = "Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish")
-    public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData,
-            @PathVariable String user) {
-        Stream<TimeLineObject> histories = jsonData.getTimelineObjects().stream()
-                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null);
-        List<LocationHistory> locationHistories = histories.map(this::extractLocationData).collect(Collectors.toList());
-        List<PlaceVisit> placeVisits = histories.map(this::extractPlaceVisitData).collect(Collectors.toList());
-        placeVisitRepository.saveAll(placeVisits);
+    public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData) {
+        List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
+                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
+                .map(this::extractLocationData)
+                .collect(Collectors.toList());
+        List<PlaceVisit> placeVisits = jsonData.getTimelineObjects().stream()
+                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
+                .map(this::extractPlaceVisitData)
+                .collect(Collectors.toList());
         locationHistoryRepository.saveAll(locationHistories);
+        placeVisitRepository.saveAll(placeVisits);
         return new ResponseEntity<>("Upload success", HttpStatus.OK);
     }
 
@@ -90,8 +93,7 @@ public class LocationDataController {
         long startTimestampMs = timeLineObject.getPlaceVisit().getDuration().getStartTimestampMs();
         long endTimestampMs = timeLineObject.getPlaceVisit().getDuration().getEndTimestampMs();
         long updateTime = System.currentTimeMillis();
-        long duration = endTimestampMs - startTimestampMs;
         Place place = new Place(lat, lon, name, id);
-        return new PlaceVisit(place, updateTime, duration);
+        return new PlaceVisit(place, startTimestampMs, endTimestampMs, updateTime);
     }
 }
