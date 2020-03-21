@@ -19,6 +19,9 @@ public class ExaminationDTO {
     private String city;
     private String zipCode;
 
+    private long latitudeE7;
+    private long longitudeE7;
+
     private Date dateOfExamination;
 
     private List<Long> symptomsID;

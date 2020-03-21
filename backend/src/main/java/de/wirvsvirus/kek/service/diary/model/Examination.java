@@ -30,6 +30,9 @@ public class Examination {
     private String city;
     private String zipCode;
 
+    private long latitudeE7;
+    private long longitudeE7;
+
     private Date dateOfExamination;
 
     // TODO this should be converted to actual symptom entities in toDomainObject
@@ -41,13 +44,13 @@ public class Examination {
     private List<String> symptomDescription;
 
     public static Examination toDomainObject(ExaminationDTO dto) {
-        return new Examination(null, dto.getStreetname(), dto.getCity(), dto.getZipCode(), dto.getDateOfExamination(),
-                dto.getSymptomsID(), dto.getSymptomDescription());
+        return new Examination(null, dto.getStreetname(), dto.getCity(), dto.getZipCode(), dto.getLatitudeE7(),
+                dto.getLongitudeE7(), dto.getDateOfExamination(), dto.getSymptomsID(), dto.getSymptomDescription());
     }
 
     public ExaminationDTO toDTO() {
-        return new ExaminationDTO(this.getStreetname(), this.getCity(), this.getZipCode(), this.getDateOfExamination(),
-                this.getSymptomsID(), this.getSymptomDescription());
+        return new ExaminationDTO(this.getStreetname(), this.getCity(), this.getZipCode(), this.getLatitudeE7(),
+                this.getLongitudeE7(), this.getDateOfExamination(), this.getSymptomsID(), this.getSymptomDescription());
 
     }
 }
