@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,12 +21,15 @@ public class TrivialLocationMappingService {
         List<LocationMatch> matches = new ArrayList<>();
 
         for (LocationHistory locationHistory : locationHistories) {
-            Collection<LocationHistory> infectedLocationHistories = locationHistoryRepository
-                    .findAllByLatitudeAndLongitude(locationHistory.getLatitude(), locationHistory.getLongitude());
-            for (LocationHistory infectedLocationHistory : infectedLocationHistories) {
-                LocationMatch match = new LocationMatch(infectedLocationHistory.getLatitude(),
-                        infectedLocationHistory.getLongitude(), infectedLocationHistory.getStartTimestamp(),
-                        infectedLocationHistory.getEndTimestamp());
+            LocationHistory infectedLocationHistory = locationHistoryRepository
+                    .findFirstByLatitudeAndLongitudeAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(
+                            locationHistory.getLatitude(), locationHistory.getLongitude(),
+                            locationHistory.getEndTimestamp(), locationHistory.getStartTimestamp());
+
+            if (infectedLocationHistory != null) {
+                LocationMatch match = new LocationMatch(locationHistory.getLatitude(),
+                        locationHistory.getLongitude(), locationHistory.getStartTimestamp(),
+                        locationHistory.getEndTimestamp());
                 matches.add(match);
             }
         }

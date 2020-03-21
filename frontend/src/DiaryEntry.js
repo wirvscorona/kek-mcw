@@ -18,9 +18,9 @@ const protectionOptions = [
 ]
 
 const symptomsOptions = [
-    { value: '0', label: 'nein' },
-    { value: '1', label: 'ja' },
-    { value: '2', label: 'weiß nicht' },
+    { value: 0, label: 'nein' },
+    { value: 1, label: 'ja' },
+    { value: 2, label: 'weiß nicht' },
 ]
 
 
@@ -56,8 +56,8 @@ class DiaryTableEntry extends React.Component {
         return this.state
     }
 
-    handleDateChange(date) {
-        this.setState({ date: date });
+    handleDateChange(newDate) {
+        this.setState({ date: newDate });
     }
 
     handleContactChange(newContacts) {

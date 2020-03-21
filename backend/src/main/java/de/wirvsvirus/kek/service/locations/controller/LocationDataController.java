@@ -1,7 +1,6 @@
 package de.wirvsvirus.kek.service.locations.controller;
 
-import de.wirvsvirus.kek.service.diary.model.Diary;
-import de.wirvsvirus.kek.service.diary.repository.DiaryRepository;
+import de.wirvsvirus.kek.service.locations.model.LocationMatch;
 import de.wirvsvirus.kek.service.locations.model.pojo.TimeLineObject;
 import de.wirvsvirus.kek.service.locations.model.pojo.TimelineJsonRoot;
 import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/")
-public class UploadLocationDataController {
+public class LocationDataController {
 
     @Autowired
     private LocationHistoryRepository locationHistoryRepository;
@@ -31,17 +30,26 @@ public class UploadLocationDataController {
     private TrivialLocationMappingService trivialLocationMappingService;
 
     @PostMapping("/locations/{user}/upload")
-    @ApiOperation(value = "Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish", response = Diary.class)
+    @ApiOperation(value = "Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish")
     public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData, @PathVariable String user) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
-                .filter( timeLineObject -> timeLineObject.getPlaceVisit() != null)
+                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
                 .map(this::extractData)
                 .collect(Collectors.toList());
         locationHistoryRepository.saveAll(locationHistories);
-
-
-
         return new ResponseEntity<String>("Upload success", HttpStatus.OK);
+    }
+
+    // FIXME GetMapping does not support @RequestBody
+    @PostMapping("/locations/check")
+    @ApiOperation(value = "Responds with a list of matched locations")
+    public ResponseEntity<List<LocationMatch>> getMatchingLocations(@RequestBody TimelineJsonRoot jsonData) {
+        List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
+                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
+                .map(this::extractData)
+                .collect(Collectors.toList());
+        List<LocationMatch> locationMatches = trivialLocationMappingService.computeMatches(locationHistories);
+        return new ResponseEntity<List<LocationMatch>>(locationMatches, HttpStatus.OK);
     }
 
     private LocationHistory extractData(TimeLineObject timeLineObject) {
