@@ -24,7 +24,11 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
 import de.wirvsvirus.kek.service.diary.model.Diary;
+import de.wirvsvirus.kek.service.diary.model.Symptom;
+import de.wirvsvirus.kek.service.diary.model.User;
 import de.wirvsvirus.kek.service.diary.repository.DiaryRepository;
+import de.wirvsvirus.kek.service.diary.repository.SymptomRepository;
+import de.wirvsvirus.kek.service.diary.repository.UserRepository;
 
 @SpringBootApplication
 @EnableSwagger2
@@ -67,6 +71,26 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 			for (LocationHistory queriedHistory : repository.findAll()) {
 				logger.info(queriedHistory.toString());
 			}
+		});
+	}
+
+	@Bean
+	public CommandLineRunner demoUser(UserRepository repository) {
+		return (args -> {
+			User user = new User();
+			user.setFirstName("peter");
+			user.setLastName("lustig");
+			repository.save(user);
+		});
+	}
+
+	@Bean
+	public CommandLineRunner demoSymptom(SymptomRepository repository) {
+		return (args -> {
+			Symptom symptom = new Symptom();
+			symptom.setName("rote augen");
+			symptom.setValue(1000);
+			repository.save(symptom);
 		});
 	}
 }
