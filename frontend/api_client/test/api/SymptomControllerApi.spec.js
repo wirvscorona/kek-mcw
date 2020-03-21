@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new ApiDocumentation.ContactMethod();
+    instance = new ApiDocumentation.SymptomControllerApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,31 +47,37 @@
       object[property] = value;
   }
 
-  describe('ContactMethod', function() {
-    it('should create an instance of ContactMethod', function() {
-      // uncomment below and update the code to test ContactMethod
-      //var instane = new ApiDocumentation.ContactMethod();
-      //expect(instance).to.be.a(ApiDocumentation.ContactMethod);
+  describe('SymptomControllerApi', function() {
+    describe('findSymptomsUsingGET', function() {
+      it('should call findSymptomsUsingGET successfully', function(done) {
+        //uncomment below and update the code to test findSymptomsUsingGET
+        //instance.findSymptomsUsingGET(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property contactMethodType (base name: "contactMethodType")', function() {
-      // uncomment below and update the code to test the property contactMethodType
-      //var instane = new ApiDocumentation.ContactMethod();
-      //expect(instance).to.be();
+    describe('findUserUsingGET', function() {
+      it('should call findUserUsingGET successfully', function(done) {
+        //uncomment below and update the code to test findUserUsingGET
+        //instance.findUserUsingGET(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property detail (base name: "detail")', function() {
-      // uncomment below and update the code to test the property detail
-      //var instane = new ApiDocumentation.ContactMethod();
-      //expect(instance).to.be();
+    describe('saveSymptomUsingPOST', function() {
+      it('should call saveSymptomUsingPOST successfully', function(done) {
+        //uncomment below and update the code to test saveSymptomUsingPOST
+        //instance.saveSymptomUsingPOST(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property id (base name: "id")', function() {
-      // uncomment below and update the code to test the property id
-      //var instane = new ApiDocumentation.ContactMethod();
-      //expect(instance).to.be();
-    });
-
   });
 
 }));

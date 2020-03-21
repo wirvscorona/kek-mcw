@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new ApiDocumentation.UserDTO();
+    instance = new ApiDocumentation.DiaryDTO();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,34 +47,28 @@
       object[property] = value;
   }
 
-  describe('UserDTO', function() {
-    it('should create an instance of UserDTO', function() {
-      // uncomment below and update the code to test UserDTO
-      //var instane = new ApiDocumentation.UserDTO();
-      //expect(instance).to.be.a(ApiDocumentation.UserDTO);
+  describe('DiaryDTO', function() {
+    it('should create an instance of DiaryDTO', function() {
+      // uncomment below and update the code to test DiaryDTO
+      //var instane = new ApiDocumentation.DiaryDTO();
+      //expect(instance).to.be.a(ApiDocumentation.DiaryDTO);
     });
 
-    it('should have the property correspondenceDetails (base name: "correspondenceDetails")', function() {
-      // uncomment below and update the code to test the property correspondenceDetails
-      //var instane = new ApiDocumentation.UserDTO();
+    it('should have the property contacts (base name: "contacts")', function() {
+      // uncomment below and update the code to test the property contacts
+      //var instane = new ApiDocumentation.DiaryDTO();
       //expect(instance).to.be();
     });
 
-    it('should have the property firstName (base name: "firstName")', function() {
-      // uncomment below and update the code to test the property firstName
-      //var instane = new ApiDocumentation.UserDTO();
+    it('should have the property cured (base name: "cured")', function() {
+      // uncomment below and update the code to test the property cured
+      //var instane = new ApiDocumentation.DiaryDTO();
       //expect(instance).to.be();
     });
 
-    it('should have the property id (base name: "id")', function() {
-      // uncomment below and update the code to test the property id
-      //var instane = new ApiDocumentation.UserDTO();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property lastName (base name: "lastName")', function() {
-      // uncomment below and update the code to test the property lastName
-      //var instane = new ApiDocumentation.UserDTO();
+    it('should have the property userId (base name: "userId")', function() {
+      // uncomment below and update the code to test the property userId
+      //var instane = new ApiDocumentation.DiaryDTO();
       //expect(instance).to.be();
     });
 

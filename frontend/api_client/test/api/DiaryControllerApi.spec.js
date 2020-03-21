@@ -78,30 +78,20 @@
         done();
       });
     });
-    describe('findUserUsingGET', function() {
-      it('should call findUserUsingGET successfully', function(done) {
-        //uncomment below and update the code to test findUserUsingGET
-        //instance.findUserUsingGET(function(error) {
+    describe('saveDiaryUsingPOST', function() {
+      it('should call saveDiaryUsingPOST successfully', function(done) {
+        //uncomment below and update the code to test saveDiaryUsingPOST
+        //instance.saveDiaryUsingPOST(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('newDiaryUsingPOST', function() {
-      it('should call newDiaryUsingPOST successfully', function(done) {
-        //uncomment below and update the code to test newDiaryUsingPOST
-        //instance.newDiaryUsingPOST(function(error) {
-        //  if (error) throw error;
-        //expect().to.be();
-        //});
-        done();
-      });
-    });
-    describe('replaceDiaryUsingPUT', function() {
-      it('should call replaceDiaryUsingPUT successfully', function(done) {
-        //uncomment below and update the code to test replaceDiaryUsingPUT
-        //instance.replaceDiaryUsingPUT(function(error) {
+    describe('updateDiaryUsingPUT', function() {
+      it('should call updateDiaryUsingPUT successfully', function(done) {
+        //uncomment below and update the code to test updateDiaryUsingPUT
+        //instance.updateDiaryUsingPUT(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

@@ -21,22 +21,16 @@ Object.defineProperty(exports, "ContactEntryDTO", {
     return _ContactEntryDTO.default;
   }
 });
-Object.defineProperty(exports, "ContactMethod", {
+Object.defineProperty(exports, "CorrespondenceDetails", {
   enumerable: true,
   get: function get() {
-    return _ContactMethod.default;
+    return _CorrespondenceDetails.default;
   }
 });
-Object.defineProperty(exports, "ContactMethodDTO", {
+Object.defineProperty(exports, "CorrespondenceDetailsDTO", {
   enumerable: true,
   get: function get() {
-    return _ContactMethodDTO.default;
-  }
-});
-Object.defineProperty(exports, "CreateDiaryDTO", {
-  enumerable: true,
-  get: function get() {
-    return _CreateDiaryDTO.default;
+    return _CorrespondenceDetailsDTO.default;
   }
 });
 Object.defineProperty(exports, "Diary", {
@@ -45,10 +39,22 @@ Object.defineProperty(exports, "Diary", {
     return _Diary.default;
   }
 });
+Object.defineProperty(exports, "DiaryDTO", {
+  enumerable: true,
+  get: function get() {
+    return _DiaryDTO.default;
+  }
+});
 Object.defineProperty(exports, "Duration", {
   enumerable: true,
   get: function get() {
     return _Duration.default;
+  }
+});
+Object.defineProperty(exports, "ExaminationDTO", {
+  enumerable: true,
+  get: function get() {
+    return _ExaminationDTO.default;
   }
 });
 Object.defineProperty(exports, "Link", {
@@ -79,6 +85,12 @@ Object.defineProperty(exports, "Symptom", {
   enumerable: true,
   get: function get() {
     return _Symptom.default;
+  }
+});
+Object.defineProperty(exports, "SymptomDTO", {
+  enumerable: true,
+  get: function get() {
+    return _SymptomDTO.default;
   }
 });
 Object.defineProperty(exports, "TimeLineObject", {
@@ -123,6 +135,18 @@ Object.defineProperty(exports, "DiaryControllerApi", {
     return _DiaryControllerApi.default;
   }
 });
+Object.defineProperty(exports, "ExaminationControllerApi", {
+  enumerable: true,
+  get: function get() {
+    return _ExaminationControllerApi.default;
+  }
+});
+Object.defineProperty(exports, "ExportControllerApi", {
+  enumerable: true,
+  get: function get() {
+    return _ExportControllerApi.default;
+  }
+});
 Object.defineProperty(exports, "LocationDataControllerApi", {
   enumerable: true,
   get: function get() {
@@ -133,6 +157,12 @@ Object.defineProperty(exports, "OperationHandlerApi", {
   enumerable: true,
   get: function get() {
     return _OperationHandlerApi.default;
+  }
+});
+Object.defineProperty(exports, "SymptomControllerApi", {
+  enumerable: true,
+  get: function get() {
+    return _SymptomControllerApi.default;
   }
 });
 Object.defineProperty(exports, "UserControllerApi", {
@@ -154,15 +184,17 @@ var _ContactEntry = _interopRequireDefault(require("./model/ContactEntry"));
 
 var _ContactEntryDTO = _interopRequireDefault(require("./model/ContactEntryDTO"));
 
-var _ContactMethod = _interopRequireDefault(require("./model/ContactMethod"));
+var _CorrespondenceDetails = _interopRequireDefault(require("./model/CorrespondenceDetails"));
 
-var _ContactMethodDTO = _interopRequireDefault(require("./model/ContactMethodDTO"));
-
-var _CreateDiaryDTO = _interopRequireDefault(require("./model/CreateDiaryDTO"));
+var _CorrespondenceDetailsDTO = _interopRequireDefault(require("./model/CorrespondenceDetailsDTO"));
 
 var _Diary = _interopRequireDefault(require("./model/Diary"));
 
+var _DiaryDTO = _interopRequireDefault(require("./model/DiaryDTO"));
+
 var _Duration = _interopRequireDefault(require("./model/Duration"));
+
+var _ExaminationDTO = _interopRequireDefault(require("./model/ExaminationDTO"));
 
 var _Link = _interopRequireDefault(require("./model/Link"));
 
@@ -173,6 +205,8 @@ var _ModelAndView = _interopRequireDefault(require("./model/ModelAndView"));
 var _PlaceVisit = _interopRequireDefault(require("./model/PlaceVisit"));
 
 var _Symptom = _interopRequireDefault(require("./model/Symptom"));
+
+var _SymptomDTO = _interopRequireDefault(require("./model/SymptomDTO"));
 
 var _TimeLineObject = _interopRequireDefault(require("./model/TimeLineObject"));
 
@@ -188,9 +222,15 @@ var _BasicErrorControllerApi = _interopRequireDefault(require("./api/BasicErrorC
 
 var _DiaryControllerApi = _interopRequireDefault(require("./api/DiaryControllerApi"));
 
+var _ExaminationControllerApi = _interopRequireDefault(require("./api/ExaminationControllerApi"));
+
+var _ExportControllerApi = _interopRequireDefault(require("./api/ExportControllerApi"));
+
 var _LocationDataControllerApi = _interopRequireDefault(require("./api/LocationDataControllerApi"));
 
 var _OperationHandlerApi = _interopRequireDefault(require("./api/OperationHandlerApi"));
+
+var _SymptomControllerApi = _interopRequireDefault(require("./api/SymptomControllerApi"));
 
 var _UserControllerApi = _interopRequireDefault(require("./api/UserControllerApi"));
 

@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import ContactMethod from './ContactMethod';
+import CorrespondenceDetails from './CorrespondenceDetails';
 
 /**
  * The User model module.
@@ -49,8 +49,8 @@ class User {
         if (data) {
             obj = obj || new User();
 
-            if (data.hasOwnProperty('contactMethods')) {
-                obj['contactMethods'] = ApiClient.convertToType(data['contactMethods'], [ContactMethod]);
+            if (data.hasOwnProperty('correspondenceDetails')) {
+                obj['correspondenceDetails'] = ApiClient.convertToType(data['correspondenceDetails'], [CorrespondenceDetails]);
             }
             if (data.hasOwnProperty('firstName')) {
                 obj['firstName'] = ApiClient.convertToType(data['firstName'], 'String');
@@ -69,9 +69,9 @@ class User {
 }
 
 /**
- * @member {Array.<module:model/ContactMethod>} contactMethods
+ * @member {Array.<module:model/CorrespondenceDetails>} correspondenceDetails
  */
-User.prototype['contactMethods'] = undefined;
+User.prototype['correspondenceDetails'] = undefined;
 
 /**
  * @member {String} firstName

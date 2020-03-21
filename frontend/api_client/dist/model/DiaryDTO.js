@@ -18,19 +18,19 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /**
- * The CreateDiaryDTO model module.
- * @module model/CreateDiaryDTO
+ * The DiaryDTO model module.
+ * @module model/DiaryDTO
  * @version 1.0
  */
-var CreateDiaryDTO = /*#__PURE__*/function () {
+var DiaryDTO = /*#__PURE__*/function () {
   /**
-   * Constructs a new <code>CreateDiaryDTO</code>.
-   * @alias module:model/CreateDiaryDTO
+   * Constructs a new <code>DiaryDTO</code>.
+   * @alias module:model/DiaryDTO
    */
-  function CreateDiaryDTO() {
-    _classCallCheck(this, CreateDiaryDTO);
+  function DiaryDTO() {
+    _classCallCheck(this, DiaryDTO);
 
-    CreateDiaryDTO.initialize(this);
+    DiaryDTO.initialize(this);
   }
   /**
    * Initializes the fields of this object.
@@ -39,22 +39,22 @@ var CreateDiaryDTO = /*#__PURE__*/function () {
    */
 
 
-  _createClass(CreateDiaryDTO, null, [{
+  _createClass(DiaryDTO, null, [{
     key: "initialize",
     value: function initialize(obj) {}
     /**
-     * Constructs a <code>CreateDiaryDTO</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>DiaryDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/CreateDiaryDTO} obj Optional instance to populate.
-     * @return {module:model/CreateDiaryDTO} The populated <code>CreateDiaryDTO</code> instance.
+     * @param {module:model/DiaryDTO} obj Optional instance to populate.
+     * @return {module:model/DiaryDTO} The populated <code>DiaryDTO</code> instance.
      */
 
   }, {
     key: "constructFromObject",
     value: function constructFromObject(data, obj) {
       if (data) {
-        obj = obj || new CreateDiaryDTO();
+        obj = obj || new DiaryDTO();
 
         if (data.hasOwnProperty('contacts')) {
           obj['contacts'] = _ApiClient.default.convertToType(data['contacts'], [_ContactEntryDTO.default]);
@@ -73,23 +73,23 @@ var CreateDiaryDTO = /*#__PURE__*/function () {
     }
   }]);
 
-  return CreateDiaryDTO;
+  return DiaryDTO;
 }();
 /**
  * @member {Array.<module:model/ContactEntryDTO>} contacts
  */
 
 
-CreateDiaryDTO.prototype['contacts'] = undefined;
+DiaryDTO.prototype['contacts'] = undefined;
 /**
  * @member {Boolean} cured
  */
 
-CreateDiaryDTO.prototype['cured'] = undefined;
+DiaryDTO.prototype['cured'] = undefined;
 /**
  * @member {Number} userId
  */
 
-CreateDiaryDTO.prototype['userId'] = undefined;
-var _default = CreateDiaryDTO;
+DiaryDTO.prototype['userId'] = undefined;
+var _default = DiaryDTO;
 exports.default = _default;

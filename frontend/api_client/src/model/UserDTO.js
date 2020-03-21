@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import ContactMethodDTO from './ContactMethodDTO';
+import CorrespondenceDetailsDTO from './CorrespondenceDetailsDTO';
 
 /**
  * The UserDTO model module.
@@ -49,8 +49,8 @@ class UserDTO {
         if (data) {
             obj = obj || new UserDTO();
 
-            if (data.hasOwnProperty('contactMethods')) {
-                obj['contactMethods'] = ApiClient.convertToType(data['contactMethods'], [ContactMethodDTO]);
+            if (data.hasOwnProperty('correspondenceDetails')) {
+                obj['correspondenceDetails'] = ApiClient.convertToType(data['correspondenceDetails'], [CorrespondenceDetailsDTO]);
             }
             if (data.hasOwnProperty('firstName')) {
                 obj['firstName'] = ApiClient.convertToType(data['firstName'], 'String');
@@ -69,9 +69,9 @@ class UserDTO {
 }
 
 /**
- * @member {Array.<module:model/ContactMethodDTO>} contactMethods
+ * @member {Array.<module:model/CorrespondenceDetailsDTO>} correspondenceDetails
  */
-UserDTO.prototype['contactMethods'] = undefined;
+UserDTO.prototype['correspondenceDetails'] = undefined;
 
 /**
  * @member {String} firstName

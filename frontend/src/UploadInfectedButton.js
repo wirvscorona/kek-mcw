@@ -4,7 +4,11 @@ import { LocationDataControllerApi } from 'api_documentation';
 
 function uploadLocationData(jsonData) {
     let apiInstance = new LocationDataControllerApi();
-    apiInstance.getMatchingLocationsUsingPOST(jsonData, (error, data, response) => {
+    let opts = {
+        'maxDistanceInMeters': 100, // Number | maxDistanceInMeters
+        'virusPersistenceTimeInMillis': 1800000 // Number | virusPersistenceTimeInMillis
+      };
+    apiInstance.uploadLocationDataUsingPOST(jsonData, opts, (error, data, response) => {
         if (error) {
             console.error(error);
         } else {
@@ -36,15 +40,15 @@ function uploadEvent() {
     document.getElementById("file-input").click()
 }
 
-function UploadMovementButton() {
+function UploadInfectedButton() {
     return (
         <div>
              <Button variant='secondary' onClick={uploadEvent}>
-                Upload Timeline .json
+                Upload Timeline .json if you're infected
             </Button>
             <input id="file-input" type="file" name="name" style={{display: "none"}} onChange={inputChanged}/>
         </div>
     ) 
 }
 
-export default UploadMovementButton
+export default UploadInfectedButton

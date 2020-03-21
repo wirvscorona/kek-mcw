@@ -15,18 +15,18 @@ import ApiClient from '../ApiClient';
 import ContactEntryDTO from './ContactEntryDTO';
 
 /**
- * The CreateDiaryDTO model module.
- * @module model/CreateDiaryDTO
+ * The DiaryDTO model module.
+ * @module model/DiaryDTO
  * @version 1.0
  */
-class CreateDiaryDTO {
+class DiaryDTO {
     /**
-     * Constructs a new <code>CreateDiaryDTO</code>.
-     * @alias module:model/CreateDiaryDTO
+     * Constructs a new <code>DiaryDTO</code>.
+     * @alias module:model/DiaryDTO
      */
     constructor() { 
         
-        CreateDiaryDTO.initialize(this);
+        DiaryDTO.initialize(this);
     }
 
     /**
@@ -38,15 +38,15 @@ class CreateDiaryDTO {
     }
 
     /**
-     * Constructs a <code>CreateDiaryDTO</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>DiaryDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/CreateDiaryDTO} obj Optional instance to populate.
-     * @return {module:model/CreateDiaryDTO} The populated <code>CreateDiaryDTO</code> instance.
+     * @param {module:model/DiaryDTO} obj Optional instance to populate.
+     * @return {module:model/DiaryDTO} The populated <code>DiaryDTO</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new CreateDiaryDTO();
+            obj = obj || new DiaryDTO();
 
             if (data.hasOwnProperty('contacts')) {
                 obj['contacts'] = ApiClient.convertToType(data['contacts'], [ContactEntryDTO]);
@@ -67,22 +67,22 @@ class CreateDiaryDTO {
 /**
  * @member {Array.<module:model/ContactEntryDTO>} contacts
  */
-CreateDiaryDTO.prototype['contacts'] = undefined;
+DiaryDTO.prototype['contacts'] = undefined;
 
 /**
  * @member {Boolean} cured
  */
-CreateDiaryDTO.prototype['cured'] = undefined;
+DiaryDTO.prototype['cured'] = undefined;
 
 /**
  * @member {Number} userId
  */
-CreateDiaryDTO.prototype['userId'] = undefined;
+DiaryDTO.prototype['userId'] = undefined;
 
 
 
 
 
 
-export default CreateDiaryDTO;
+export default DiaryDTO;
 

@@ -48,70 +48,70 @@
   }
 
   describe('BasicErrorControllerApi', function() {
-    describe('errorHtmlUsingDELETE', function() {
-      it('should call errorHtmlUsingDELETE successfully', function(done) {
-        //uncomment below and update the code to test errorHtmlUsingDELETE
-        //instance.errorHtmlUsingDELETE(function(error) {
+    describe('errorUsingDELETE', function() {
+      it('should call errorUsingDELETE successfully', function(done) {
+        //uncomment below and update the code to test errorUsingDELETE
+        //instance.errorUsingDELETE(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('errorHtmlUsingGET', function() {
-      it('should call errorHtmlUsingGET successfully', function(done) {
-        //uncomment below and update the code to test errorHtmlUsingGET
-        //instance.errorHtmlUsingGET(function(error) {
+    describe('errorUsingGET', function() {
+      it('should call errorUsingGET successfully', function(done) {
+        //uncomment below and update the code to test errorUsingGET
+        //instance.errorUsingGET(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('errorHtmlUsingHEAD', function() {
-      it('should call errorHtmlUsingHEAD successfully', function(done) {
-        //uncomment below and update the code to test errorHtmlUsingHEAD
-        //instance.errorHtmlUsingHEAD(function(error) {
+    describe('errorUsingHEAD', function() {
+      it('should call errorUsingHEAD successfully', function(done) {
+        //uncomment below and update the code to test errorUsingHEAD
+        //instance.errorUsingHEAD(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('errorHtmlUsingOPTIONS', function() {
-      it('should call errorHtmlUsingOPTIONS successfully', function(done) {
-        //uncomment below and update the code to test errorHtmlUsingOPTIONS
-        //instance.errorHtmlUsingOPTIONS(function(error) {
+    describe('errorUsingOPTIONS', function() {
+      it('should call errorUsingOPTIONS successfully', function(done) {
+        //uncomment below and update the code to test errorUsingOPTIONS
+        //instance.errorUsingOPTIONS(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('errorHtmlUsingPATCH', function() {
-      it('should call errorHtmlUsingPATCH successfully', function(done) {
-        //uncomment below and update the code to test errorHtmlUsingPATCH
-        //instance.errorHtmlUsingPATCH(function(error) {
+    describe('errorUsingPATCH', function() {
+      it('should call errorUsingPATCH successfully', function(done) {
+        //uncomment below and update the code to test errorUsingPATCH
+        //instance.errorUsingPATCH(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('errorHtmlUsingPOST', function() {
-      it('should call errorHtmlUsingPOST successfully', function(done) {
-        //uncomment below and update the code to test errorHtmlUsingPOST
-        //instance.errorHtmlUsingPOST(function(error) {
+    describe('errorUsingPOST', function() {
+      it('should call errorUsingPOST successfully', function(done) {
+        //uncomment below and update the code to test errorUsingPOST
+        //instance.errorUsingPOST(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});
         done();
       });
     });
-    describe('errorHtmlUsingPUT', function() {
-      it('should call errorHtmlUsingPUT successfully', function(done) {
-        //uncomment below and update the code to test errorHtmlUsingPUT
-        //instance.errorHtmlUsingPUT(function(error) {
+    describe('errorUsingPUT', function() {
+      it('should call errorUsingPUT successfully', function(done) {
+        //uncomment below and update the code to test errorUsingPUT
+        //instance.errorUsingPUT(function(error) {
         //  if (error) throw error;
         //expect().to.be();
         //});

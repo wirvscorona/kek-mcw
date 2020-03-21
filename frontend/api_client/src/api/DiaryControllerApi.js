@@ -13,9 +13,8 @@
 
 
 import ApiClient from "../ApiClient";
-import CreateDiaryDTO from '../model/CreateDiaryDTO';
 import Diary from '../model/Diary';
-import User from '../model/User';
+import DiaryDTO from '../model/DiaryDTO';
 
 /**
 * DiaryController service.
@@ -157,50 +156,8 @@ export default class DiaryControllerApi {
     }
 
     /**
-     * Callback function to receive the result of the findUserUsingGET operation.
-     * @callback module:api/DiaryControllerApi~findUserUsingGETCallback
-     * @param {String} error Error message, if any.
-     * @param {module:model/User} data The data returned by the service call.
-     * @param {String} response The complete HTTP response.
-     */
-
-    /**
-     * Responds with a diary object
-     * @param {Number} id id
-     * @param {module:api/DiaryControllerApi~findUserUsingGETCallback} callback The callback function, accepting three arguments: error, data, response
-     * data is of type: {@link module:model/User}
-     */
-    findUserUsingGET(id, callback) {
-      let postBody = null;
-      // verify the required parameter 'id' is set
-      if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling findUserUsingGET");
-      }
-
-      let pathParams = {
-        'id': id
-      };
-      let queryParams = {
-      };
-      let headerParams = {
-      };
-      let formParams = {
-      };
-
-      let authNames = [];
-      let contentTypes = [];
-      let accepts = ['*/*'];
-      let returnType = User;
-      return this.apiClient.callApi(
-        '/api/diaries/user/{id}', 'GET',
-        pathParams, queryParams, headerParams, formParams, postBody,
-        authNames, contentTypes, accepts, returnType, null, callback
-      );
-    }
-
-    /**
-     * Callback function to receive the result of the newDiaryUsingPOST operation.
-     * @callback module:api/DiaryControllerApi~newDiaryUsingPOSTCallback
+     * Callback function to receive the result of the saveDiaryUsingPOST operation.
+     * @callback module:api/DiaryControllerApi~saveDiaryUsingPOSTCallback
      * @param {String} error Error message, if any.
      * @param {module:model/Diary} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -208,15 +165,15 @@ export default class DiaryControllerApi {
 
     /**
      * Saves new diary object
-     * @param {module:model/CreateDiaryDTO} createDiaryDTO createDiaryDTO
-     * @param {module:api/DiaryControllerApi~newDiaryUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:model/DiaryDTO} diaryDTO diaryDTO
+     * @param {module:api/DiaryControllerApi~saveDiaryUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Diary}
      */
-    newDiaryUsingPOST(createDiaryDTO, callback) {
-      let postBody = createDiaryDTO;
-      // verify the required parameter 'createDiaryDTO' is set
-      if (createDiaryDTO === undefined || createDiaryDTO === null) {
-        throw new Error("Missing the required parameter 'createDiaryDTO' when calling newDiaryUsingPOST");
+    saveDiaryUsingPOST(diaryDTO, callback) {
+      let postBody = diaryDTO;
+      // verify the required parameter 'diaryDTO' is set
+      if (diaryDTO === undefined || diaryDTO === null) {
+        throw new Error("Missing the required parameter 'diaryDTO' when calling saveDiaryUsingPOST");
       }
 
       let pathParams = {
@@ -233,15 +190,15 @@ export default class DiaryControllerApi {
       let accepts = ['*/*'];
       let returnType = Diary;
       return this.apiClient.callApi(
-        '/api/diaries/{id}', 'POST',
+        '/api/diaries/', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );
     }
 
     /**
-     * Callback function to receive the result of the replaceDiaryUsingPUT operation.
-     * @callback module:api/DiaryControllerApi~replaceDiaryUsingPUTCallback
+     * Callback function to receive the result of the updateDiaryUsingPUT operation.
+     * @callback module:api/DiaryControllerApi~updateDiaryUsingPUTCallback
      * @param {String} error Error message, if any.
      * @param {module:model/Diary} data The data returned by the service call.
      * @param {String} response The complete HTTP response.
@@ -250,19 +207,19 @@ export default class DiaryControllerApi {
     /**
      * Updates a diary object
      * @param {Number} id id
-     * @param {module:model/Diary} newDiary newDiary
-     * @param {module:api/DiaryControllerApi~replaceDiaryUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
+     * @param {module:model/DiaryDTO} diaryDTO diaryDTO
+     * @param {module:api/DiaryControllerApi~updateDiaryUsingPUTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link module:model/Diary}
      */
-    replaceDiaryUsingPUT(id, newDiary, callback) {
-      let postBody = newDiary;
+    updateDiaryUsingPUT(id, diaryDTO, callback) {
+      let postBody = diaryDTO;
       // verify the required parameter 'id' is set
       if (id === undefined || id === null) {
-        throw new Error("Missing the required parameter 'id' when calling replaceDiaryUsingPUT");
+        throw new Error("Missing the required parameter 'id' when calling updateDiaryUsingPUT");
       }
-      // verify the required parameter 'newDiary' is set
-      if (newDiary === undefined || newDiary === null) {
-        throw new Error("Missing the required parameter 'newDiary' when calling replaceDiaryUsingPUT");
+      // verify the required parameter 'diaryDTO' is set
+      if (diaryDTO === undefined || diaryDTO === null) {
+        throw new Error("Missing the required parameter 'diaryDTO' when calling updateDiaryUsingPUT");
       }
 
       let pathParams = {

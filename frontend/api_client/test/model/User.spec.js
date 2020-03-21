@@ -54,8 +54,8 @@
       //expect(instance).to.be.a(ApiDocumentation.User);
     });
 
-    it('should have the property contactMethods (base name: "contactMethods")', function() {
-      // uncomment below and update the code to test the property contactMethods
+    it('should have the property correspondenceDetails (base name: "correspondenceDetails")', function() {
+      // uncomment below and update the code to test the property correspondenceDetails
       //var instane = new ApiDocumentation.User();
       //expect(instance).to.be();
     });

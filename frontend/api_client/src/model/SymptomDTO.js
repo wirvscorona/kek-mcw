@@ -14,19 +14,19 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The Symptom model module.
- * @module model/Symptom
+ * The SymptomDTO model module.
+ * @module model/SymptomDTO
  * @version 1.0
  */
-class Symptom {
+class SymptomDTO {
     /**
-     * Constructs a new <code>Symptom</code>.
+     * Constructs a new <code>SymptomDTO</code>.
      * All details about a symptom.
-     * @alias module:model/Symptom
+     * @alias module:model/SymptomDTO
      */
     constructor() { 
         
-        Symptom.initialize(this);
+        SymptomDTO.initialize(this);
     }
 
     /**
@@ -38,15 +38,15 @@ class Symptom {
     }
 
     /**
-     * Constructs a <code>Symptom</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>SymptomDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/Symptom} obj Optional instance to populate.
-     * @return {module:model/Symptom} The populated <code>Symptom</code> instance.
+     * @param {module:model/SymptomDTO} obj Optional instance to populate.
+     * @return {module:model/SymptomDTO} The populated <code>SymptomDTO</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new Symptom();
+            obj = obj || new SymptomDTO();
 
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'Number');
@@ -67,17 +67,17 @@ class Symptom {
 /**
  * @member {Number} id
  */
-Symptom.prototype['id'] = undefined;
+SymptomDTO.prototype['id'] = undefined;
 
 /**
  * @member {String} name
  */
-Symptom.prototype['name'] = undefined;
+SymptomDTO.prototype['name'] = undefined;
 
 /**
- * @member {module:model/Symptom.SymptomTypeEnum} symptomType
+ * @member {module:model/SymptomDTO.SymptomTypeEnum} symptomType
  */
-Symptom.prototype['symptomType'] = undefined;
+SymptomDTO.prototype['symptomType'] = undefined;
 
 
 
@@ -88,7 +88,7 @@ Symptom.prototype['symptomType'] = undefined;
  * @enum {String}
  * @readonly
  */
-Symptom['SymptomTypeEnum'] = {
+SymptomDTO['SymptomTypeEnum'] = {
 
     /**
      * value: "NUMERICAL"
@@ -105,5 +105,5 @@ Symptom['SymptomTypeEnum'] = {
 
 
 
-export default Symptom;
+export default SymptomDTO;
 

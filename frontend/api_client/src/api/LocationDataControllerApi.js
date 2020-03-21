@@ -46,10 +46,14 @@ export default class LocationDataControllerApi {
     /**
      * Responds with a list of matched locations
      * @param {module:model/TimelineJsonRoot} jsonData jsonData
+     * @param {Object} opts Optional parameters
+     * @param {Number} opts.maxDistanceInMeters maxDistanceInMeters (default to 100)
+     * @param {Number} opts.virusPersistenceTimeInMillis virusPersistenceTimeInMillis (default to 1800000)
      * @param {module:api/LocationDataControllerApi~getMatchingLocationsUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link Array.<module:model/LocationMatch>}
      */
-    getMatchingLocationsUsingPOST(jsonData, callback) {
+    getMatchingLocationsUsingPOST(jsonData, opts, callback) {
+      opts = opts || {};
       let postBody = jsonData;
       // verify the required parameter 'jsonData' is set
       if (jsonData === undefined || jsonData === null) {
@@ -59,6 +63,8 @@ export default class LocationDataControllerApi {
       let pathParams = {
       };
       let queryParams = {
+        'maxDistanceInMeters': opts['maxDistanceInMeters'],
+        'virusPersistenceTimeInMillis': opts['virusPersistenceTimeInMillis']
       };
       let headerParams = {
       };
@@ -86,24 +92,18 @@ export default class LocationDataControllerApi {
 
     /**
      * Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish
-     * @param {String} user user
      * @param {module:model/TimelineJsonRoot} jsonData jsonData
      * @param {module:api/LocationDataControllerApi~uploadLocationDataUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link String}
      */
-    uploadLocationDataUsingPOST(user, jsonData, callback) {
+    uploadLocationDataUsingPOST(jsonData, callback) {
       let postBody = jsonData;
-      // verify the required parameter 'user' is set
-      if (user === undefined || user === null) {
-        throw new Error("Missing the required parameter 'user' when calling uploadLocationDataUsingPOST");
-      }
       // verify the required parameter 'jsonData' is set
       if (jsonData === undefined || jsonData === null) {
         throw new Error("Missing the required parameter 'jsonData' when calling uploadLocationDataUsingPOST");
       }
 
       let pathParams = {
-        'user': user
       };
       let queryParams = {
       };
@@ -117,7 +117,7 @@ export default class LocationDataControllerApi {
       let accepts = ['*/*'];
       let returnType = 'String';
       return this.apiClient.callApi(
-        '/locations/{user}/upload', 'POST',
+        '/locations/upload', 'POST',
         pathParams, queryParams, headerParams, formParams, postBody,
         authNames, contentTypes, accepts, returnType, null, callback
       );

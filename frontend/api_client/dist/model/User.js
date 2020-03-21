@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _ContactMethod = _interopRequireDefault(require("./ContactMethod"));
+var _CorrespondenceDetails = _interopRequireDefault(require("./CorrespondenceDetails"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57,8 +57,8 @@ var User = /*#__PURE__*/function () {
       if (data) {
         obj = obj || new User();
 
-        if (data.hasOwnProperty('contactMethods')) {
-          obj['contactMethods'] = _ApiClient.default.convertToType(data['contactMethods'], [_ContactMethod.default]);
+        if (data.hasOwnProperty('correspondenceDetails')) {
+          obj['correspondenceDetails'] = _ApiClient.default.convertToType(data['correspondenceDetails'], [_CorrespondenceDetails.default]);
         }
 
         if (data.hasOwnProperty('firstName')) {
@@ -81,11 +81,11 @@ var User = /*#__PURE__*/function () {
   return User;
 }();
 /**
- * @member {Array.<module:model/ContactMethod>} contactMethods
+ * @member {Array.<module:model/CorrespondenceDetails>} correspondenceDetails
  */
 
 
-User.prototype['contactMethods'] = undefined;
+User.prototype['correspondenceDetails'] = undefined;
 /**
  * @member {String} firstName
  */

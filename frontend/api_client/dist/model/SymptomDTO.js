@@ -16,19 +16,20 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /**
- * The ContactMethod model module.
- * @module model/ContactMethod
+ * The SymptomDTO model module.
+ * @module model/SymptomDTO
  * @version 1.0
  */
-var ContactMethod = /*#__PURE__*/function () {
+var SymptomDTO = /*#__PURE__*/function () {
   /**
-   * Constructs a new <code>ContactMethod</code>.
-   * @alias module:model/ContactMethod
+   * Constructs a new <code>SymptomDTO</code>.
+   * All details about a symptom.
+   * @alias module:model/SymptomDTO
    */
-  function ContactMethod() {
-    _classCallCheck(this, ContactMethod);
+  function SymptomDTO() {
+    _classCallCheck(this, SymptomDTO);
 
-    ContactMethod.initialize(this);
+    SymptomDTO.initialize(this);
   }
   /**
    * Initializes the fields of this object.
@@ -37,33 +38,33 @@ var ContactMethod = /*#__PURE__*/function () {
    */
 
 
-  _createClass(ContactMethod, null, [{
+  _createClass(SymptomDTO, null, [{
     key: "initialize",
     value: function initialize(obj) {}
     /**
-     * Constructs a <code>ContactMethod</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>SymptomDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/ContactMethod} obj Optional instance to populate.
-     * @return {module:model/ContactMethod} The populated <code>ContactMethod</code> instance.
+     * @param {module:model/SymptomDTO} obj Optional instance to populate.
+     * @return {module:model/SymptomDTO} The populated <code>SymptomDTO</code> instance.
      */
 
   }, {
     key: "constructFromObject",
     value: function constructFromObject(data, obj) {
       if (data) {
-        obj = obj || new ContactMethod();
-
-        if (data.hasOwnProperty('contactMethodType')) {
-          obj['contactMethodType'] = _ApiClient.default.convertToType(data['contactMethodType'], 'String');
-        }
-
-        if (data.hasOwnProperty('detail')) {
-          obj['detail'] = _ApiClient.default.convertToType(data['detail'], 'String');
-        }
+        obj = obj || new SymptomDTO();
 
         if (data.hasOwnProperty('id')) {
           obj['id'] = _ApiClient.default.convertToType(data['id'], 'Number');
+        }
+
+        if (data.hasOwnProperty('name')) {
+          obj['name'] = _ApiClient.default.convertToType(data['name'], 'String');
+        }
+
+        if (data.hasOwnProperty('symptomType')) {
+          obj['symptomType'] = _ApiClient.default.convertToType(data['symptomType'], 'String');
         }
       }
 
@@ -71,48 +72,42 @@ var ContactMethod = /*#__PURE__*/function () {
     }
   }]);
 
-  return ContactMethod;
+  return SymptomDTO;
 }();
-/**
- * @member {module:model/ContactMethod.ContactMethodTypeEnum} contactMethodType
- */
-
-
-ContactMethod.prototype['contactMethodType'] = undefined;
-/**
- * @member {String} detail
- */
-
-ContactMethod.prototype['detail'] = undefined;
 /**
  * @member {Number} id
  */
 
-ContactMethod.prototype['id'] = undefined;
+
+SymptomDTO.prototype['id'] = undefined;
 /**
- * Allowed values for the <code>contactMethodType</code> property.
+ * @member {String} name
+ */
+
+SymptomDTO.prototype['name'] = undefined;
+/**
+ * @member {module:model/SymptomDTO.SymptomTypeEnum} symptomType
+ */
+
+SymptomDTO.prototype['symptomType'] = undefined;
+/**
+ * Allowed values for the <code>symptomType</code> property.
  * @enum {String}
  * @readonly
  */
 
-ContactMethod['ContactMethodTypeEnum'] = {
+SymptomDTO['SymptomTypeEnum'] = {
   /**
-   * value: "HOME"
+   * value: "NUMERICAL"
    * @const
    */
-  "HOME": "HOME",
+  "NUMERICAL": "NUMERICAL",
 
   /**
-   * value: "MOBILE"
+   * value: "STRING"
    * @const
    */
-  "MOBILE": "MOBILE",
-
-  /**
-   * value: "EMAIL"
-   * @const
-   */
-  "EMAIL": "EMAIL"
+  "STRING": "STRING"
 };
-var _default = ContactMethod;
+var _default = SymptomDTO;
 exports.default = _default;

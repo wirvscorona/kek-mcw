@@ -1,4 +1,4 @@
-# ApiDocumentation.ContactMethodDTO
+# ApiDocumentation.CorrespondenceDetails
 
 ## Properties
 
@@ -6,7 +6,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contactMethodType** | **String** |  | [optional] 
 **detail** | **String** |  | [optional] 
-**id** | **Number** |  | [optional] 
 
 
 

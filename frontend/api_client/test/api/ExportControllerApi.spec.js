@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new ApiDocumentation.ContactMethodDTO();
+    instance = new ApiDocumentation.ExportControllerApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,31 +47,17 @@
       object[property] = value;
   }
 
-  describe('ContactMethodDTO', function() {
-    it('should create an instance of ContactMethodDTO', function() {
-      // uncomment below and update the code to test ContactMethodDTO
-      //var instane = new ApiDocumentation.ContactMethodDTO();
-      //expect(instance).to.be.a(ApiDocumentation.ContactMethodDTO);
+  describe('ExportControllerApi', function() {
+    describe('exportExaminationFeaturesUsingGET', function() {
+      it('should call exportExaminationFeaturesUsingGET successfully', function(done) {
+        //uncomment below and update the code to test exportExaminationFeaturesUsingGET
+        //instance.exportExaminationFeaturesUsingGET(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property contactMethodType (base name: "contactMethodType")', function() {
-      // uncomment below and update the code to test the property contactMethodType
-      //var instane = new ApiDocumentation.ContactMethodDTO();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property detail (base name: "detail")', function() {
-      // uncomment below and update the code to test the property detail
-      //var instane = new ApiDocumentation.ContactMethodDTO();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property id (base name: "id")', function() {
-      // uncomment below and update the code to test the property id
-      //var instane = new ApiDocumentation.ContactMethodDTO();
-      //expect(instance).to.be();
-    });
-
   });
 
 }));
