@@ -51,6 +51,12 @@ Object.defineProperty(exports, "Duration", {
     return _Duration.default;
   }
 });
+Object.defineProperty(exports, "Examination", {
+  enumerable: true,
+  get: function get() {
+    return _Examination.default;
+  }
+});
 Object.defineProperty(exports, "ExaminationDTO", {
   enumerable: true,
   get: function get() {
@@ -79,12 +85,6 @@ Object.defineProperty(exports, "PlaceVisit", {
   enumerable: true,
   get: function get() {
     return _PlaceVisit.default;
-  }
-});
-Object.defineProperty(exports, "Symptom", {
-  enumerable: true,
-  get: function get() {
-    return _Symptom.default;
   }
 });
 Object.defineProperty(exports, "SymptomDTO", {
@@ -194,6 +194,8 @@ var _DiaryDTO = _interopRequireDefault(require("./model/DiaryDTO"));
 
 var _Duration = _interopRequireDefault(require("./model/Duration"));
 
+var _Examination = _interopRequireDefault(require("./model/Examination"));
+
 var _ExaminationDTO = _interopRequireDefault(require("./model/ExaminationDTO"));
 
 var _Link = _interopRequireDefault(require("./model/Link"));
@@ -203,8 +205,6 @@ var _LocationMatch = _interopRequireDefault(require("./model/LocationMatch"));
 var _ModelAndView = _interopRequireDefault(require("./model/ModelAndView"));
 
 var _PlaceVisit = _interopRequireDefault(require("./model/PlaceVisit"));
-
-var _Symptom = _interopRequireDefault(require("./model/Symptom"));
 
 var _SymptomDTO = _interopRequireDefault(require("./model/SymptomDTO"));
 

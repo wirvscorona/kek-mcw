@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
-var _Symptom = _interopRequireDefault(require("./Symptom"));
+var _Examination = _interopRequireDefault(require("./Examination"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -77,12 +77,12 @@ var ContactEntry = /*#__PURE__*/function () {
           obj['description'] = _ApiClient.default.convertToType(data['description'], 'String');
         }
 
-        if (data.hasOwnProperty('id')) {
-          obj['id'] = _ApiClient.default.convertToType(data['id'], 'Number');
+        if (data.hasOwnProperty('examination')) {
+          obj['examination'] = _Examination.default.constructFromObject(data['examination']);
         }
 
-        if (data.hasOwnProperty('symptoms')) {
-          obj['symptoms'] = _ApiClient.default.convertToType(data['symptoms'], [_Symptom.default]);
+        if (data.hasOwnProperty('id')) {
+          obj['id'] = _ApiClient.default.convertToType(data['id'], 'Number');
         }
       }
 
@@ -119,14 +119,14 @@ ContactEntry.prototype['date'] = undefined;
 
 ContactEntry.prototype['description'] = undefined;
 /**
+ * @member {module:model/Examination} examination
+ */
+
+ContactEntry.prototype['examination'] = undefined;
+/**
  * @member {Number} id
  */
 
 ContactEntry.prototype['id'] = undefined;
-/**
- * @member {Array.<module:model/Symptom>} symptoms
- */
-
-ContactEntry.prototype['symptoms'] = undefined;
 var _default = ContactEntry;
 exports.default = _default;

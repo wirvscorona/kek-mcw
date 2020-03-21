@@ -4,72 +4,13 @@ import MovementTable from './MovementTable';
 import './MovementMap.css'
 import UploadMovementButton from './UploadMovementButton';
 import UploadInfectedButton from './UploadInfectedButton';
+import markerMockUp from './MarkerMockUp'
 
-
-const markerMockUp = [
-    {
-        markerId: 0,
-        lat: 49.006,
-        lng: 8.403
-    },
-    {
-        markerId: 1,
-        lat: 49.006,
-        lng: 8.413
-    },
-    {
-        markerId: 2,
-        lat: 49.006,
-        lng: 8.423
-    },
-    {
-        markerId: 3,
-        lat: 49.006,
-        lng: 8.433
-    },
-    {
-        markerId: 4,
-        lat: 49.006,
-        lng: 8.443
-    },
-    {
-        markerId: 5,
-        lat: 49.006,
-        lng: 8.453
-    },
-    {
-        markerId: 6,
-        lat: 49.006,
-        lng: 8.463
-    },
-    {
-        markerId: 7,
-        lat: 49.006,
-        lng: 8.473
-    },
-    {
-        markerId: 8,
-        lat: 49.006,
-        lng: 8.393
-    },
-    {
-        markerId: 9,
-        lat: 49.006,
-        lng: 8.383
-    },
-    {
-        markerId: 10,
-        lat: 49.006,
-        lng: 8.373
-    }
-]
-
-
-const SelectedMarker = markerList => {
+const generateSelectedMarker = (selectedMarkerList, markerList) => {
     var markerComponentList = []; 
-    markerList.forEach(markerId => {
-        markerMockUp.forEach(markerElement => {
-            if (markerId === markerElement.markerId) {
+    selectedMarkerList.forEach(markerId => {
+        markerList.forEach(markerElement => {
+            if (markerId === markerElement.index) {
                 markerComponentList.push(markerElement)
             }
         })
@@ -77,28 +18,44 @@ const SelectedMarker = markerList => {
     return markerComponentList;
 }
 
+const correctE7Values = markerList => {
+    return markerList.filter(marker => {
+        return marker.latitudeE7 !== 0 && marker.longitudeE7 !== 0;
+    }).map((marker, index) => {
+        marker.index = index;
+        marker.latitude = Number(marker.latitudeE7 + "E-7");
+        marker.longitude = Number(marker.longitudeE7 + "E-7");
+        return marker;
+    });
+}
+
 const MovementMap = props => {
 
     const [ markerList, setMarkerList ] = useState([]);
+    const [ selectedMarkerList, setSelectedMarkerList ] = useState([]);
+
+    const setNewMarkerList = newMarkerList => {
+        newMarkerList = correctE7Values(newMarkerList)
+        setMarkerList(newMarkerList);
+    }
 
     const addMarker = markerId => {
-        const newMarkerList = [...markerList, markerId];
-        setMarkerList(newMarkerList);
+        const newMarkerList = [...selectedMarkerList, markerId];
+        setSelectedMarkerList(newMarkerList);
     };
 
     const removeMarker = markerId => {
-        const newMarkerList = markerList.filter(marker => marker !== markerId);
-        console.log(newMarkerList)
-        setMarkerList(newMarkerList);
+        const newMarkerList = selectedMarkerList.filter(marker => marker !== markerId);
+        setSelectedMarkerList(newMarkerList);
     };
 
-    const markerBundle = { addMarker, removeMarker };
-    const markerComponentList = SelectedMarker(markerList)
+    const markerBundle = { markerList, addMarker, removeMarker };
+    const markerComponentList = generateSelectedMarker(selectedMarkerList, markerList)
 
     return (
         <div className='collision'>
             <div>
-                <UploadMovementButton/>
+                <UploadMovementButton setNewMarkerList={setNewMarkerList}/>
             </div>
             <div>
                 <UploadInfectedButton/>
@@ -114,11 +71,11 @@ const MovementMap = props => {
                 initialCenter={{ lat: 49.006, lng: 8.403 }}
                 >   
                 {markerComponentList.map(marker => {
-                    const markerId = marker.markerId
-                    const lat = marker.lat;
-                    const long = marker.lng;
+                    const index = marker.index
+                    const lat = marker.latitude;
+                    const long = marker.longitude;
                     const position = { lat: lat, lng: long }
-                    return (<Marker markerId={markerId} position={position} />)
+                    return (<Marker index={index} position={position} />)
                 })}
                 </Map> 
             </div>

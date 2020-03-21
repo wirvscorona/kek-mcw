@@ -7,6 +7,8 @@ exports.default = void 0;
 
 var _ApiClient = _interopRequireDefault(require("../ApiClient"));
 
+var _ExaminationDTO = _interopRequireDefault(require("./ExaminationDTO"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -74,12 +76,8 @@ var ContactEntryDTO = /*#__PURE__*/function () {
           obj['description'] = _ApiClient.default.convertToType(data['description'], 'String');
         }
 
-        if (data.hasOwnProperty('id')) {
-          obj['id'] = _ApiClient.default.convertToType(data['id'], 'Number');
-        }
-
-        if (data.hasOwnProperty('symptoms')) {
-          obj['symptoms'] = _ApiClient.default.convertToType(data['symptoms'], ['Number']);
+        if (data.hasOwnProperty('examination')) {
+          obj['examination'] = _ExaminationDTO.default.constructFromObject(data['examination']);
         }
       }
 
@@ -116,14 +114,9 @@ ContactEntryDTO.prototype['date'] = undefined;
 
 ContactEntryDTO.prototype['description'] = undefined;
 /**
- * @member {Number} id
+ * @member {module:model/ExaminationDTO} examination
  */
 
-ContactEntryDTO.prototype['id'] = undefined;
-/**
- * @member {Array.<Number>} symptoms
- */
-
-ContactEntryDTO.prototype['symptoms'] = undefined;
+ContactEntryDTO.prototype['examination'] = undefined;
 var _default = ContactEntryDTO;
 exports.default = _default;

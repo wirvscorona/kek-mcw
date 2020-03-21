@@ -20,12 +20,12 @@ import CorrespondenceDetailsDTO from './model/CorrespondenceDetailsDTO';
 import Diary from './model/Diary';
 import DiaryDTO from './model/DiaryDTO';
 import Duration from './model/Duration';
+import Examination from './model/Examination';
 import ExaminationDTO from './model/ExaminationDTO';
 import Link from './model/Link';
 import LocationMatch from './model/LocationMatch';
 import ModelAndView from './model/ModelAndView';
 import PlaceVisit from './model/PlaceVisit';
-import Symptom from './model/Symptom';
 import SymptomDTO from './model/SymptomDTO';
 import TimeLineObject from './model/TimeLineObject';
 import TimelineJsonRoot from './model/TimelineJsonRoot';
@@ -124,6 +124,12 @@ export {
     Duration,
 
     /**
+     * The Examination model constructor.
+     * @property {module:model/Examination}
+     */
+    Examination,
+
+    /**
      * The ExaminationDTO model constructor.
      * @property {module:model/ExaminationDTO}
      */
@@ -152,12 +158,6 @@ export {
      * @property {module:model/PlaceVisit}
      */
     PlaceVisit,
-
-    /**
-     * The Symptom model constructor.
-     * @property {module:model/Symptom}
-     */
-    Symptom,
 
     /**
      * The SymptomDTO model constructor.
