@@ -1,7 +1,10 @@
 package de.wirvsvirus.kek.service;
 
+import com.google.common.collect.Lists;
+import de.wirvsvirus.kek.service.locations.model.LocationMatch;
 import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
 import de.wirvsvirus.kek.service.locations.repository.LocationHistoryRepository;
+import de.wirvsvirus.kek.service.locations.service.TrivialLocationMappingService;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
@@ -57,20 +60,6 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 		}
 	}
 
-	// FIXME: only for demo purposes, ensuring LocationRepository works as expected.
-	@Bean
-	public CommandLineRunner demo(LocationHistoryRepository repository) {
-		return (args -> {
-			repository.save(new LocationHistory(-1, -1, -1, -1, -1));
-
-			logger.info("Stored one new location history....");
-
-			for (LocationHistory queriedHistory : repository.findAllByLatitudeBetweenAndLongitudeBetween(-2, 0, -2, 0)) {
-				logger.info(queriedHistory.toString());
-			}
-		});
-	}
-
 	@Bean
 	public CommandLineRunner demoUser(UserRepository repository) {
 		return (args -> {
@@ -86,6 +75,7 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 		return (args -> {
 			Symptom symptom = new Symptom();
 			symptom.setName("rote augen");
+			symptom.setSymptomType(Symptom.Type.STRING);
 			repository.save(symptom);
 		});
 	}

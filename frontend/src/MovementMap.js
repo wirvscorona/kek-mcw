@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import MovementTabel from './MovementTabel';
+import MovementTable from './MovementTable';
 import './MovementMap.css'
+import UploadMovementButton from './UploadMovementButton';
 
 const markerMockUp = [
     {
@@ -94,8 +95,11 @@ const MovementMap = props => {
 
     return (
         <div className='collision'>
+            <div>
+                <UploadMovementButton/>
+            </div>
             <div className='movement-table'>
-                <MovementTabel {...markerBundle}/>
+                <MovementTable {...markerBundle}/>
             </div>
             <div>
                 <Map
@@ -116,7 +120,7 @@ const MovementMap = props => {
         </div>
     )
 }
-    
+
 
 export default GoogleApiWrapper({ apiKey: 'AIzaSyD2BFWRom0XvQjkjvS6l6X5lbUS6JO3HpY' })(MovementMap);
 

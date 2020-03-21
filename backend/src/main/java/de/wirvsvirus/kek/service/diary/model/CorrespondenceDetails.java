@@ -1,33 +1,22 @@
 package de.wirvsvirus.kek.service.diary.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.Embeddable;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
+@Embeddable
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CorrespondenceDetails {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     public enum Type {
-        HOME,
-        MOBILE,
-        EMAIL
+        HOME, MOBILE, EMAIL
     };
 
     private Type contactMethodType;
     private String detail;
-
 
     public static CorrespondenceDetails toDomainObject(CorrespondenceDetailsDTO dto) {
         CorrespondenceDetails.Type type = CorrespondenceDetails.Type.HOME;
@@ -35,19 +24,18 @@ public class CorrespondenceDetails {
         switch (dto.getContactMethodType()) {
             case HOME:
                 type = CorrespondenceDetails.Type.HOME;
-            break;
+                break;
 
             case MOBILE:
                 type = CorrespondenceDetails.Type.MOBILE;
-            break;
+                break;
 
             case EMAIL:
                 type = CorrespondenceDetails.Type.EMAIL;
-            break;
+                break;
         }
 
-
-        return new CorrespondenceDetails(dto.getId(), type, dto.getDetail());
+        return new CorrespondenceDetails(type, dto.getDetail());
     }
 
     public CorrespondenceDetailsDTO toDTO() {
@@ -56,18 +44,18 @@ public class CorrespondenceDetails {
         switch (this.contactMethodType) {
             case HOME:
                 type = CorrespondenceDetailsDTO.Type.HOME;
-            break;
+                break;
 
             case MOBILE:
                 type = CorrespondenceDetailsDTO.Type.MOBILE;
-            break;
+                break;
 
             case EMAIL:
                 type = CorrespondenceDetailsDTO.Type.EMAIL;
-            break;
+                break;
         }
 
-        return new CorrespondenceDetailsDTO(this.getId(), type, this.detail);
+        return new CorrespondenceDetailsDTO(type, this.detail);
     }
 
 }
