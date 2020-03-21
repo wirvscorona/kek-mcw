@@ -8,6 +8,7 @@ import de.wirvsvirus.kek.service.diary.model.Symptom;
 
 @Repository
 public interface SymptomRepository extends CrudRepository<Symptom, Long> {
+    Collection<Symptom> findAll();
     Collection<Symptom> findByName(String name);
     Collection<Symptom> findByNameContains(String name);
 }

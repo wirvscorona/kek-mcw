@@ -10,7 +10,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel(description = "All details about a symptom.")
 public class SymptomDTO {
+
+    enum Type {
+        NUMERICAL,
+        STRING
+    };
+
+
     private Long id;
 
     private String name;
+    private Type symptomType;
 }
