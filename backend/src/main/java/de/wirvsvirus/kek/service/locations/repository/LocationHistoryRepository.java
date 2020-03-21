@@ -12,4 +12,5 @@ public interface LocationHistoryRepository extends CrudRepository<LocationHistor
     LocationHistory findFirstByLatitudeAndLongitudeAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(
             long latitude, long longitude, long endTimestamp, long startTimestamp);
     Collection<LocationHistory> findAllByLatitudeBetweenAndLongitudeBetween(long minLatitude, long maxLatitude, long minLongitude, long maxLongitude);
+    Collection<LocationHistory> findAllByLatitudeBetweenAndLongitudeBetweenAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(long minLatitude, long maxLatitude, long minLongitude, long maxLongitude, long maxStartTimestamp, long minEndTimestamp);
 }

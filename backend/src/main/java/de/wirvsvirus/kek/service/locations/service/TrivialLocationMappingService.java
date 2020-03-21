@@ -79,8 +79,13 @@ public class TrivialLocationMappingService {
         long minLatitudeE7 = (long) (minLatitudeDegree * Math.pow(10, 7));
         long maxLatitudeE7 = (long) (maxLatitudeDegree * Math.pow(10, 7));
 
-        Collection<LocationHistory> possibleLocationMatches = locationHistoryRepository.findAllByLatitudeBetweenAndLongitudeBetween(minLatitudeE7, maxLatitudeE7, minLongitudeE7, maxLongitudeE7);
-        return possibleLocationMatches.stream().filter(matchingLocationHistory -> isWithinRange(locationHistory, matchingLocationHistory, distanceInMeters)).collect(Collectors.toSet());
+        Collection<LocationHistory> possibleLocationMatches = locationHistoryRepository.findAllByLatitudeBetweenAndLongitudeBetweenAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(
+                minLatitudeE7, maxLatitudeE7, minLongitudeE7, maxLongitudeE7,
+                locationHistory.getEndTimestamp(), locationHistory.getStartTimestamp()
+        );
+        return possibleLocationMatches.stream()
+                .filter(matchingLocationHistory -> isWithinRange(locationHistory, matchingLocationHistory, distanceInMeters))
+                .collect(Collectors.toList());
     }
 
     private boolean isWithinRange(LocationHistory first, LocationHistory second, long maxDistanceInMeters) {
