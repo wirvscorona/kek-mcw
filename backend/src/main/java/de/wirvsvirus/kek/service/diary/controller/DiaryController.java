@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import de.wirvsvirus.kek.service.diary.model.ContactEntry;
 import de.wirvsvirus.kek.service.diary.model.ContactEntryDTO;
-import de.wirvsvirus.kek.service.diary.model.CreateDiaryDTO;
+import de.wirvsvirus.kek.service.diary.model.DiaryDTO;
 import de.wirvsvirus.kek.service.diary.model.Diary;
 import de.wirvsvirus.kek.service.diary.model.Symptom;
 import de.wirvsvirus.kek.service.diary.model.User;
@@ -44,18 +44,6 @@ public class DiaryController {
         return new ResponseEntity<Collection<Diary>>(diaryRepo.findAll(), HttpStatus.OK);
     }
 
-    // TODO move to seperate controller
-    @ApiOperation(value = "Responds with a diary object", response = User.class)
-    @GetMapping("/user/{id}")
-    public ResponseEntity<User> findUser(@PathVariable Long id) {
-        Optional<User> user = userRepo.findById(id);
-        if (!user.isPresent()) {
-            return new ResponseEntity<User>(new User(), HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<User>(user.get(), HttpStatus.OK);
-    }
-
     @ApiOperation(value = "Responds with a diary object", response = Diary.class)
     @GetMapping("/{id}")
     public ResponseEntity<Diary> findDiary(@PathVariable Long id) {
@@ -69,7 +57,7 @@ public class DiaryController {
 
     @ApiOperation(value = "Saves new diary object", response = Diary.class)
     @PostMapping("/{id}")
-    public ResponseEntity<Diary> newDiary(@RequestBody CreateDiaryDTO createDiaryDTO) {
+    public ResponseEntity<Diary> newDiary(@RequestBody DiaryDTO createDiaryDTO) {
         Diary newDiary = new Diary();
         Optional<User> user = userRepo.findById(createDiaryDTO.getUserId());
         if (!user.isPresent()) {

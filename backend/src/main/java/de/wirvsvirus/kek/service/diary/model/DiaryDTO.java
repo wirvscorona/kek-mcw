@@ -1,17 +1,15 @@
 package de.wirvsvirus.kek.service.diary.model;
 
-import javax.persistence.Id;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.*;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class CreateDiaryDTO {
+@RequiredArgsConstructor
+public class DiaryDTO {
     private Long userId;
 
     private List<ContactEntryDTO> contacts;

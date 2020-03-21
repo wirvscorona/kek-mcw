@@ -7,12 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ContactMethodDTO {
+public class CorrespondenceDetailsDTO {
 
     public enum Type {
-        HOME,
-        MOBILE,
-        EMAIL
+        HOME, MOBILE, EMAIL
     };
 
     private Long id;
