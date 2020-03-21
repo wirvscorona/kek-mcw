@@ -3,6 +3,7 @@ import App from './App';
 import Diary from './Diary'
 import Navigation from './Navigation';
 import MovementMap from './MovementMap';
+import SymptomMap from './SymptomMap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 const AppRouter = _ => (
@@ -19,8 +20,13 @@ const AppRouter = _ => (
             </Route>
         </Switch>
         <Switch>
-            <Route path='/map'>
+            <Route path='/map/matching'>
                 <MovementMap/>
+            </Route>
+        </Switch>
+        <Switch>
+            <Route path='/map/heat'>
+                <SymptomMap/>
             </Route>
         </Switch>
     </Router>
