@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import io.swagger.annotations.ApiOperation;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
 
@@ -76,6 +77,7 @@ public class DiaryController {
         }
         newDiary.setUser(user.get());
         newDiary.setCured(createDiaryDTO.isCured());
+        newDiary.setContacts(new ArrayList<ContactEntry>());
         createDiaryDTO.getContacts().forEach(ce -> newDiary.getContacts().add(ContactEntryDTOtoEntity(ce)));
         return new ResponseEntity<Diary>(diaryRepo.save(newDiary), HttpStatus.OK);
     }
@@ -87,6 +89,8 @@ public class DiaryController {
         entry.setDate(entryDTO.getDate());
         entry.setCustomSymptomPresent(entryDTO.isCustomSymptomPresent());
         entry.setDescription(entryDTO.getDescription());
+
+        entry.setSymptoms(new ArrayList<Symptom>());
 
         entryDTO.getSymptoms().forEach(symptomID -> {
             Optional<Symptom> symptom = symptomRepo.findById(symptomID);

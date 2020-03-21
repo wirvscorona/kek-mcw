@@ -9,4 +9,5 @@ import de.wirvsvirus.kek.service.diary.model.User;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {
+    Collection<User> findAll();
 }
