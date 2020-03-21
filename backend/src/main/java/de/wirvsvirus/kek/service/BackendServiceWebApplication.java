@@ -1,7 +1,10 @@
 package de.wirvsvirus.kek.service;
 
+import com.google.common.collect.Lists;
+import de.wirvsvirus.kek.service.locations.model.LocationMatch;
 import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
 import de.wirvsvirus.kek.service.locations.repository.LocationHistoryRepository;
+import de.wirvsvirus.kek.service.locations.service.TrivialLocationMappingService;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
@@ -62,14 +65,18 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 
 	// FIXME: only for demo purposes, ensuring LocationRepository works as expected.
 	@Bean
-	public CommandLineRunner demo(LocationHistoryRepository repository) {
+	public CommandLineRunner demo(LocationHistoryRepository repository, TrivialLocationMappingService service) {
 		return (args -> {
-			repository.save(new LocationHistory(-1, -1, -1, -1, -1));
+			repository.save(new LocationHistory(490147397, 83940415, 1, 2, -1));
 
 			logger.info("Stored one new location history....");
 
 			for (LocationHistory queriedHistory : repository.findAllByLatitudeBetweenAndLongitudeBetween(-2, 0, -2, 0)) {
 				logger.info(queriedHistory.toString());
+			}
+
+			for (LocationMatch match : service.computeNearbyMatches(Lists.newArrayList(new LocationHistory(490147397, 83940415, 0, 10, -1)), 100)) {
+				logger.info(match.toString());
 			}
 		});
 	}

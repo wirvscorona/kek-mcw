@@ -54,15 +54,8 @@ public class TrivialLocationMappingService {
     }
 
     private Collection<LocationHistory> computeNearbyLocationHistories(LocationHistory locationHistory, long distanceInMeters) {
-        long latitudeE7 = locationHistory.getLatitude();
-        long longitudeE7 = locationHistory.getLongitude();
-
-        // Apparently an overflow error in googles location data
-        // see https://support.google.com/maps/thread/4595364?hl=en&msgid=4967524
-        if (latitudeE7 > 900000000L) latitudeE7 = latitudeE7 - 4294967296L;
-        if (longitudeE7 > 1800000000L) longitudeE7 = longitudeE7 - 4294967296L;
-        double latitudeDegrees = latitudeE7 / Math.pow(10, 7);
-        double longitudeDegrees = longitudeE7 / Math.pow(10, 7);
+        double latitudeDegrees = convertLatitudeE7ToDegree(locationHistory.getLatitude());
+        double longitudeDegrees = convertLongitudeE7ToDegree(locationHistory.getLongitude());
 
         double firstLongitudeDegreeBorder = Geodesic.WGS84.Direct(latitudeDegrees, longitudeDegrees, -90, distanceInMeters).lon2; // west - minlon
         double secondLongitudeDegreeBorder = Geodesic.WGS84.Direct(latitudeDegrees, longitudeDegrees, 90, distanceInMeters).lon2; // east - maxlon
@@ -88,7 +81,28 @@ public class TrivialLocationMappingService {
                 .collect(Collectors.toList());
     }
 
+    private double convertLatitudeE7ToDegree(long latitudeE7) {
+        // Apparently an overflow error in googles location data
+        // see https://support.google.com/maps/thread/4595364?hl=en&msgid=4967524
+        if (latitudeE7 > 900000000L) latitudeE7 = latitudeE7 - 4294967296L;
+        return latitudeE7 / Math.pow(10, 7);
+    }
+
+
+    private double convertLongitudeE7ToDegree(long longitudeE7) {
+        // Apparently an overflow error in googles location data
+        // see https://support.google.com/maps/thread/4595364?hl=en&msgid=4967524
+        if (longitudeE7 > 1800000000L) longitudeE7 = longitudeE7 - 4294967296L;
+        return longitudeE7 / Math.pow(10, 7);
+    }
+
+
     private boolean isWithinRange(LocationHistory first, LocationHistory second, long maxDistanceInMeters) {
-        return Geodesic.WGS84.Inverse(first.getLatitude(), first.getLongitude(), second.getLatitude(), second.getLongitude()).s12 <= maxDistanceInMeters;
+        return Geodesic.WGS84.Inverse(
+                convertLatitudeE7ToDegree(first.getLatitude()),
+                convertLongitudeE7ToDegree(first.getLongitude()),
+                convertLatitudeE7ToDegree(second.getLatitude()),
+                convertLongitudeE7ToDegree(second.getLongitude())
+        ).s12 <= maxDistanceInMeters;
     }
 }
