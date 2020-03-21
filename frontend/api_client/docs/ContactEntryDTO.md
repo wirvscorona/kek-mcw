@@ -9,7 +9,6 @@ Name | Type | Description | Notes
 **customSymptomPresent** | **Boolean** |  | [optional] 
 **_date** | **Date** |  | [optional] 
 **description** | **String** |  | [optional] 
-**id** | **Number** |  | [optional] 
-**symptoms** | **[Number]** |  | [optional] 
+**examination** | [**ExaminationDTO**](ExaminationDTO.md) |  | [optional] 
 
 

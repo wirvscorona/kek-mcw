@@ -109,7 +109,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.errorUsingDELETE(callback);
+api.errorHtmlUsingDELETE(callback);
 
 ```
 
@@ -119,13 +119,13 @@ All URIs are relative to *http://127.0.0.1:8081*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingDELETE**](docs/BasicErrorControllerApi.md#errorUsingDELETE) | **DELETE** /error | error
-*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingGET**](docs/BasicErrorControllerApi.md#errorUsingGET) | **GET** /error | error
-*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingHEAD**](docs/BasicErrorControllerApi.md#errorUsingHEAD) | **HEAD** /error | error
-*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingOPTIONS**](docs/BasicErrorControllerApi.md#errorUsingOPTIONS) | **OPTIONS** /error | error
-*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingPATCH**](docs/BasicErrorControllerApi.md#errorUsingPATCH) | **PATCH** /error | error
-*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingPOST**](docs/BasicErrorControllerApi.md#errorUsingPOST) | **POST** /error | error
-*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingPUT**](docs/BasicErrorControllerApi.md#errorUsingPUT) | **PUT** /error | error
+*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingDELETE**](docs/BasicErrorControllerApi.md#errorHtmlUsingDELETE) | **DELETE** /error | errorHtml
+*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingGET**](docs/BasicErrorControllerApi.md#errorHtmlUsingGET) | **GET** /error | errorHtml
+*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingHEAD**](docs/BasicErrorControllerApi.md#errorHtmlUsingHEAD) | **HEAD** /error | errorHtml
+*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingOPTIONS**](docs/BasicErrorControllerApi.md#errorHtmlUsingOPTIONS) | **OPTIONS** /error | errorHtml
+*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingPATCH**](docs/BasicErrorControllerApi.md#errorHtmlUsingPATCH) | **PATCH** /error | errorHtml
+*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingPOST**](docs/BasicErrorControllerApi.md#errorHtmlUsingPOST) | **POST** /error | errorHtml
+*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingPUT**](docs/BasicErrorControllerApi.md#errorHtmlUsingPUT) | **PUT** /error | errorHtml
 *ApiDocumentation.DiaryControllerApi* | [**deleteDiaryUsingDELETE**](docs/DiaryControllerApi.md#deleteDiaryUsingDELETE) | **DELETE** /api/diaries/{id} | Deletes diary object
 *ApiDocumentation.DiaryControllerApi* | [**findDiariesUsingGET**](docs/DiaryControllerApi.md#findDiariesUsingGET) | **GET** /api/diaries | Responds with a list of diaries
 *ApiDocumentation.DiaryControllerApi* | [**findDiaryUsingGET**](docs/DiaryControllerApi.md#findDiaryUsingGET) | **GET** /api/diaries/{id} | Responds with a diary object
@@ -160,12 +160,12 @@ Class | Method | HTTP request | Description
  - [ApiDocumentation.Diary](docs/Diary.md)
  - [ApiDocumentation.DiaryDTO](docs/DiaryDTO.md)
  - [ApiDocumentation.Duration](docs/Duration.md)
+ - [ApiDocumentation.Examination](docs/Examination.md)
  - [ApiDocumentation.ExaminationDTO](docs/ExaminationDTO.md)
  - [ApiDocumentation.Link](docs/Link.md)
  - [ApiDocumentation.LocationMatch](docs/LocationMatch.md)
  - [ApiDocumentation.ModelAndView](docs/ModelAndView.md)
  - [ApiDocumentation.PlaceVisit](docs/PlaceVisit.md)
- - [ApiDocumentation.Symptom](docs/Symptom.md)
  - [ApiDocumentation.SymptomDTO](docs/SymptomDTO.md)
  - [ApiDocumentation.TimeLineObject](docs/TimeLineObject.md)
  - [ApiDocumentation.TimelineJsonRoot](docs/TimelineJsonRoot.md)

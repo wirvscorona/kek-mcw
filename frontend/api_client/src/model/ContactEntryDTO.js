@@ -12,6 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
+import ExaminationDTO from './ExaminationDTO';
 
 /**
  * The ContactEntryDTO model module.
@@ -62,11 +63,8 @@ class ContactEntryDTO {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
-            }
-            if (data.hasOwnProperty('symptoms')) {
-                obj['symptoms'] = ApiClient.convertToType(data['symptoms'], ['Number']);
+            if (data.hasOwnProperty('examination')) {
+                obj['examination'] = ExaminationDTO.constructFromObject(data['examination']);
             }
         }
         return obj;
@@ -101,14 +99,9 @@ ContactEntryDTO.prototype['date'] = undefined;
 ContactEntryDTO.prototype['description'] = undefined;
 
 /**
- * @member {Number} id
+ * @member {module:model/ExaminationDTO} examination
  */
-ContactEntryDTO.prototype['id'] = undefined;
-
-/**
- * @member {Array.<Number>} symptoms
- */
-ContactEntryDTO.prototype['symptoms'] = undefined;
+ContactEntryDTO.prototype['examination'] = undefined;
 
 
 

@@ -38,7 +38,7 @@ class HeatMap extends Component {
         heatmapVisible: true,
             heatmapPoints: [
                     {lat: 59.95, lng: 30.33},
-                      {lat: 59.96, lng: 30.32}
+                    {lat: 59.96, lng: 30.32}
                   ]
         }
     }

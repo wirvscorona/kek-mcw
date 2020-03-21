@@ -12,7 +12,7 @@
  */
 
 import ApiClient from '../ApiClient';
-import Symptom from './Symptom';
+import Examination from './Examination';
 
 /**
  * The ContactEntry model module.
@@ -64,11 +64,11 @@ class ContactEntry {
             if (data.hasOwnProperty('description')) {
                 obj['description'] = ApiClient.convertToType(data['description'], 'String');
             }
+            if (data.hasOwnProperty('examination')) {
+                obj['examination'] = Examination.constructFromObject(data['examination']);
+            }
             if (data.hasOwnProperty('id')) {
                 obj['id'] = ApiClient.convertToType(data['id'], 'Number');
-            }
-            if (data.hasOwnProperty('symptoms')) {
-                obj['symptoms'] = ApiClient.convertToType(data['symptoms'], [Symptom]);
             }
         }
         return obj;
@@ -103,14 +103,14 @@ ContactEntry.prototype['date'] = undefined;
 ContactEntry.prototype['description'] = undefined;
 
 /**
+ * @member {module:model/Examination} examination
+ */
+ContactEntry.prototype['examination'] = undefined;
+
+/**
  * @member {Number} id
  */
 ContactEntry.prototype['id'] = undefined;
-
-/**
- * @member {Array.<module:model/Symptom>} symptoms
- */
-ContactEntry.prototype['symptoms'] = undefined;
 
 
 

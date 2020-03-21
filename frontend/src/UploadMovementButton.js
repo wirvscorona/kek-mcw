@@ -2,47 +2,57 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { LocationDataControllerApi } from 'api_documentation';
 
-function uploadLocationData(jsonData) {
+// endTimeMillis: 1577911089000
+// latitudeE7: 0
+// longitudeE7: 0
+// startTimeMillis: 1577903429000
+
+function getMatchingLocations(jsonData, setNewMarkerList) {
     let apiInstance = new LocationDataControllerApi();
-    apiInstance.getMatchingLocationsUsingPOST(jsonData, (error, data, response) => {
+    let opts = {
+        'maxDistanceInMeters': 100, // Number | maxDistanceInMeters
+        'virusPersistenceTimeInMillis': 1800000 // Number | virusPersistenceTimeInMillis
+    };
+    apiInstance.getMatchingLocationsUsingPOST(jsonData, opts, (error, data, response) => {
         if (error) {
             console.error(error);
         } else {
-            console.log('API called successfully. Returned data: ' + data);
+            console.log('getMatchingLocationsUsingPOST called successfully.');
+            setNewMarkerList(data)
         }
     });
 }
 
 
-function inputChanged(event) {
-    var file = event.target.files[0];
+function movementInputChanged(event, setNewMarkerList) {
+    const file = event.target.files[0];
 
     if (file.type !== "application/json") {
         window.alert("File type must be json");
         return;
     }
 
-    var reader = new FileReader();
+    const reader = new FileReader();
     reader.readAsText(file,'UTF-8');
     reader.onload = readerEvent => {
-        var content = readerEvent.target.result; // this is the content!
-        uploadLocationData(content)
+        const content = readerEvent.target.result; // this is the content!
+        getMatchingLocations(content, setNewMarkerList);
     }
 
 
 }
 
 function uploadEvent() {
-    document.getElementById("file-input").click()
+    document.getElementById("movement-file-input").click()
 }
 
-function UploadMovementButton() {
+function UploadMovementButton(props) {
     return (
         <div>
              <Button variant='secondary' onClick={uploadEvent}>
                 Upload Timeline .json
             </Button>
-            <input id="file-input" type="file" name="name" style={{display: "none"}} onChange={inputChanged}/>
+            <input id="movement-file-input" type="file" name="name" style={{display: "none"}} onChange={ e => movementInputChanged(e, props.setNewMarkerList) }/>
         </div>
     ) 
 }

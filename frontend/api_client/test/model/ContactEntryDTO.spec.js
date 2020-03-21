@@ -84,14 +84,8 @@
       //expect(instance).to.be();
     });
 
-    it('should have the property id (base name: "id")', function() {
-      // uncomment below and update the code to test the property id
-      //var instane = new ApiDocumentation.ContactEntryDTO();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property symptoms (base name: "symptoms")', function() {
-      // uncomment below and update the code to test the property symptoms
+    it('should have the property examination (base name: "examination")', function() {
+      // uncomment below and update the code to test the property examination
       //var instane = new ApiDocumentation.ContactEntryDTO();
       //expect(instance).to.be();
     });

@@ -4,21 +4,21 @@ All URIs are relative to *http://127.0.0.1:8081*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**errorUsingDELETE**](BasicErrorControllerApi.md#errorUsingDELETE) | **DELETE** /error | error
-[**errorUsingGET**](BasicErrorControllerApi.md#errorUsingGET) | **GET** /error | error
-[**errorUsingHEAD**](BasicErrorControllerApi.md#errorUsingHEAD) | **HEAD** /error | error
-[**errorUsingOPTIONS**](BasicErrorControllerApi.md#errorUsingOPTIONS) | **OPTIONS** /error | error
-[**errorUsingPATCH**](BasicErrorControllerApi.md#errorUsingPATCH) | **PATCH** /error | error
-[**errorUsingPOST**](BasicErrorControllerApi.md#errorUsingPOST) | **POST** /error | error
-[**errorUsingPUT**](BasicErrorControllerApi.md#errorUsingPUT) | **PUT** /error | error
+[**errorHtmlUsingDELETE**](BasicErrorControllerApi.md#errorHtmlUsingDELETE) | **DELETE** /error | errorHtml
+[**errorHtmlUsingGET**](BasicErrorControllerApi.md#errorHtmlUsingGET) | **GET** /error | errorHtml
+[**errorHtmlUsingHEAD**](BasicErrorControllerApi.md#errorHtmlUsingHEAD) | **HEAD** /error | errorHtml
+[**errorHtmlUsingOPTIONS**](BasicErrorControllerApi.md#errorHtmlUsingOPTIONS) | **OPTIONS** /error | errorHtml
+[**errorHtmlUsingPATCH**](BasicErrorControllerApi.md#errorHtmlUsingPATCH) | **PATCH** /error | errorHtml
+[**errorHtmlUsingPOST**](BasicErrorControllerApi.md#errorHtmlUsingPOST) | **POST** /error | errorHtml
+[**errorHtmlUsingPUT**](BasicErrorControllerApi.md#errorHtmlUsingPUT) | **PUT** /error | errorHtml
 
 
 
-## errorUsingDELETE
+## errorHtmlUsingDELETE
 
-> {String: Object} errorUsingDELETE()
+> ModelAndView errorHtmlUsingDELETE()
 
-error
+errorHtml
 
 ### Example
 
@@ -26,7 +26,7 @@ error
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.BasicErrorControllerApi();
-apiInstance.errorUsingDELETE((error, data, response) => {
+apiInstance.errorHtmlUsingDELETE((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -41,7 +41,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**{String: Object}**
+[**ModelAndView**](ModelAndView.md)
 
 ### Authorization
 
@@ -50,14 +50,14 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: text/html
 
 
-## errorUsingGET
+## errorHtmlUsingGET
 
-> {String: Object} errorUsingGET()
+> ModelAndView errorHtmlUsingGET()
 
-error
+errorHtml
 
 ### Example
 
@@ -65,7 +65,7 @@ error
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.BasicErrorControllerApi();
-apiInstance.errorUsingGET((error, data, response) => {
+apiInstance.errorHtmlUsingGET((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -80,7 +80,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**{String: Object}**
+[**ModelAndView**](ModelAndView.md)
 
 ### Authorization
 
@@ -89,14 +89,14 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: text/html
 
 
-## errorUsingHEAD
+## errorHtmlUsingHEAD
 
-> {String: Object} errorUsingHEAD()
+> ModelAndView errorHtmlUsingHEAD()
 
-error
+errorHtml
 
 ### Example
 
@@ -104,7 +104,7 @@ error
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.BasicErrorControllerApi();
-apiInstance.errorUsingHEAD((error, data, response) => {
+apiInstance.errorHtmlUsingHEAD((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -119,7 +119,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**{String: Object}**
+[**ModelAndView**](ModelAndView.md)
 
 ### Authorization
 
@@ -128,14 +128,14 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: text/html
 
 
-## errorUsingOPTIONS
+## errorHtmlUsingOPTIONS
 
-> {String: Object} errorUsingOPTIONS()
+> ModelAndView errorHtmlUsingOPTIONS()
 
-error
+errorHtml
 
 ### Example
 
@@ -143,7 +143,7 @@ error
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.BasicErrorControllerApi();
-apiInstance.errorUsingOPTIONS((error, data, response) => {
+apiInstance.errorHtmlUsingOPTIONS((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -158,7 +158,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**{String: Object}**
+[**ModelAndView**](ModelAndView.md)
 
 ### Authorization
 
@@ -167,14 +167,14 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: text/html
 
 
-## errorUsingPATCH
+## errorHtmlUsingPATCH
 
-> {String: Object} errorUsingPATCH()
+> ModelAndView errorHtmlUsingPATCH()
 
-error
+errorHtml
 
 ### Example
 
@@ -182,7 +182,7 @@ error
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.BasicErrorControllerApi();
-apiInstance.errorUsingPATCH((error, data, response) => {
+apiInstance.errorHtmlUsingPATCH((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -197,7 +197,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**{String: Object}**
+[**ModelAndView**](ModelAndView.md)
 
 ### Authorization
 
@@ -206,14 +206,14 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: text/html
 
 
-## errorUsingPOST
+## errorHtmlUsingPOST
 
-> {String: Object} errorUsingPOST()
+> ModelAndView errorHtmlUsingPOST()
 
-error
+errorHtml
 
 ### Example
 
@@ -221,7 +221,7 @@ error
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.BasicErrorControllerApi();
-apiInstance.errorUsingPOST((error, data, response) => {
+apiInstance.errorHtmlUsingPOST((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -236,7 +236,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**{String: Object}**
+[**ModelAndView**](ModelAndView.md)
 
 ### Authorization
 
@@ -245,14 +245,14 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: text/html
 
 
-## errorUsingPUT
+## errorHtmlUsingPUT
 
-> {String: Object} errorUsingPUT()
+> ModelAndView errorHtmlUsingPUT()
 
-error
+errorHtml
 
 ### Example
 
@@ -260,7 +260,7 @@ error
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.BasicErrorControllerApi();
-apiInstance.errorUsingPUT((error, data, response) => {
+apiInstance.errorHtmlUsingPUT((error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -275,7 +275,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-**{String: Object}**
+[**ModelAndView**](ModelAndView.md)
 
 ### Authorization
 
@@ -284,5 +284,5 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: */*
+- **Accept**: text/html
 
