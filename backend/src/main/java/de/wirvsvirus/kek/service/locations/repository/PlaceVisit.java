@@ -9,16 +9,30 @@ public class PlaceVisit {
     private long id;
     @ManyToOne
     private Place place;
-    private long timestamp;
-    private long duration;
+    private long startTimestamp;
+    private long endTimestamp;
+    private long updateTimestamp;
 
     private PlaceVisit() {
     }
 
-    public PlaceVisit(Place place, long timestamp, long duration) {
+    public PlaceVisit(Place place, long startTimestamp, long endTimestamp, long updateTimestamp) {
         this.place = place;
-        this.timestamp = timestamp;
-        this.duration = duration;
+        this.startTimestamp = startTimestamp;
+        this.endTimestamp = endTimestamp;
+        this.updateTimestamp = updateTimestamp;
+    }
+
+    public Place getPlace() {
+        return place;
+    }
+
+    public long getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public long getEndTimestamp() {
+        return endTimestamp;
     }
 
     @Override
@@ -26,8 +40,9 @@ public class PlaceVisit {
         return "PlaceVisit{" +
                 "id=" + id +
                 ", place=" + place +
-                ", timestamp=" + timestamp +
-                ", duration=" + duration +
+                ", startTimestamp=" + startTimestamp +
+                ", endTimestamp=" + endTimestamp +
+                ", updateTimestamp=" + updateTimestamp +
                 '}';
     }
 }

@@ -8,4 +8,5 @@ import java.util.Collection;
 @Repository
 public interface PlaceVisitRepository extends CrudRepository<PlaceVisit, Long> {
     Collection<PlaceVisit> findAll();
+    PlaceVisit findFirstByPlaceEqualsAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(Place place, long endTimestamp, long startTimestamp);
 }

@@ -1,8 +1,11 @@
 package de.wirvsvirus.kek.service.locations.service;
 
 import de.wirvsvirus.kek.service.locations.model.LocationMatch;
+import de.wirvsvirus.kek.service.locations.model.PlaceMatch;
 import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
 import de.wirvsvirus.kek.service.locations.repository.LocationHistoryRepository;
+import de.wirvsvirus.kek.service.locations.repository.PlaceVisit;
+import de.wirvsvirus.kek.service.locations.repository.PlaceVisitRepository;
 import net.sf.geographiclib.Geodesic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,11 +16,13 @@ import java.util.stream.Collectors;
 
 @Service
 public class TrivialLocationMappingService {
-    private LocationHistoryRepository locationHistoryRepository;
+    private final LocationHistoryRepository locationHistoryRepository;
+    private final PlaceVisitRepository placeVisitRepository;
 
     @Autowired
-    public TrivialLocationMappingService(LocationHistoryRepository locationHistoryRepository) {
+    public TrivialLocationMappingService(LocationHistoryRepository locationHistoryRepository, PlaceVisitRepository placeVisitRepository) {
         this.locationHistoryRepository = locationHistoryRepository;
+        this.placeVisitRepository = placeVisitRepository;
     }
 
     public List<LocationMatch> computeMatches(List<LocationHistory> locationHistories, long virusPersistenceTime) {
@@ -29,6 +34,16 @@ public class TrivialLocationMappingService {
                                 locationHistory.getEndTimestamp(),
                                 locationHistory.getStartTimestamp() - virusPersistenceTime) != null)
                 .map(LocationMatch::fromLocationHistory)
+                .collect(Collectors.toList());
+    }
+
+    public List<PlaceMatch> computePlaceMatches(List<PlaceVisit> placeVisits, long virusPersistenceTime) {
+        return placeVisits.stream()
+                .filter(placeVisit -> placeVisitRepository.findFirstByPlaceEqualsAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(
+                                placeVisit.getPlace(),
+                                placeVisit.getEndTimestamp(),
+                                placeVisit.getStartTimestamp() - virusPersistenceTime) != null)
+                .map(PlaceMatch::fromPlaceVisit)
                 .collect(Collectors.toList());
     }
 
