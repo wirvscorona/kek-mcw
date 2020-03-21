@@ -13,8 +13,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class TrivialLocationMappingService {
+    private LocationHistoryRepository locationHistoryRepository;
+
     @Autowired
-    LocationHistoryRepository locationHistoryRepository;
+    public TrivialLocationMappingService(LocationHistoryRepository locationHistoryRepository) {
+        this.locationHistoryRepository = locationHistoryRepository;
+    }
 
     public List<LocationMatch> computeMatches(List<LocationHistory> locationHistories, long virusPersistenceTime) {
         return locationHistories.stream()

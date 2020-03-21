@@ -63,24 +63,6 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 		}
 	}
 
-	// FIXME: only for demo purposes, ensuring LocationRepository works as expected.
-	@Bean
-	public CommandLineRunner demo(LocationHistoryRepository repository, TrivialLocationMappingService service) {
-		return (args -> {
-			repository.save(new LocationHistory(490147397, 83940415, 1, 2, -1));
-
-			logger.info("Stored one new location history....");
-
-			for (LocationHistory queriedHistory : repository.findAllByLatitudeBetweenAndLongitudeBetween(-2, 0, -2, 0)) {
-				logger.info(queriedHistory.toString());
-			}
-
-			for (LocationMatch match : service.computeNearbyMatches(Lists.newArrayList(new LocationHistory(490147397, 83940415, 0, 10, -1)), 100, 1800000)) {
-				logger.info(match.toString());
-			}
-		});
-	}
-
 	@Bean
 	public CommandLineRunner demoUser(UserRepository repository) {
 		return (args -> {
