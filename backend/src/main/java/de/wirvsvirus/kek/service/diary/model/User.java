@@ -45,8 +45,7 @@ public class User {
     }
 
     public static User toDomainObject(UserDTO dto) {
-        User newUser = new User(dto.getId(), dto.getFirstName(), dto.getLastName(),
-                new HashSet<CorrespondenceDetails>());
+        User newUser = new User(null, dto.getFirstName(), dto.getLastName(), new HashSet<CorrespondenceDetails>());
 
         dto.getCorrespondenceDetails().forEach(
                 methodDTO -> newUser.getCorrespondenceDetails().add(CorrespondenceDetails.toDomainObject(methodDTO)));
@@ -55,7 +54,7 @@ public class User {
     }
 
     public UserDTO toDTO() {
-        UserDTO newUserDTO = new UserDTO(this.getId(), this.getFirstName(), this.getLastName(),
+        UserDTO newUserDTO = new UserDTO(this.getFirstName(), this.getLastName(),
                 new HashSet<CorrespondenceDetailsDTO>());
         this.correspondenceDetails.forEach(method -> newUserDTO.getCorrespondenceDetails().add(method.toDTO()));
         return newUserDTO;

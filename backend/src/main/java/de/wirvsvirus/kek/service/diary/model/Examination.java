@@ -32,21 +32,22 @@ public class Examination {
 
     private Date dateOfExamination;
 
+    // TODO this should be converted to actual symptom entities in toDomainObject
+    // See Diary/ContractEntry for reference
     @ElementCollection
     private List<Long> symptomsID;
 
     @ElementCollection
     private List<String> symptomDescription;
 
-
     public static Examination toDomainObject(ExaminationDTO dto) {
-        return new Examination(dto.getId(), dto.getStreetname(), dto.getCity(), dto.getZipCode(), dto.getDateOfExamination(), 
-                               dto.getSymptomsID(), dto.getSymptomDescription());
+        return new Examination(null, dto.getStreetname(), dto.getCity(), dto.getZipCode(), dto.getDateOfExamination(),
+                dto.getSymptomsID(), dto.getSymptomDescription());
     }
 
     public ExaminationDTO toDTO() {
-        return new ExaminationDTO(this.getId(), this.getStreetname(), this.getCity(), this.getZipCode(), this.getDateOfExamination(), 
-                                  this.getSymptomsID(), this.getSymptomDescription());
+        return new ExaminationDTO(this.getStreetname(), this.getCity(), this.getZipCode(), this.getDateOfExamination(),
+                this.getSymptomsID(), this.getSymptomDescription());
 
     }
 }

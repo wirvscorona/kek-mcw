@@ -23,21 +23,19 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/api/examinations")
 @Api(value = "Examination Endpoint", description = "Provides access to examination data.")
 public class ExaminationController {
 
-
     @Autowired
     private ExaminationRepository examRepo;
 
-    @ApiOperation(value = "Responds with a list of examinations", response = ExaminationDTO.class)
+    @ApiOperation(value = "Responds with a list of examinations", response = Examination.class)
     @GetMapping
-    public ResponseEntity<Collection<ExaminationDTO>> findExaminations(@ApiParam(name="containssymptoms", value="A comma seperated list of symptom ids that should be searched for") @RequestParam(name = "containssymptoms", required = false) List<Long> symptomsIDSearchList) {
-        Collection<ExaminationDTO> examinationDTOs = new ArrayList<ExaminationDTO>();
-        Iterable<Examination> examinations = null;
+    public ResponseEntity<Collection<Examination>> findExaminations(
+            @ApiParam(name = "containssymptoms", value = "A comma seperated list of symptom ids that should be searched for") @RequestParam(name = "containssymptoms", required = false) List<Long> symptomsIDSearchList) {
+        Collection<Examination> examinations = null;
 
         // No search query
         if (symptomsIDSearchList == null || symptomsIDSearchList.isEmpty()) {
@@ -47,38 +45,27 @@ public class ExaminationController {
             examinations = examRepo.findBySymptomsIDIn(symptomsIDSearchList);
         }
 
-        examinations.forEach(examination -> examinationDTOs.add(examination.toDTO()));
-    
-        if (examinationDTOs.isEmpty()) {
-            return new ResponseEntity<Collection<ExaminationDTO>>(examinationDTOs, HttpStatus.NOT_FOUND);
-
-        } else {
-            return new ResponseEntity<Collection<ExaminationDTO>>(examinationDTOs, HttpStatus.OK);
-        }
+        return new ResponseEntity<Collection<Examination>>(examinations, HttpStatus.OK);
     }
 
-
-    @ApiOperation(value = "Saves new Examination object", response = ExaminationDTO.class)
+    @ApiOperation(value = "Saves new Examination object", response = Examination.class)
     @PostMapping
-    public ResponseEntity<ExaminationDTO> saveExamination(@RequestBody ExaminationDTO newExaminationDTO) {
+    public ResponseEntity<Examination> saveExamination(@RequestBody ExaminationDTO newExaminationDTO) {
         Examination newExamination = Examination.toDomainObject(newExaminationDTO);
 
-        ExaminationDTO responseDTO = examRepo.save(newExamination).toDTO();
-
-        return new ResponseEntity<ExaminationDTO>(responseDTO, HttpStatus.CREATED);
+        return new ResponseEntity<Examination>(examRepo.save(newExamination), HttpStatus.CREATED);
     }
 
-
-    @ApiOperation(value = "Responds with an examination object", response = ExaminationDTO.class)
+    @ApiOperation(value = "Responds with an examination object", response = Examination.class)
     @GetMapping("/{id}")
-    public ResponseEntity<ExaminationDTO> findExamination(@PathVariable Long id) {
+    public ResponseEntity<Examination> findExamination(@PathVariable Long id) {
         Optional<Examination> candidate = examRepo.findById(id);
 
         if (!candidate.isPresent()) {
-            return new ResponseEntity<ExaminationDTO>(new ExaminationDTO(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Examination>(new Examination(), HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<ExaminationDTO>(candidate.get().toDTO(), HttpStatus.OK);
+        return new ResponseEntity<Examination>(candidate.get(), HttpStatus.OK);
     }
 
 }

@@ -15,8 +15,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @ApiModel(description = "All details about an examination.")
 public class ExaminationDTO {
-    private Long id;
-
     private String streetname;
     private String city;
     private String zipCode;

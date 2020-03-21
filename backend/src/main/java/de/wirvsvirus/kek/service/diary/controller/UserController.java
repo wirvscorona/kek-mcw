@@ -21,12 +21,10 @@ import io.swagger.annotations.ApiOperation;
 import java.util.Collection;
 import java.util.Optional;
 
-
 @RestController
 @RequestMapping("/api/users")
 @Api(value = "User Endpoint", description = "Provides access to user data.")
 public class UserController {
-
 
     @Autowired
     private UserRepository userRepo;
@@ -37,44 +35,33 @@ public class UserController {
         return new ResponseEntity<Collection<User>>(userRepo.findAll(), HttpStatus.OK);
     }
 
-
-    @ApiOperation(value = "Saves new User object", response = UserDTO.class)
+    @ApiOperation(value = "Saves new User object", response = User.class)
     @PostMapping
-    public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO newUserDTO) {
+    public ResponseEntity<User> saveUser(@RequestBody UserDTO newUserDTO) {
         User newUser = User.toDomainObject(newUserDTO);
-        Optional<User> user = userRepo.findById(newUser.getId());
 
-        // Do not add a user if it is already present
-        if (user.isPresent()) {
-            return new ResponseEntity<UserDTO>(newUserDTO, HttpStatus.NOT_ACCEPTABLE);
-        }
-
-        UserDTO responseDTO = userRepo.save(newUser).toDTO();
-
-        return new ResponseEntity<UserDTO>(responseDTO, HttpStatus.CREATED);
+        return new ResponseEntity<User>(userRepo.save(newUser), HttpStatus.CREATED);
     }
 
-
-    @ApiOperation(value = "Responds with a user object", response = UserDTO.class)
+    @ApiOperation(value = "Responds with a user object", response = User.class)
     @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> findUser(@PathVariable Long id) {
+    public ResponseEntity<User> findUser(@PathVariable Long id) {
         Optional<User> userCandidate = userRepo.findById(id);
 
         if (!userCandidate.isPresent()) {
-            return new ResponseEntity<UserDTO>(new UserDTO(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<User>(new User(), HttpStatus.NOT_FOUND);
         }
 
-        return new ResponseEntity<UserDTO>(userCandidate.get().toDTO(), HttpStatus.OK);
+        return new ResponseEntity<User>(userCandidate.get(), HttpStatus.OK);
     }
 
-
-    @ApiOperation(value = "Updates a user object", response = UserDTO.class)
+    @ApiOperation(value = "Updates a user object", response = User.class)
     @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> updateUser(@RequestBody UserDTO updatedUserDTO, @PathVariable Long id) {
+    public ResponseEntity<User> updateUser(@RequestBody UserDTO updatedUserDTO, @PathVariable Long id) {
         Optional<User> userCandidate = userRepo.findById(id);
 
         if (!userCandidate.isPresent()) {
-            return new ResponseEntity<UserDTO>(new UserDTO(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<User>(new User(), HttpStatus.NOT_FOUND);
         }
 
         User domainUser = userCandidate.get();
@@ -82,7 +69,7 @@ public class UserController {
 
         userRepo.save(domainUser);
 
-        return new ResponseEntity<UserDTO>(domainUser.toDTO(), HttpStatus.OK);
+        return new ResponseEntity<User>(domainUser, HttpStatus.OK);
     }
 
     @ApiOperation(value = "Deletes user object")
@@ -90,7 +77,5 @@ public class UserController {
     public void deleteUser(@PathVariable Long id) {
         userRepo.deleteById(id);
     }
-
-
 
 }

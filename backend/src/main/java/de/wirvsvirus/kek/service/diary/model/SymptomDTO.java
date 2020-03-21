@@ -12,12 +12,8 @@ import lombok.NoArgsConstructor;
 public class SymptomDTO {
 
     enum Type {
-        NUMERICAL,
-        STRING
+        NUMERICAL, STRING
     };
-
-
-    private Long id;
 
     private String name;
     private Type symptomType;

@@ -18,8 +18,7 @@ import lombok.NoArgsConstructor;
 public class Symptom {
 
     public enum Type {
-        NUMERICAL,
-        STRING
+        NUMERICAL, STRING
     };
 
     @Id
@@ -30,35 +29,34 @@ public class Symptom {
 
     private Type symptomType;
 
-
     public static Symptom toDomainObject(SymptomDTO dto) {
         Symptom.Type type = Symptom.Type.NUMERICAL;
-        switch(dto.getSymptomType()) {
+        switch (dto.getSymptomType()) {
             case NUMERICAL:
                 type = Symptom.Type.NUMERICAL;
-            break;
+                break;
 
             case STRING:
                 type = Symptom.Type.STRING;
-            break;
+                break;
         }
 
-        return new Symptom(dto.getId(), dto.getName(), type);
+        return new Symptom(null, dto.getName(), type);
     }
 
     public SymptomDTO toDTO() {
         SymptomDTO.Type type = SymptomDTO.Type.NUMERICAL;
 
-        switch(this.getSymptomType()) {
+        switch (this.getSymptomType()) {
             case NUMERICAL:
                 type = SymptomDTO.Type.NUMERICAL;
-            break;
+                break;
 
             case STRING:
                 type = SymptomDTO.Type.STRING;
-            break;
+                break;
         }
 
-        return new SymptomDTO(this.id, this.name, type);
+        return new SymptomDTO(this.name, type);
     }
 }

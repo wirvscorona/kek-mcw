@@ -62,6 +62,7 @@ public class DiaryService {
         diary.setCured(dto.isCured());
 
         diary.getContacts().forEach(ce -> {
+            // TODO ideally we should have this in a contactenry service
             examinationRepository.delete(ce.getExamination());
             contactEntryRepo.delete(ce);
         });
@@ -92,6 +93,7 @@ public class DiaryService {
         diaryRepository.deleteById(id);
     }
 
+    // TODO ideally we should have this in a contactenry service
     private ContactEntry createContactEntryFromDTO(ContactEntryDTO dto) {
         ContactEntry contractEntry = new ContactEntry();
         contractEntry.setContactWith(dto.getContactWith());
