@@ -6,18 +6,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 
 @Entity
-@ApiModel(description = "All details about a Diary. ")
-public class Diary {
+@Data
+@ApiModel(description = "All details about a User. ")
+public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public Diary() {
-
-    }
-
+    private String firstName;
+    private String lastName;
 }

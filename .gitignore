@@ -174,3 +174,5 @@ build
 /src/main/frontend/node
 /src/main/frontend/app/css
 /src/main/frontend/app/js
+.vscode
+
