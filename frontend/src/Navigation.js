@@ -1,23 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Navigation.css'
+import { Navbar, Nav, NavDropdown, Form, FormControl,Button } from 'react-bootstrap';
 
 const Navigation = _ => (
-    <div>
-        <nav>
-            <ul>
-                <li>
-                    <Link to="/">Home</Link>
-                </li>
-                <li>
-                    <Link to="/app">React App</Link>
-                </li>
-                <li>
-                    <Link to="/diary">Diary</Link>
-                </li>
-            </ul>
-        </nav>
-    </div>
+
+<Navbar bg="light" expand="lg">
+    <Navbar.Brand href="/">Keks vs. Virus</Navbar.Brand>
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
+    <Nav className="mr-auto">
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/map">Map</Nav.Link>
+        <Nav.Link href="/diary">Diary</Nav.Link>
+        <Nav.Link href="/app">App</Nav.Link>
+    </Nav>
+    <Form inline>
+        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
+        <Button variant="outline-success">Search</Button>
+    </Form>
+    </Navbar.Collapse>
+</Navbar>
 )
 
 export default Navigation;
