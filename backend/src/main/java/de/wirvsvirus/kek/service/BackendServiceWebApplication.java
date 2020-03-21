@@ -73,10 +73,19 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 	@Bean
 	public CommandLineRunner demoSymptom(SymptomRepository repository) {
 		return (args -> {
-			Symptom symptom = new Symptom();
-			symptom.setName("rote augen");
-			symptom.setSymptomType(Symptom.Type.STRING);
-			repository.save(symptom);
+			repository.save(getSymptom("Fieber", Symptom.Type.NUMERICAL));
+			repository.save(getSymptom("trockener Husten", Symptom.Type.STRING));
+			repository.save(getSymptom("Durchfall", Symptom.Type.STRING));
+			repository.save(getSymptom("Laufende Nase", Symptom.Type.STRING));
+			repository.save(getSymptom("Atembeschwerden", Symptom.Type.STRING));
+			repository.save(getSymptom("Halsschmerzen", Symptom.Type.STRING));
 		});
+	}
+
+	Symptom getSymptom(String name, Symptom.Type type) {
+		Symptom symp = new Symptom();
+		symp.setName(name);
+		symp.setSymptomType(type);
+		return symp;
 	}
 }
