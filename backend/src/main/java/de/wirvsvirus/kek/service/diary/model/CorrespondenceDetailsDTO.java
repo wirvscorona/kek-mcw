@@ -13,7 +13,6 @@ public class CorrespondenceDetailsDTO {
         HOME, MOBILE, EMAIL
     };
 
-    private Long id;
     private Type contactMethodType;
     private String detail;
 

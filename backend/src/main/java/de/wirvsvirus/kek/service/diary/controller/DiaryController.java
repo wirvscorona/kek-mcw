@@ -10,7 +10,7 @@ import de.wirvsvirus.kek.service.diary.model.DiaryDTO;
 import de.wirvsvirus.kek.service.diary.model.Diary;
 import de.wirvsvirus.kek.service.diary.model.Symptom;
 import de.wirvsvirus.kek.service.diary.model.User;
-import de.wirvsvirus.kek.service.diary.repository.DiaryRepository;
+import de.wirvsvirus.kek.service.diary.service.DiaryService;
 import de.wirvsvirus.kek.service.diary.repository.SymptomRepository;
 import de.wirvsvirus.kek.service.diary.repository.UserRepository;
 import io.swagger.annotations.Api;
@@ -20,9 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import io.swagger.annotations.ApiOperation;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/diaries")
@@ -30,83 +28,35 @@ import java.util.Optional;
 public class DiaryController {
 
     @Autowired
-    private DiaryRepository diaryRepo;
-
-    @Autowired
-    private UserRepository userRepo;
-
-    @Autowired
-    private SymptomRepository symptomRepo;
+    private DiaryService diaryService;
 
     @ApiOperation(value = "Responds with a list of diaries", response = Diary.class)
     @GetMapping
     public ResponseEntity<Collection<Diary>> findDiaries() {
-        return new ResponseEntity<Collection<Diary>>(diaryRepo.findAll(), HttpStatus.OK);
+        return new ResponseEntity<Collection<Diary>>(diaryService.findAll(), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Responds with a diary object", response = Diary.class)
     @GetMapping("/{id}")
     public ResponseEntity<Diary> findDiary(@PathVariable Long id) {
-        Optional<Diary> diaryCandidate = diaryRepo.findById(id);
-        if (!diaryCandidate.isPresent()) {
-            return new ResponseEntity<Diary>(new Diary(), HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<Diary>(diaryCandidate.get(), HttpStatus.OK);
+        return new ResponseEntity<Diary>(diaryService.findById(id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Saves new diary object", response = Diary.class)
-    @PostMapping("/{id}")
-    public ResponseEntity<Diary> newDiary(@RequestBody DiaryDTO createDiaryDTO) {
-        Diary newDiary = new Diary();
-        Optional<User> user = userRepo.findById(createDiaryDTO.getUserId());
-        if (!user.isPresent()) {
-            return new ResponseEntity<Diary>(new Diary(), HttpStatus.CONFLICT);
-        }
-        newDiary.setUser(user.get());
-        newDiary.setCured(createDiaryDTO.isCured());
-        newDiary.setContacts(new ArrayList<ContactEntry>());
-        createDiaryDTO.getContacts().forEach(ce -> newDiary.getContacts().add(ContactEntryDTOtoEntity(ce)));
-        return new ResponseEntity<Diary>(diaryRepo.save(newDiary), HttpStatus.OK);
-    }
-
-    private ContactEntry ContactEntryDTOtoEntity(ContactEntryDTO entryDTO) {
-        ContactEntry entry = new ContactEntry();
-        entry.setContactWith(entryDTO.getContactWith());
-        entry.setCustomSymptom(entryDTO.getCustomSymptom());
-        entry.setDate(entryDTO.getDate());
-        entry.setCustomSymptomPresent(entryDTO.isCustomSymptomPresent());
-        entry.setDescription(entryDTO.getDescription());
-
-        entry.setSymptoms(new ArrayList<Symptom>());
-
-        entryDTO.getSymptoms().forEach(symptomID -> {
-            Optional<Symptom> symptom = symptomRepo.findById(symptomID);
-            if (symptom.isPresent()) {
-                entry.getSymptoms().add(symptom.get());
-            }
-        });
-
-        return entry;
+    @PostMapping("/")
+    public ResponseEntity<Diary> saveDiary(@RequestBody DiaryDTO diaryDTO) {
+        return new ResponseEntity<Diary>(diaryService.saveFromDTO(diaryDTO), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Updates a diary object", response = Diary.class)
     @PutMapping("/{id}")
-    public ResponseEntity<Diary> replaceDiary(@RequestBody Diary newDiary, @PathVariable Long id) {
-        Optional<Diary> diaryCandidate = diaryRepo.findById(id);
-        if (!diaryCandidate.isPresent()) {
-            return new ResponseEntity<Diary>(new Diary(), HttpStatus.NOT_FOUND);
-        }
-
-        Diary diary = diaryCandidate.get();
-        BeanUtils.copyProperties(newDiary, diary);
-
-        return new ResponseEntity<Diary>(diaryRepo.save(diary), HttpStatus.OK);
+    public ResponseEntity<Diary> updateDiary(@RequestBody DiaryDTO diaryDTO, @PathVariable Long id) {
+        return new ResponseEntity<Diary>(diaryService.updateFromDTO(diaryDTO, id), HttpStatus.OK);
     }
 
     @ApiOperation(value = "Deletes diary object", response = Diary.class)
     @DeleteMapping("/{id}")
     public void deleteDiary(@PathVariable Long id) {
-        diaryRepo.deleteById(id);
+        diaryService.deleteById(id);
     }
 }

@@ -17,7 +17,6 @@ import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import java.util.ArrayList;
 import java.util.HashSet;
 
 @Entity
@@ -32,29 +31,33 @@ public class User {
     private Long id;
     private String firstName;
     private String lastName;
-    
-    @OneToMany
-    private Set<CorrespondenceDetails> contactMethods;
+
+    @ElementCollection
+    private Set<CorrespondenceDetails> correspondenceDetails;
 
     public void update(UserDTO dto) {
         this.firstName = dto.getFirstName();
         this.lastName = dto.getLastName();
-        this.contactMethods.clear();
+        this.correspondenceDetails.clear();
 
-        dto.getContactMethods().forEach(methodDTO -> this.contactMethods.add(CorrespondenceDetails.toDomainObject(methodDTO)));
+        dto.getCorrespondenceDetails()
+                .forEach(methodDTO -> this.correspondenceDetails.add(CorrespondenceDetails.toDomainObject(methodDTO)));
     }
 
     public static User toDomainObject(UserDTO dto) {
-        User newUser = new User(dto.getId(), dto.getFirstName(), dto.getLastName(), new HashSet<CorrespondenceDetails>());
+        User newUser = new User(dto.getId(), dto.getFirstName(), dto.getLastName(),
+                new HashSet<CorrespondenceDetails>());
 
-        dto.getContactMethods().forEach(methodDTO -> newUser.getContactMethods().add(CorrespondenceDetails.toDomainObject(methodDTO)));
+        dto.getCorrespondenceDetails().forEach(
+                methodDTO -> newUser.getCorrespondenceDetails().add(CorrespondenceDetails.toDomainObject(methodDTO)));
 
         return newUser;
     }
 
     public UserDTO toDTO() {
-        UserDTO newUserDTO = new UserDTO(this.getId(), this.getFirstName(), this.getLastName(), new HashSet<CorrespondenceDetailsDTO>());
-        this.getContactMethods().forEach(method -> newUserDTO.getContactMethods().add(method.toDTO()));
+        UserDTO newUserDTO = new UserDTO(this.getId(), this.getFirstName(), this.getLastName(),
+                new HashSet<CorrespondenceDetailsDTO>());
+        this.correspondenceDetails.forEach(method -> newUserDTO.getCorrespondenceDetails().add(method.toDTO()));
         return newUserDTO;
     }
 }
