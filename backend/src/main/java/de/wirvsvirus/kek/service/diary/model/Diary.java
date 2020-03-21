@@ -1,5 +1,6 @@
 package de.wirvsvirus.kek.service.diary.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,11 +27,11 @@ public class Diary {
     private List<ContactEntry> contacts;
 
     @OneToOne()
-    private Examination xRay = new Examination();
+    private Examination xRay;
     @OneToOne()
-    private Examination nasopharynxSwab = new Examination();
+    private Examination nasopharynxSwab;
     @OneToOne()
-    private Examination sputumSwab = new Examination();
+    private Examination sputumSwab;
 
     private boolean isCured;
 
@@ -86,5 +87,53 @@ public class Diary {
 
     public boolean hasBloodSampleWillingness() {
         return hasBloodSampleWillingness;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setContacts(List<ContactEntry> contacts) {
+        this.contacts = contacts;
+    }
+
+    public void setxRay(Examination xRay) {
+        this.xRay = xRay;
+    }
+
+    public void setNasopharynxSwab(Examination nasopharynxSwab) {
+        this.nasopharynxSwab = nasopharynxSwab;
+    }
+
+    public void setSputumSwab(Examination sputumSwab) {
+        this.sputumSwab = sputumSwab;
+    }
+
+    public void setCured(boolean isCured) {
+        this.isCured = isCured;
+    }
+
+    public boolean isHasNasopharynxSwabWillingness() {
+        return hasNasopharynxSwabWillingness;
+    }
+
+    public void setHasNasopharynxSwabWillingness(boolean hasNasopharynxSwabWillingness) {
+        this.hasNasopharynxSwabWillingness = hasNasopharynxSwabWillingness;
+    }
+
+    public boolean isHasSputumSampleWillingness() {
+        return hasSputumSampleWillingness;
+    }
+
+    public void setHasSputumSampleWillingness(boolean hasSputumSampleWillingness) {
+        this.hasSputumSampleWillingness = hasSputumSampleWillingness;
+    }
+
+    public boolean isHasBloodSampleWillingness() {
+        return hasBloodSampleWillingness;
+    }
+
+    public void setHasBloodSampleWillingness(boolean hasBloodSampleWillingness) {
+        this.hasBloodSampleWillingness = hasBloodSampleWillingness;
     }
 }
