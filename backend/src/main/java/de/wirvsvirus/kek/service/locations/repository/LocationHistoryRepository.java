@@ -9,4 +9,5 @@ import java.util.Collection;
 @Repository
 public interface LocationHistoryRepository extends CrudRepository<LocationHistory, Long> {
     Collection<LocationHistory> findAll();
+    Collection<LocationHistory> findAllByLatitudeAndLongitude(long latitude, long longitude);
 }

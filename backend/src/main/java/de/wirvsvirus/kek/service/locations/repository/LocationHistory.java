@@ -12,19 +12,42 @@ public class LocationHistory {
     private long id;
     private long latitude;
     private long longitude;
-    private long timestamp;
-    private long duration;
+    private long startTimestamp;
+    private long endTimestamp;
     private long updateTimestamp;
 
     private LocationHistory() {
     }
-
-    public LocationHistory(long latitude, long longitude, long timestamp, long duration, long updateTimestamp) {
+    public LocationHistory(long latitude, long longitude, long startTimestamp, long endTimestamp, long updateTimestamp) {
         this.latitude = latitude;
         this.longitude = longitude;
-        this.timestamp = timestamp;
-        this.duration = duration;
+        this.startTimestamp = startTimestamp;
+        this.endTimestamp = endTimestamp;
         this.updateTimestamp = updateTimestamp;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public long getLatitude() {
+        return latitude;
+    }
+
+    public long getLongitude() {
+        return longitude;
+    }
+
+    public long getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public long getEndTimestamp() {
+        return endTimestamp;
+    }
+
+    public long getUpdateTimestamp() {
+        return updateTimestamp;
     }
 
     @Override
@@ -33,8 +56,8 @@ public class LocationHistory {
                 "id=" + id +
                 ", latitude=" + latitude +
                 ", longitude=" + longitude +
-                ", timestamp=" + timestamp +
-                ", duration=" + duration +
+                ", startTimestamp=" + startTimestamp +
+                ", endTimestamp=" + endTimestamp +
                 ", updateTimestamp=" + updateTimestamp +
                 '}';
     }
