@@ -3,12 +3,13 @@ package de.wirvsvirus.kek.service.diary.model;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 import io.swagger.annotations.ApiModel;
 import lombok.AllArgsConstructor;
@@ -30,8 +31,8 @@ public class ContactEntry {
 
     private String description;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    private List<Symptom> symptoms;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private Examination examination;
 
     private boolean customSymptomPresent;
     private String customSymptom;
