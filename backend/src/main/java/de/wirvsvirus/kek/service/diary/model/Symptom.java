@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import io.swagger.annotations.ApiModel;
+import lombok.Data;
 
 @Entity
+@Data
 @ApiModel(description = "All details about a symptom.")
 public class Symptom {
 
@@ -13,17 +15,4 @@ public class Symptom {
     private String name;
 
     private double value;
-
-    public Symptom(String name, double value) {
-        this.name = name;
-        this.value = value;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getValue() {
-        return value;
-    }
 }

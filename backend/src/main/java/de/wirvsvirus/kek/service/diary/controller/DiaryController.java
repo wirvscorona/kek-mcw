@@ -61,7 +61,7 @@ public class DiaryController {
         return new ResponseEntity<Diary>(diaryRepo.save(diary), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Deletes diary object", response =  Diary.class)
+    @ApiOperation(value = "Deletes diary object", response = Diary.class)
     @DeleteMapping("/{id}")
     public void deleteDiary(@PathVariable Long id) {
         diaryRepo.deleteById(id);
