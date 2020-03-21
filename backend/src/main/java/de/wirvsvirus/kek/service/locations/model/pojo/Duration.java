@@ -1,22 +1,13 @@
 package de.wirvsvirus.kek.service.locations.model.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Duration {
-    public long getStartTimestampMs() {
-        return startTimestampMs;
-    }
-
-    public void setStartTimestampMs(long startTimestampMs) {
-        this.startTimestampMs = startTimestampMs;
-    }
-
-    public long getEndTimestampMs() {
-        return endTimestampMs;
-    }
-
-    public void setEndTimestampMs(long endTimestampMs) {
-        this.endTimestampMs = endTimestampMs;
-    }
-
-    long startTimestampMs;
-    long endTimestampMs;
+    private long startTimestampMs;
+    private long endTimestampMs;
 }

@@ -1,13 +1,12 @@
 package de.wirvsvirus.kek.service.locations.model.pojo;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class TimeLineObject {
-    PlaceVisit placeVisit;
-
-    public PlaceVisit getPlaceVisit() {
-        return placeVisit;
-    }
-
-    public void setPlaceVisit(PlaceVisit placeVisit) {
-        this.placeVisit = placeVisit;
-    }
+    private PlaceVisit placeVisit;
 }
