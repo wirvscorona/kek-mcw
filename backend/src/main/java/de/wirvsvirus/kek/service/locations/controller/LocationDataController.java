@@ -29,7 +29,7 @@ public class LocationDataController {
     private TrivialLocationMappingService trivialLocationMappingService;
 
     @PostMapping("/locations/{user}/upload")
-    @ApiOperation(value = "Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish", response = Diary.class)
+    @ApiOperation(value = "Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish")
     public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData, @PathVariable String user) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
                 .filter( timeLineObject -> timeLineObject.getPlaceVisit() != null)
@@ -44,7 +44,7 @@ public class LocationDataController {
 
     // FIXME GetMapping does not support @RequestBody
     @PostMapping("/locations/check")
-    @ApiOperation(value= "Responds with a list of matched locations", response = Diary.class)
+    @ApiOperation(value= "Responds with a list of matched locations")
     public ResponseEntity<List<LocationMatch>> getMatchingLocations(@RequestBody TimelineJsonRoot jsonData) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
                 .filter( timeLineObject -> timeLineObject.getPlaceVisit() != null)
