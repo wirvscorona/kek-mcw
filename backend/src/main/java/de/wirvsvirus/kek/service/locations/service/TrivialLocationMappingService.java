@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class TrivialLocationMappingService {
+    private static final long VIRUS_PERSISTENCE_TIME = 1800000; // 30 minutes
 
     @Autowired
     LocationHistoryRepository locationHistoryRepository;
@@ -25,7 +26,7 @@ public class TrivialLocationMappingService {
             LocationHistory infectedLocationHistory = locationHistoryRepository
                     .findFirstByLatitudeAndLongitudeAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(
                             locationHistory.getLatitude(), locationHistory.getLongitude(),
-                            locationHistory.getEndTimestamp(), locationHistory.getStartTimestamp());
+                            locationHistory.getEndTimestamp(), locationHistory.getStartTimestamp() - VIRUS_PERSISTENCE_TIME);
 
             if (infectedLocationHistory != null) {
                 LocationMatch match = new LocationMatch(locationHistory.getLatitude(),
