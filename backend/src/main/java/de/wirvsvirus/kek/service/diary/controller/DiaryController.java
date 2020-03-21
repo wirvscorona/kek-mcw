@@ -73,7 +73,7 @@ public class DiaryController {
         Diary newDiary = new Diary();
         Optional<User> user = userRepo.findById(createDiaryDTO.getUserId());
         if (!user.isPresent()) {
-            return new ResponseEntity<Diary>(new Diary(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<Diary>(new Diary(), HttpStatus.CONFLICT);
         }
         newDiary.setUser(user.get());
         newDiary.setCured(createDiaryDTO.isCured());
