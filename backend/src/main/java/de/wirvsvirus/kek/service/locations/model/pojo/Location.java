@@ -1,23 +1,60 @@
 package de.wirvsvirus.kek.service.locations.model.pojo;
 
 public class Location {
-    public int getCenterLatE7() {
-        return centerLatE7;
+
+    int latitudeE7;
+    int longitudeE7;
+    String placeId;
+    String address;
+    String name;
+    String readableName;
+
+    public int getLatitudeE7() {
+        return latitudeE7;
     }
 
-    public void setCenterLatE7(int centerLatE7) {
-        this.centerLatE7 = centerLatE7;
+    public void setLatitudeE7(int latitudeE7) {
+        this.latitudeE7 = latitudeE7;
     }
 
-    public int getCenterLngE7() {
-        return centerLngE7;
+    public int getLongitudeE7() {
+        return longitudeE7;
     }
 
-    public void setCenterLngE7(int centerLngE7) {
-        this.centerLngE7 = centerLngE7;
+    public void setLongitudeE7(int longitudeE7) {
+        this.longitudeE7 = longitudeE7;
     }
 
-    int centerLatE7;
-    int centerLngE7;
+    public String getPlaceId() {
+        return placeId;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setPlaceId(String placeId) {
+        this.placeId = placeId;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getReadableName() {
+        return readableName;
+    }
+
+    public void setReadableName(String readableName) {
+        this.readableName = readableName;
+    }
 
 }
