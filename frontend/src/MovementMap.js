@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import MovementTabel from './MovementTabel';
+import MovementTable from './MovementTable';
 import './MovementMap.css'
+import UploadMovementButton from './UploadMovementButton';
 
 const markerMockUp = [
     {
@@ -43,6 +44,21 @@ const markerMockUp = [
         markerId: 7,
         lat: 49.006,
         lng: 8.473
+    },
+    {
+        markerId: 8,
+        lat: 49.006,
+        lng: 8.393
+    },
+    {
+        markerId: 9,
+        lat: 49.006,
+        lng: 8.383
+    },
+    {
+        markerId: 10,
+        lat: 49.006,
+        lng: 8.373
     }
 ]
 
@@ -51,18 +67,17 @@ const SelectedMarker = markerList => {
     var markerComponentList = []; 
     markerList.forEach(markerId => {
         markerMockUp.forEach(markerElement => {
-            if (markerId == markerElement.markerId) {
+            if (markerId === markerElement.markerId) {
                 markerComponentList.push(markerElement)
             }
         })
     });
-    console.log(markerComponentList)
     return markerComponentList;
 }
 
 const MovementMap = props => {
 
-    const [ markerList, setMarkerList ] = useState([0, 1]);
+    const [ markerList, setMarkerList ] = useState([]);
 
     const addMarker = markerId => {
         const newMarkerList = [...markerList, markerId];
@@ -70,7 +85,8 @@ const MovementMap = props => {
     };
 
     const removeMarker = markerId => {
-        const newMarkerList = [...markerList];
+        const newMarkerList = markerList.filter(marker => marker !== markerId);
+        console.log(newMarkerList)
         setMarkerList(newMarkerList);
     };
 
@@ -79,14 +95,17 @@ const MovementMap = props => {
 
     return (
         <div className='collision'>
+            <div>
+                <UploadMovementButton/>
+            </div>
             <div className='movement-table'>
-                <MovementTabel {...markerBundle}/>
+                <MovementTable {...markerBundle}/>
             </div>
             <div>
                 <Map
                 className='collision-map'
                 google={props.google}
-                zoom={13}
+                zoom={12}
                 initialCenter={{ lat: 49.006, lng: 8.403 }}
                 >   
                 {markerComponentList.map(marker => {
@@ -94,7 +113,6 @@ const MovementMap = props => {
                     const lat = marker.lat;
                     const long = marker.lng;
                     const position = { lat: lat, lng: long }
-                    console.log(typeof long)
                     return (<Marker markerId={markerId} position={position} />)
                 })}
                 </Map> 
@@ -102,7 +120,7 @@ const MovementMap = props => {
         </div>
     )
 }
-    
+
 
 export default GoogleApiWrapper({ apiKey: 'AIzaSyD2BFWRom0XvQjkjvS6l6X5lbUS6JO3HpY' })(MovementMap);
 

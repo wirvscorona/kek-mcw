@@ -59,6 +59,11 @@ class ContactPerson extends React.Component {
         this.handleSputumSwapAllowedChange = this.handleSputumSwapAllowedChange.bind(this)
         this.handleBloodDrawAllowedChange = this.handleBloodDrawAllowedChange.bind(this)
 
+        this.isValidated = this.isValidated.bind(this)
+    }
+
+    isValidated() {
+        this.props.callback(this.state)
     }
 
     handleInfectChange(infectValue) {

@@ -71,7 +71,7 @@ const onCheckChange = (e, props) => {
 }
 
 const TableRowElement = props => {
-    console.log(props);
+
     const marker = props.marker;
     const id = marker.markerId;
     const lat = marker.lat;
@@ -90,7 +90,6 @@ const TableRowElement = props => {
 }
 
 const MovementTable = props => {
-    console.log(props);
     
     return (
         <Table striped bordered hover>
@@ -110,7 +109,6 @@ const MovementTable = props => {
             </tbody>
         </Table>
     )
-
 }
 
 
