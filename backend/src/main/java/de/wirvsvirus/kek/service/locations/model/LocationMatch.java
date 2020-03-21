@@ -1,5 +1,6 @@
 package de.wirvsvirus.kek.service.locations.model;
 
+import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
 import io.swagger.annotations.ApiModel;
 
 import javax.persistence.Entity;
@@ -40,6 +41,14 @@ public class LocationMatch {
 
     public long getEndTimeMillis() {
         return endTimeMillis;
+    }
+
+    public static LocationMatch fromLocationHistory(LocationHistory locationHistory) {
+        return new LocationMatch(locationHistory.getLatitude(),
+                locationHistory.getLongitude(),
+                locationHistory.getStartTimestamp(),
+                locationHistory.getEndTimestamp()
+        );
     }
 
 }

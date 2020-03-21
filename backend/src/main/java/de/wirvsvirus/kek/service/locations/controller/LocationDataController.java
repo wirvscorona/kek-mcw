@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,34 +23,45 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/")
 public class LocationDataController {
+    private static final String DEFAULT_VIRUS_PERSISTENCE_TIME = "1800000"; // 30 min
+    private static final String DEFAULT_MAX_DISTANCE = "100"; // 100 meter radius
+
+    private final LocationHistoryRepository locationHistoryRepository;
+
+    private final TrivialLocationMappingService trivialLocationMappingService;
 
     @Autowired
-    private LocationHistoryRepository locationHistoryRepository;
+    public LocationDataController(LocationHistoryRepository locationHistoryRepository, TrivialLocationMappingService trivialLocationMappingService) {
+        this.locationHistoryRepository = locationHistoryRepository;
+        this.trivialLocationMappingService = trivialLocationMappingService;
+    }
 
-    @Autowired
-    private TrivialLocationMappingService trivialLocationMappingService;
-
-    @PostMapping("/locations/{user}/upload")
+    @PostMapping("/locations/upload")
     @ApiOperation(value = "Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish")
-    public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData, @PathVariable String user) {
+    public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
                 .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
                 .map(this::extractData)
                 .collect(Collectors.toList());
         locationHistoryRepository.saveAll(locationHistories);
-        return new ResponseEntity<String>("Upload success", HttpStatus.OK);
+        return new ResponseEntity<>("Upload success", HttpStatus.OK);
     }
 
-    // FIXME GetMapping does not support @RequestBody
     @PostMapping("/locations/check")
     @ApiOperation(value = "Responds with a list of matched locations")
-    public ResponseEntity<List<LocationMatch>> getMatchingLocations(@RequestBody TimelineJsonRoot jsonData) {
+    public ResponseEntity<List<LocationMatch>> getMatchingLocations(@RequestBody TimelineJsonRoot jsonData,
+                                                                    @RequestParam(required = false, defaultValue = DEFAULT_MAX_DISTANCE) long maxDistanceInMeters,
+                                                                    @RequestParam(required = false, defaultValue = DEFAULT_VIRUS_PERSISTENCE_TIME) long virusPersistenceTimeInMillis) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
                 .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
                 .map(this::extractData)
                 .collect(Collectors.toList());
-        List<LocationMatch> locationMatches = trivialLocationMappingService.computeMatches(locationHistories);
-        return new ResponseEntity<List<LocationMatch>>(locationMatches, HttpStatus.OK);
+
+        List<LocationMatch> locationMatches = trivialLocationMappingService.computeNearbyMatches(
+                locationHistories,
+                maxDistanceInMeters,
+                virusPersistenceTimeInMillis);
+        return new ResponseEntity<>(locationMatches, HttpStatus.OK);
     }
 
     private LocationHistory extractData(TimeLineObject timeLineObject) {
