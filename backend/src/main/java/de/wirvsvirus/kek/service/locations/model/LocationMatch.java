@@ -21,7 +21,7 @@ public class LocationMatch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private long latitudeE7;
     private long longitudeE7;
     private long startTimeMillis;
