@@ -4,6 +4,7 @@ import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
 import de.wirvsvirus.kek.service.locations.repository.Place;
 import de.wirvsvirus.kek.service.locations.repository.PlaceVisit;
 import io.swagger.annotations.ApiModel;
+import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 
 @Entity
 @ApiModel(description = "Describes match between two locations.")
+@Data
 public class PlaceMatch extends LocationMatch {
     private String placeIdentifier;
     private String placeName;
