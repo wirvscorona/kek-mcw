@@ -1,10 +1,12 @@
 package de.wirvsvirus.kek.service.locations.controller;
 
 import de.wirvsvirus.kek.service.locations.model.LocationMatch;
+import de.wirvsvirus.kek.service.locations.model.PlaceMatch;
+import de.wirvsvirus.kek.service.locations.model.pojo.Duration;
+import de.wirvsvirus.kek.service.locations.model.pojo.Location;
+import de.wirvsvirus.kek.service.locations.repository.*;
 import de.wirvsvirus.kek.service.locations.model.pojo.TimeLineObject;
 import de.wirvsvirus.kek.service.locations.model.pojo.TimelineJsonRoot;
-import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
-import de.wirvsvirus.kek.service.locations.repository.LocationHistoryRepository;
 import de.wirvsvirus.kek.service.locations.service.TrivialLocationMappingService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/")
@@ -30,10 +33,15 @@ public class LocationDataController {
 
     private final TrivialLocationMappingService trivialLocationMappingService;
 
+    private final PlaceVisitRepository placeVisitRepository;
+    private final PlaceRepository placeRepository;
+
     @Autowired
-    public LocationDataController(LocationHistoryRepository locationHistoryRepository, TrivialLocationMappingService trivialLocationMappingService) {
+    public LocationDataController(LocationHistoryRepository locationHistoryRepository, TrivialLocationMappingService trivialLocationMappingService, PlaceVisitRepository placeVisitRepository, PlaceRepository placeRepository) {
         this.locationHistoryRepository = locationHistoryRepository;
         this.trivialLocationMappingService = trivialLocationMappingService;
+        this.placeVisitRepository = placeVisitRepository;
+        this.placeRepository = placeRepository;
     }
 
     @PostMapping("/locations/upload")
@@ -41,9 +49,14 @@ public class LocationDataController {
     public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
                 .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
-                .map(this::extractData)
+                .map(this::extractLocationData)
+                .collect(Collectors.toList());
+        List<PlaceVisit> placeVisits = jsonData.getTimelineObjects().stream()
+                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
+                .map(this::extractPlaceVisitData)
                 .collect(Collectors.toList());
         locationHistoryRepository.saveAll(locationHistories);
+        placeVisitRepository.saveAll(placeVisits);
         return new ResponseEntity<>("Upload success", HttpStatus.OK);
     }
 
@@ -53,8 +66,7 @@ public class LocationDataController {
                                                                     @RequestParam(required = false, defaultValue = DEFAULT_MAX_DISTANCE) long maxDistanceInMeters,
                                                                     @RequestParam(required = false, defaultValue = DEFAULT_VIRUS_PERSISTENCE_TIME) long virusPersistenceTimeInMillis) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
-                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
-                .map(this::extractData)
+                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null).map(this::extractLocationData)
                 .collect(Collectors.toList());
 
         List<LocationMatch> locationMatches = trivialLocationMappingService.computeNearbyMatches(
@@ -64,7 +76,21 @@ public class LocationDataController {
         return new ResponseEntity<>(locationMatches, HttpStatus.OK);
     }
 
-    private LocationHistory extractData(TimeLineObject timeLineObject) {
+    @PostMapping("/locations/checkp")
+    @ApiOperation(value = "Responds with a list of matched predefined places")
+    public ResponseEntity<List<PlaceMatch>> getMatchingPlaces(@RequestBody TimelineJsonRoot jsonData,
+                                                              @RequestParam(required = false, defaultValue = DEFAULT_VIRUS_PERSISTENCE_TIME) long virusPersistenceTimeInMillis) {
+        List<PlaceVisit> locationHistories = jsonData.getTimelineObjects().stream()
+                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null).map(this::extractPlaceVisitData)
+                .collect(Collectors.toList());
+
+        List<PlaceMatch> placeMatches = trivialLocationMappingService.computePlaceMatches(
+                locationHistories,
+                virusPersistenceTimeInMillis);
+        return new ResponseEntity<>(placeMatches, HttpStatus.OK);
+    }
+
+    private LocationHistory extractLocationData(TimeLineObject timeLineObject) {
         long lat = timeLineObject.getPlaceVisit().getCenterLatE7();
         long lon = timeLineObject.getPlaceVisit().getCenterLngE7();
         long startTimestampMs = timeLineObject.getPlaceVisit().getDuration().getStartTimestampMs();
@@ -72,5 +98,14 @@ public class LocationDataController {
         long updateTime = System.currentTimeMillis();
 
         return new LocationHistory(lat, lon, startTimestampMs, endTimestampMs, updateTime);
+    }
+
+    private PlaceVisit extractPlaceVisitData(TimeLineObject timeLineObject) {
+        de.wirvsvirus.kek.service.locations.model.pojo.PlaceVisit placeVisit = timeLineObject.getPlaceVisit();
+        Location location = placeVisit.getLocation();
+        Duration duration = placeVisit.getDuration();
+        Place place = new Place(location.getLatitudeE7(), location.getLongitudeE7(), location.getName(), location.getPlaceId());
+        placeRepository.save(place);
+        return new PlaceVisit(place, duration.getStartTimestampMs(), duration.getEndTimestampMs(), System.currentTimeMillis());
     }
 }

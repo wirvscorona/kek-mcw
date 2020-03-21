@@ -23,6 +23,22 @@ public class Place {
         this.googlePlaceIdentifier = googlePlaceIdentifier;
     }
 
+    public String getGooglePlaceIdentifier() {
+        return googlePlaceIdentifier;
+    }
+
+    public long getLatitude() {
+        return latitude;
+    }
+
+    public long getLongitude() {
+        return longitude;
+    }
+
+    public String getReadableName() {
+        return readableName;
+    }
+
     @Override
     public String toString() {
         return "Place{" +
