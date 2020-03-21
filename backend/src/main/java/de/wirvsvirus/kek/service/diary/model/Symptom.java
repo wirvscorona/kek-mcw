@@ -17,18 +17,48 @@ import lombok.NoArgsConstructor;
 @ApiModel(description = "All details about a symptom.")
 public class Symptom {
 
+    enum Type {
+        NUMERICAL,
+        STRING
+    };
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
+    private Type symptomType;
+
 
     public static Symptom toDomainObject(SymptomDTO dto) {
-        return new Symptom(dto.getId(), dto.getName());
+        Symptom.Type type = Symptom.Type.NUMERICAL;
+        switch(dto.getSymptomType()) {
+            case NUMERICAL:
+                type = Symptom.Type.NUMERICAL;
+            break;
+
+            case STRING:
+                type = Symptom.Type.STRING;
+            break;
+        }
+
+        return new Symptom(dto.getId(), dto.getName(), type);
     }
 
     public SymptomDTO toDTO() {
-        return new SymptomDTO(this.id, this.name);
+        SymptomDTO.Type type = SymptomDTO.Type.NUMERICAL;
+
+        switch(this.getSymptomType()) {
+            case NUMERICAL:
+                type = SymptomDTO.Type.NUMERICAL;
+            break;
+
+            case STRING:
+                type = SymptomDTO.Type.STRING;
+            break;
+        }
+
+        return new SymptomDTO(this.id, this.name, type);
     }
 }
