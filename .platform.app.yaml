@@ -28,4 +28,4 @@ hooks:
 # The configuration of app when it is exposed to the web.
 web:
     commands:
-        start:  java -jar -Xmx512m target/backendservice-0.0.1-SNAPSHOT.jar --server.port=$PORT
+        start:  java -jar -Xmx512m backend/target/backendservice-0.0.1-SNAPSHOT.jar --server.port=$PORT
