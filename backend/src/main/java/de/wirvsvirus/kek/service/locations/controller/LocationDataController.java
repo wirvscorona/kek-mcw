@@ -36,9 +36,9 @@ public class LocationDataController {
         this.trivialLocationMappingService = trivialLocationMappingService;
     }
 
-    @PostMapping("/locations/{user}/upload")
+    @PostMapping("/locations/upload")
     @ApiOperation(value = "Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish")
-    public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData, @PathVariable String user) {
+    public ResponseEntity<String> uploadLocationData(@RequestBody TimelineJsonRoot jsonData) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
                 .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
                 .map(this::extractData)
