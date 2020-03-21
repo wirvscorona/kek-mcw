@@ -44,7 +44,6 @@ const markerMockUp = [
         lat: 49.006,
         lng: 8.473
     }
-
 ]
 
 
@@ -71,17 +70,17 @@ const MovementMap = props => {
     };
 
     const removeMarker = markerId => {
-        const newMarkerList = [...markerList, markerId];
+        const newMarkerList = [...markerList];
         setMarkerList(newMarkerList);
     };
 
-    var markerComponentList = SelectedMarker(markerList)
-
+    const markerBundle = { addMarker, removeMarker };
+    const markerComponentList = SelectedMarker(markerList)
 
     return (
         <div className='collision'>
             <div className='movement-table'>
-                <MovementTabel/>
+                <MovementTabel {...markerBundle}/>
             </div>
             <div>
                 <Map
