@@ -1,6 +1,6 @@
 import React from 'react';
 import './Navigation.css'
-import { Navbar, Nav, NavDropdown, Form, FormControl,Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl,Button } from 'react-bootstrap';
 
 const Navigation = _ => (
 
@@ -10,7 +10,8 @@ const Navigation = _ => (
     <Navbar.Collapse id="basic-navbar-nav">
     <Nav className="mr-auto">
         <Nav.Link href="/">Home</Nav.Link>
-        <Nav.Link href="/map">Map</Nav.Link>
+        <Nav.Link href="/map/matching">MatchingMap</Nav.Link>
+        <Nav.Link href="/map/heat">HeatMap</Nav.Link>
         <Nav.Link href="/diary">Diary</Nav.Link>
         <Nav.Link href="/app">App</Nav.Link>
     </Nav>
