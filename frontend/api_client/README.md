@@ -109,7 +109,7 @@ var callback = function(error, data, response) {
     console.log('API called successfully. Returned data: ' + data);
   }
 };
-api.errorHtmlUsingDELETE(callback);
+api.errorUsingDELETE(callback);
 
 ```
 
@@ -119,24 +119,30 @@ All URIs are relative to *http://127.0.0.1:8081*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingDELETE**](docs/BasicErrorControllerApi.md#errorHtmlUsingDELETE) | **DELETE** /error | errorHtml
-*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingGET**](docs/BasicErrorControllerApi.md#errorHtmlUsingGET) | **GET** /error | errorHtml
-*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingHEAD**](docs/BasicErrorControllerApi.md#errorHtmlUsingHEAD) | **HEAD** /error | errorHtml
-*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingOPTIONS**](docs/BasicErrorControllerApi.md#errorHtmlUsingOPTIONS) | **OPTIONS** /error | errorHtml
-*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingPATCH**](docs/BasicErrorControllerApi.md#errorHtmlUsingPATCH) | **PATCH** /error | errorHtml
-*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingPOST**](docs/BasicErrorControllerApi.md#errorHtmlUsingPOST) | **POST** /error | errorHtml
-*ApiDocumentation.BasicErrorControllerApi* | [**errorHtmlUsingPUT**](docs/BasicErrorControllerApi.md#errorHtmlUsingPUT) | **PUT** /error | errorHtml
+*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingDELETE**](docs/BasicErrorControllerApi.md#errorUsingDELETE) | **DELETE** /error | error
+*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingGET**](docs/BasicErrorControllerApi.md#errorUsingGET) | **GET** /error | error
+*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingHEAD**](docs/BasicErrorControllerApi.md#errorUsingHEAD) | **HEAD** /error | error
+*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingOPTIONS**](docs/BasicErrorControllerApi.md#errorUsingOPTIONS) | **OPTIONS** /error | error
+*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingPATCH**](docs/BasicErrorControllerApi.md#errorUsingPATCH) | **PATCH** /error | error
+*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingPOST**](docs/BasicErrorControllerApi.md#errorUsingPOST) | **POST** /error | error
+*ApiDocumentation.BasicErrorControllerApi* | [**errorUsingPUT**](docs/BasicErrorControllerApi.md#errorUsingPUT) | **PUT** /error | error
 *ApiDocumentation.DiaryControllerApi* | [**deleteDiaryUsingDELETE**](docs/DiaryControllerApi.md#deleteDiaryUsingDELETE) | **DELETE** /api/diaries/{id} | Deletes diary object
 *ApiDocumentation.DiaryControllerApi* | [**findDiariesUsingGET**](docs/DiaryControllerApi.md#findDiariesUsingGET) | **GET** /api/diaries | Responds with a list of diaries
 *ApiDocumentation.DiaryControllerApi* | [**findDiaryUsingGET**](docs/DiaryControllerApi.md#findDiaryUsingGET) | **GET** /api/diaries/{id} | Responds with a diary object
-*ApiDocumentation.DiaryControllerApi* | [**findUserUsingGET**](docs/DiaryControllerApi.md#findUserUsingGET) | **GET** /api/diaries/user/{id} | Responds with a diary object
-*ApiDocumentation.DiaryControllerApi* | [**newDiaryUsingPOST**](docs/DiaryControllerApi.md#newDiaryUsingPOST) | **POST** /api/diaries/{id} | Saves new diary object
-*ApiDocumentation.DiaryControllerApi* | [**replaceDiaryUsingPUT**](docs/DiaryControllerApi.md#replaceDiaryUsingPUT) | **PUT** /api/diaries/{id} | Updates a diary object
+*ApiDocumentation.DiaryControllerApi* | [**saveDiaryUsingPOST**](docs/DiaryControllerApi.md#saveDiaryUsingPOST) | **POST** /api/diaries/ | Saves new diary object
+*ApiDocumentation.DiaryControllerApi* | [**updateDiaryUsingPUT**](docs/DiaryControllerApi.md#updateDiaryUsingPUT) | **PUT** /api/diaries/{id} | Updates a diary object
+*ApiDocumentation.ExaminationControllerApi* | [**findExaminationUsingGET**](docs/ExaminationControllerApi.md#findExaminationUsingGET) | **GET** /api/examinations/{id} | Responds with an examination object
+*ApiDocumentation.ExaminationControllerApi* | [**findExaminationsUsingGET**](docs/ExaminationControllerApi.md#findExaminationsUsingGET) | **GET** /api/examinations | Responds with a list of examinations
+*ApiDocumentation.ExaminationControllerApi* | [**saveExaminationUsingPOST**](docs/ExaminationControllerApi.md#saveExaminationUsingPOST) | **POST** /api/examinations | Saves new Examination object
+*ApiDocumentation.ExportControllerApi* | [**exportExaminationFeaturesUsingGET**](docs/ExportControllerApi.md#exportExaminationFeaturesUsingGET) | **GET** /api/export/examination_feature_set.csv | Responds with a list of diaries
 *ApiDocumentation.LocationDataControllerApi* | [**getMatchingLocationsUsingPOST**](docs/LocationDataControllerApi.md#getMatchingLocationsUsingPOST) | **POST** /locations/check | Responds with a list of matched locations
-*ApiDocumentation.LocationDataControllerApi* | [**uploadLocationDataUsingPOST**](docs/LocationDataControllerApi.md#uploadLocationDataUsingPOST) | **POST** /locations/{user}/upload | Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish
+*ApiDocumentation.LocationDataControllerApi* | [**uploadLocationDataUsingPOST**](docs/LocationDataControllerApi.md#uploadLocationDataUsingPOST) | **POST** /locations/upload | Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish
 *ApiDocumentation.OperationHandlerApi* | [**handleUsingGET**](docs/OperationHandlerApi.md#handleUsingGET) | **GET** /actuator/health/** | handle
 *ApiDocumentation.OperationHandlerApi* | [**handleUsingGET1**](docs/OperationHandlerApi.md#handleUsingGET1) | **GET** /actuator/health | handle
 *ApiDocumentation.OperationHandlerApi* | [**handleUsingGET2**](docs/OperationHandlerApi.md#handleUsingGET2) | **GET** /actuator/info | handle
+*ApiDocumentation.SymptomControllerApi* | [**findSymptomsUsingGET**](docs/SymptomControllerApi.md#findSymptomsUsingGET) | **GET** /api/symptoms | Responds with a list of symptoms
+*ApiDocumentation.SymptomControllerApi* | [**findUserUsingGET**](docs/SymptomControllerApi.md#findUserUsingGET) | **GET** /api/symptoms/{id} | Responds with a symptom object
+*ApiDocumentation.SymptomControllerApi* | [**saveSymptomUsingPOST**](docs/SymptomControllerApi.md#saveSymptomUsingPOST) | **POST** /api/symptoms | Saves new Symptom object
 *ApiDocumentation.UserControllerApi* | [**deleteUserUsingDELETE**](docs/UserControllerApi.md#deleteUserUsingDELETE) | **DELETE** /api/users/{id} | Deletes user object
 *ApiDocumentation.UserControllerApi* | [**findUserUsingGET1**](docs/UserControllerApi.md#findUserUsingGET1) | **GET** /api/users/{id} | Responds with a user object
 *ApiDocumentation.UserControllerApi* | [**findUsersUsingGET**](docs/UserControllerApi.md#findUsersUsingGET) | **GET** /api/users | Responds with a list of users
@@ -149,16 +155,18 @@ Class | Method | HTTP request | Description
 
  - [ApiDocumentation.ContactEntry](docs/ContactEntry.md)
  - [ApiDocumentation.ContactEntryDTO](docs/ContactEntryDTO.md)
- - [ApiDocumentation.ContactMethod](docs/ContactMethod.md)
- - [ApiDocumentation.ContactMethodDTO](docs/ContactMethodDTO.md)
- - [ApiDocumentation.CreateDiaryDTO](docs/CreateDiaryDTO.md)
+ - [ApiDocumentation.CorrespondenceDetails](docs/CorrespondenceDetails.md)
+ - [ApiDocumentation.CorrespondenceDetailsDTO](docs/CorrespondenceDetailsDTO.md)
  - [ApiDocumentation.Diary](docs/Diary.md)
+ - [ApiDocumentation.DiaryDTO](docs/DiaryDTO.md)
  - [ApiDocumentation.Duration](docs/Duration.md)
+ - [ApiDocumentation.ExaminationDTO](docs/ExaminationDTO.md)
  - [ApiDocumentation.Link](docs/Link.md)
  - [ApiDocumentation.LocationMatch](docs/LocationMatch.md)
  - [ApiDocumentation.ModelAndView](docs/ModelAndView.md)
  - [ApiDocumentation.PlaceVisit](docs/PlaceVisit.md)
  - [ApiDocumentation.Symptom](docs/Symptom.md)
+ - [ApiDocumentation.SymptomDTO](docs/SymptomDTO.md)
  - [ApiDocumentation.TimeLineObject](docs/TimeLineObject.md)
  - [ApiDocumentation.TimelineJsonRoot](docs/TimelineJsonRoot.md)
  - [ApiDocumentation.User](docs/User.md)

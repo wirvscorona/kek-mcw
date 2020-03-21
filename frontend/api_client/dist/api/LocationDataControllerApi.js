@@ -48,6 +48,9 @@ var LocationDataControllerApi = /*#__PURE__*/function () {
   /**
    * Responds with a list of matched locations
    * @param {module:model/TimelineJsonRoot} jsonData jsonData
+   * @param {Object} opts Optional parameters
+   * @param {Number} opts.maxDistanceInMeters maxDistanceInMeters (default to 100)
+   * @param {Number} opts.virusPersistenceTimeInMillis virusPersistenceTimeInMillis (default to 1800000)
    * @param {module:api/LocationDataControllerApi~getMatchingLocationsUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
    * data is of type: {@link Array.<module:model/LocationMatch>}
    */
@@ -55,7 +58,8 @@ var LocationDataControllerApi = /*#__PURE__*/function () {
 
   _createClass(LocationDataControllerApi, [{
     key: "getMatchingLocationsUsingPOST",
-    value: function getMatchingLocationsUsingPOST(jsonData, callback) {
+    value: function getMatchingLocationsUsingPOST(jsonData, opts, callback) {
+      opts = opts || {};
       var postBody = jsonData; // verify the required parameter 'jsonData' is set
 
       if (jsonData === undefined || jsonData === null) {
@@ -63,7 +67,10 @@ var LocationDataControllerApi = /*#__PURE__*/function () {
       }
 
       var pathParams = {};
-      var queryParams = {};
+      var queryParams = {
+        'maxDistanceInMeters': opts['maxDistanceInMeters'],
+        'virusPersistenceTimeInMillis': opts['virusPersistenceTimeInMillis']
+      };
       var headerParams = {};
       var formParams = {};
       var authNames = [];
@@ -82,7 +89,6 @@ var LocationDataControllerApi = /*#__PURE__*/function () {
 
     /**
      * Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish
-     * @param {String} user user
      * @param {module:model/TimelineJsonRoot} jsonData jsonData
      * @param {module:api/LocationDataControllerApi~uploadLocationDataUsingPOSTCallback} callback The callback function, accepting three arguments: error, data, response
      * data is of type: {@link String}
@@ -90,21 +96,14 @@ var LocationDataControllerApi = /*#__PURE__*/function () {
 
   }, {
     key: "uploadLocationDataUsingPOST",
-    value: function uploadLocationDataUsingPOST(user, jsonData, callback) {
-      var postBody = jsonData; // verify the required parameter 'user' is set
-
-      if (user === undefined || user === null) {
-        throw new Error("Missing the required parameter 'user' when calling uploadLocationDataUsingPOST");
-      } // verify the required parameter 'jsonData' is set
-
+    value: function uploadLocationDataUsingPOST(jsonData, callback) {
+      var postBody = jsonData; // verify the required parameter 'jsonData' is set
 
       if (jsonData === undefined || jsonData === null) {
         throw new Error("Missing the required parameter 'jsonData' when calling uploadLocationDataUsingPOST");
       }
 
-      var pathParams = {
-        'user': user
-      };
+      var pathParams = {};
       var queryParams = {};
       var headerParams = {};
       var formParams = {};
@@ -112,7 +111,7 @@ var LocationDataControllerApi = /*#__PURE__*/function () {
       var contentTypes = ['application/json'];
       var accepts = ['*/*'];
       var returnType = 'String';
-      return this.apiClient.callApi('/locations/{user}/upload', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
+      return this.apiClient.callApi('/locations/upload', 'POST', pathParams, queryParams, headerParams, formParams, postBody, authNames, contentTypes, accepts, returnType, null, callback);
     }
   }]);
 

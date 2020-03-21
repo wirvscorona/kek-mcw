@@ -15,16 +15,18 @@
 import ApiClient from './ApiClient';
 import ContactEntry from './model/ContactEntry';
 import ContactEntryDTO from './model/ContactEntryDTO';
-import ContactMethod from './model/ContactMethod';
-import ContactMethodDTO from './model/ContactMethodDTO';
-import CreateDiaryDTO from './model/CreateDiaryDTO';
+import CorrespondenceDetails from './model/CorrespondenceDetails';
+import CorrespondenceDetailsDTO from './model/CorrespondenceDetailsDTO';
 import Diary from './model/Diary';
+import DiaryDTO from './model/DiaryDTO';
 import Duration from './model/Duration';
+import ExaminationDTO from './model/ExaminationDTO';
 import Link from './model/Link';
 import LocationMatch from './model/LocationMatch';
 import ModelAndView from './model/ModelAndView';
 import PlaceVisit from './model/PlaceVisit';
 import Symptom from './model/Symptom';
+import SymptomDTO from './model/SymptomDTO';
 import TimeLineObject from './model/TimeLineObject';
 import TimelineJsonRoot from './model/TimelineJsonRoot';
 import User from './model/User';
@@ -32,8 +34,11 @@ import UserDTO from './model/UserDTO';
 import View from './model/View';
 import BasicErrorControllerApi from './api/BasicErrorControllerApi';
 import DiaryControllerApi from './api/DiaryControllerApi';
+import ExaminationControllerApi from './api/ExaminationControllerApi';
+import ExportControllerApi from './api/ExportControllerApi';
 import LocationDataControllerApi from './api/LocationDataControllerApi';
 import OperationHandlerApi from './api/OperationHandlerApi';
+import SymptomControllerApi from './api/SymptomControllerApi';
 import UserControllerApi from './api/UserControllerApi';
 import WebMvcLinksHandlerApi from './api/WebMvcLinksHandlerApi';
 
@@ -89,22 +94,16 @@ export {
     ContactEntryDTO,
 
     /**
-     * The ContactMethod model constructor.
-     * @property {module:model/ContactMethod}
+     * The CorrespondenceDetails model constructor.
+     * @property {module:model/CorrespondenceDetails}
      */
-    ContactMethod,
+    CorrespondenceDetails,
 
     /**
-     * The ContactMethodDTO model constructor.
-     * @property {module:model/ContactMethodDTO}
+     * The CorrespondenceDetailsDTO model constructor.
+     * @property {module:model/CorrespondenceDetailsDTO}
      */
-    ContactMethodDTO,
-
-    /**
-     * The CreateDiaryDTO model constructor.
-     * @property {module:model/CreateDiaryDTO}
-     */
-    CreateDiaryDTO,
+    CorrespondenceDetailsDTO,
 
     /**
      * The Diary model constructor.
@@ -113,10 +112,22 @@ export {
     Diary,
 
     /**
+     * The DiaryDTO model constructor.
+     * @property {module:model/DiaryDTO}
+     */
+    DiaryDTO,
+
+    /**
      * The Duration model constructor.
      * @property {module:model/Duration}
      */
     Duration,
+
+    /**
+     * The ExaminationDTO model constructor.
+     * @property {module:model/ExaminationDTO}
+     */
+    ExaminationDTO,
 
     /**
      * The Link model constructor.
@@ -147,6 +158,12 @@ export {
      * @property {module:model/Symptom}
      */
     Symptom,
+
+    /**
+     * The SymptomDTO model constructor.
+     * @property {module:model/SymptomDTO}
+     */
+    SymptomDTO,
 
     /**
      * The TimeLineObject model constructor.
@@ -191,6 +208,18 @@ export {
     DiaryControllerApi,
 
     /**
+    * The ExaminationControllerApi service constructor.
+    * @property {module:api/ExaminationControllerApi}
+    */
+    ExaminationControllerApi,
+
+    /**
+    * The ExportControllerApi service constructor.
+    * @property {module:api/ExportControllerApi}
+    */
+    ExportControllerApi,
+
+    /**
     * The LocationDataControllerApi service constructor.
     * @property {module:api/LocationDataControllerApi}
     */
@@ -201,6 +230,12 @@ export {
     * @property {module:api/OperationHandlerApi}
     */
     OperationHandlerApi,
+
+    /**
+    * The SymptomControllerApi service constructor.
+    * @property {module:api/SymptomControllerApi}
+    */
+    SymptomControllerApi,
 
     /**
     * The UserControllerApi service constructor.

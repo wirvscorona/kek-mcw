@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new ApiDocumentation.CreateDiaryDTO();
+    instance = new ApiDocumentation.SymptomDTO();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,28 +47,28 @@
       object[property] = value;
   }
 
-  describe('CreateDiaryDTO', function() {
-    it('should create an instance of CreateDiaryDTO', function() {
-      // uncomment below and update the code to test CreateDiaryDTO
-      //var instane = new ApiDocumentation.CreateDiaryDTO();
-      //expect(instance).to.be.a(ApiDocumentation.CreateDiaryDTO);
+  describe('SymptomDTO', function() {
+    it('should create an instance of SymptomDTO', function() {
+      // uncomment below and update the code to test SymptomDTO
+      //var instane = new ApiDocumentation.SymptomDTO();
+      //expect(instance).to.be.a(ApiDocumentation.SymptomDTO);
     });
 
-    it('should have the property contacts (base name: "contacts")', function() {
-      // uncomment below and update the code to test the property contacts
-      //var instane = new ApiDocumentation.CreateDiaryDTO();
+    it('should have the property id (base name: "id")', function() {
+      // uncomment below and update the code to test the property id
+      //var instane = new ApiDocumentation.SymptomDTO();
       //expect(instance).to.be();
     });
 
-    it('should have the property cured (base name: "cured")', function() {
-      // uncomment below and update the code to test the property cured
-      //var instane = new ApiDocumentation.CreateDiaryDTO();
+    it('should have the property name (base name: "name")', function() {
+      // uncomment below and update the code to test the property name
+      //var instane = new ApiDocumentation.SymptomDTO();
       //expect(instance).to.be();
     });
 
-    it('should have the property userId (base name: "userId")', function() {
-      // uncomment below and update the code to test the property userId
-      //var instane = new ApiDocumentation.CreateDiaryDTO();
+    it('should have the property symptomType (base name: "symptomType")', function() {
+      // uncomment below and update the code to test the property symptomType
+      //var instane = new ApiDocumentation.SymptomDTO();
       //expect(instance).to.be();
     });
 

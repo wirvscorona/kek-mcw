@@ -1,4 +1,4 @@
-# ApiDocumentation.CreateDiaryDTO
+# ApiDocumentation.DiaryDTO
 
 ## Properties
 
