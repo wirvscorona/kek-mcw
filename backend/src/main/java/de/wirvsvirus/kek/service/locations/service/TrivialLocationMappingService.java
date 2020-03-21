@@ -81,7 +81,7 @@ public class TrivialLocationMappingService {
 
         Collection<LocationHistory> possibleLocationMatches = locationHistoryRepository.findAllByLatitudeBetweenAndLongitudeBetweenAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(
                 minLatitudeE7, maxLatitudeE7, minLongitudeE7, maxLongitudeE7,
-                locationHistory.getEndTimestamp(), locationHistory.getStartTimestamp()
+                locationHistory.getEndTimestamp(), locationHistory.getStartTimestamp() - VIRUS_PERSISTENCE_TIME
         );
         return possibleLocationMatches.stream()
                 .filter(matchingLocationHistory -> isWithinRange(locationHistory, matchingLocationHistory, distanceInMeters))
