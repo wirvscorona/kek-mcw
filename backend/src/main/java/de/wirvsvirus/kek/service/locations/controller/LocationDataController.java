@@ -1,6 +1,7 @@
 package de.wirvsvirus.kek.service.locations.controller;
 
 import de.wirvsvirus.kek.service.locations.model.LocationMatch;
+import de.wirvsvirus.kek.service.locations.model.PlaceMatch;
 import de.wirvsvirus.kek.service.locations.model.pojo.Duration;
 import de.wirvsvirus.kek.service.locations.model.pojo.Location;
 import de.wirvsvirus.kek.service.locations.repository.*;
@@ -73,6 +74,20 @@ public class LocationDataController {
                 maxDistanceInMeters,
                 virusPersistenceTimeInMillis);
         return new ResponseEntity<>(locationMatches, HttpStatus.OK);
+    }
+
+    @PostMapping("/locations/checkp")
+    @ApiOperation(value = "Responds with a list of matched predefined places")
+    public ResponseEntity<List<PlaceMatch>> getMatchingPlaces(@RequestBody TimelineJsonRoot jsonData,
+                                                              @RequestParam(required = false, defaultValue = DEFAULT_VIRUS_PERSISTENCE_TIME) long virusPersistenceTimeInMillis) {
+        List<PlaceVisit> locationHistories = jsonData.getTimelineObjects().stream()
+                .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null).map(this::extractPlaceVisitData)
+                .collect(Collectors.toList());
+
+        List<PlaceMatch> placeMatches = trivialLocationMappingService.computePlaceMatches(
+                locationHistories,
+                virusPersistenceTimeInMillis);
+        return new ResponseEntity<>(placeMatches, HttpStatus.OK);
     }
 
     private LocationHistory extractLocationData(TimeLineObject timeLineObject) {

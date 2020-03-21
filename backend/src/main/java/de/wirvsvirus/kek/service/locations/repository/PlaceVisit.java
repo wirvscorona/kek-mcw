@@ -23,6 +23,18 @@ public class PlaceVisit {
         this.updateTimestamp = updateTimestamp;
     }
 
+    public Place getPlace() {
+        return place;
+    }
+
+    public long getStartTimestamp() {
+        return startTimestamp;
+    }
+
+    public long getEndTimestamp() {
+        return endTimestamp;
+    }
+
     @Override
     public String toString() {
         return "PlaceVisit{" +
