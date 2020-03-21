@@ -4,9 +4,8 @@ import java.util.Collection;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-import de.wirvsvirus.kek.service.diary.model.Diary;
+import de.wirvsvirus.kek.service.diary.model.Symptom;
 
 @Repository
-public interface DiaryRepository extends CrudRepository<Diary, Long> {
-    Collection<Diary> findAll();
+public interface SymptomRepository extends CrudRepository<Symptom, Long> {
 }
