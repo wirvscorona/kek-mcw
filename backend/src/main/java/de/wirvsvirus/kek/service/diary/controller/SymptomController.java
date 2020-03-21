@@ -36,7 +36,7 @@ public class SymptomController {
     @GetMapping
     public ResponseEntity<Collection<SymptomDTO>> findSymptoms(@ApiParam(name="search", value="The name of the symptom (or part of it) that should be searched") @RequestParam(name = "search", required = false) String symptomSearchQuery) {
         Collection<SymptomDTO> symptomDTOs = new ArrayList<SymptomDTO>();
-        Iterable<Symptom> symptoms = null;
+        Collection<Symptom> symptoms = null;
 
         // No search query
         if (symptomSearchQuery == null || symptomSearchQuery.isEmpty()) {
@@ -46,11 +46,11 @@ public class SymptomController {
             symptoms = symptomRepo.findByNameContains(symptomSearchQuery);
         }
 
-        symptoms.forEach(symptom -> symptomDTOs.add(symptom.toDTO()));
+        if (!symptoms.isEmpty())
+            symptoms.forEach(symptom -> symptomDTOs.add(symptom.toDTO()));
     
         if (symptomDTOs.isEmpty()) {
             return new ResponseEntity<Collection<SymptomDTO>>(symptomDTOs, HttpStatus.NOT_FOUND);
-
         } else {
             return new ResponseEntity<Collection<SymptomDTO>>(symptomDTOs, HttpStatus.OK);
         }

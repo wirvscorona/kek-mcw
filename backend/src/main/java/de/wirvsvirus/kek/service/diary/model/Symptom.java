@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @ApiModel(description = "All details about a symptom.")
 public class Symptom {
 
-    enum Type {
+    public enum Type {
         NUMERICAL,
         STRING
     };
