@@ -3,6 +3,8 @@ import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
 import MovementTable from './MovementTable';
 import './MovementMap.css'
 import UploadMovementButton from './UploadMovementButton';
+import UploadInfectedButton from './UploadInfectedButton';
+
 
 const markerMockUp = [
     {
@@ -97,6 +99,9 @@ const MovementMap = props => {
         <div className='collision'>
             <div>
                 <UploadMovementButton/>
+            </div>
+            <div>
+                <UploadInfectedButton/>
             </div>
             <div className='movement-table'>
                 <MovementTable {...markerBundle}/>
