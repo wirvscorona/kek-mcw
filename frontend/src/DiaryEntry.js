@@ -1,7 +1,6 @@
 import React from 'react'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
 import Select from 'react-select'
 
 import { Container, Row, Col } from 'react-bootstrap';
@@ -90,7 +89,7 @@ class DiaryTableEntry extends React.Component {
     }
 
     handleOtherSymptoms(e) {
-        this.setState({ otherSymptoms : e.target.value })
+        this.setState({ otherSymptoms: e.target.value })
     }
 
 
@@ -100,8 +99,8 @@ class DiaryTableEntry extends React.Component {
                 <Container fluid>
                     <Row>
                         <Col lg={1}>
-                            Datum
                             <DatePicker
+                                dateFormat="dd.MM.yyyy"
                                 selected={this.state.date}
                                 onChange={this.handleDateChange}
                             />
@@ -134,13 +133,13 @@ class DiaryTableEntry extends React.Component {
                                     </Col>
                                     {(this.state.fever == 1) &&
                                         <Col lg={1}>
-                                            <input 
+                                            <input
                                                 className="form-control"
-                                                type="number" 
-                                                step="0.1" 
-                                                placeholder="37" 
-                                                min="37" 
-                                                max="42" 
+                                                type="number"
+                                                step="0.1"
+                                                placeholder="37"
+                                                min="37"
+                                                max="42"
                                                 onChange={this.handleFeverTemperatureChange}
 
                                             />
@@ -169,25 +168,25 @@ class DiaryTableEntry extends React.Component {
                                     </Col>
                                     <Col lg={3}>
                                         <label className="text-sm text-muted">
-                                            <input 
+                                            <input
                                                 className="form-control"
-                                                type="text" 
-                                                placeholder="Erbrechen, Durchfall, ..." 
+                                                type="text"
+                                                placeholder="Erbrechen, Durchfall, ..."
                                                 onChange={this.handleOtherSymptoms}
                                             />
                                         Symptome mit Komma trennen
                                         </label>
-                                        </Col>
+                                    </Col>
                                 </Row>
                             </Container>
                         </Col>
                     </Row>
-                    { (this.state.fever > 0 
-                        || this.state.cough > 0 
-                        || this.state.soreThroat > 0 
+                    {(this.state.fever > 0
+                        || this.state.cough > 0
+                        || this.state.soreThroat > 0
                         || this.state.shortnessOfBreath > 0
-                        || this.state.otherSymptoms != '') 
-                        && 
+                        || this.state.otherSymptoms != '')
+                        &&
                         <Row>
                             <p>
                                 Sie hatten an diesem Tag Krankheitssymptome. Bitte geben Sie die Personen an mit denen Sie an diesem Tag Kontakt hatten.

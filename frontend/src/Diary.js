@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import DiaryTableEntry from './DiaryEntry'
+import PersonalInformation from './PersonalInformation'
+import './styles/main.css';
+
+import StepZilla from "react-stepzilla";
+
 
 import { Container, Row, Col } from 'react-bootstrap';
 
 
-class Diary extends Component {
+class DiaryEntries extends Component {
     render() {
         const diaryEntries = []
         let i = 0
@@ -62,6 +67,26 @@ class Diary extends Component {
                 </Row>
                 {diaryEntries}
             </Container>
+        )
+    }
+}
+
+const steps =
+    [
+        { name: 'Persönliche Informationen', component: <PersonalInformation /> },
+        { name: 'Kontakttagebuch', component: <DiaryEntries /> },
+    ]
+
+
+class Diary extends Component {
+    render() {
+        return (
+            <div className="example">
+                <div className='step-progress mx-4 my-4'>
+                    <StepZilla steps={steps} />
+                </div>
+            </div>
+
         )
     }
 }
