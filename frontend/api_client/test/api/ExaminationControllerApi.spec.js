@@ -28,7 +28,7 @@
   var instance;
 
   beforeEach(function() {
-    instance = new ApiDocumentation.UserDTO();
+    instance = new ApiDocumentation.ExaminationControllerApi();
   });
 
   var getProperty = function(object, getter, property) {
@@ -47,37 +47,37 @@
       object[property] = value;
   }
 
-  describe('UserDTO', function() {
-    it('should create an instance of UserDTO', function() {
-      // uncomment below and update the code to test UserDTO
-      //var instane = new ApiDocumentation.UserDTO();
-      //expect(instance).to.be.a(ApiDocumentation.UserDTO);
+  describe('ExaminationControllerApi', function() {
+    describe('findExaminationUsingGET', function() {
+      it('should call findExaminationUsingGET successfully', function(done) {
+        //uncomment below and update the code to test findExaminationUsingGET
+        //instance.findExaminationUsingGET(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property correspondenceDetails (base name: "correspondenceDetails")', function() {
-      // uncomment below and update the code to test the property correspondenceDetails
-      //var instane = new ApiDocumentation.UserDTO();
-      //expect(instance).to.be();
+    describe('findExaminationsUsingGET', function() {
+      it('should call findExaminationsUsingGET successfully', function(done) {
+        //uncomment below and update the code to test findExaminationsUsingGET
+        //instance.findExaminationsUsingGET(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property firstName (base name: "firstName")', function() {
-      // uncomment below and update the code to test the property firstName
-      //var instane = new ApiDocumentation.UserDTO();
-      //expect(instance).to.be();
+    describe('saveExaminationUsingPOST', function() {
+      it('should call saveExaminationUsingPOST successfully', function(done) {
+        //uncomment below and update the code to test saveExaminationUsingPOST
+        //instance.saveExaminationUsingPOST(function(error) {
+        //  if (error) throw error;
+        //expect().to.be();
+        //});
+        done();
+      });
     });
-
-    it('should have the property id (base name: "id")', function() {
-      // uncomment below and update the code to test the property id
-      //var instane = new ApiDocumentation.UserDTO();
-      //expect(instance).to.be();
-    });
-
-    it('should have the property lastName (base name: "lastName")', function() {
-      // uncomment below and update the code to test the property lastName
-      //var instane = new ApiDocumentation.UserDTO();
-      //expect(instance).to.be();
-    });
-
   });
 
 }));

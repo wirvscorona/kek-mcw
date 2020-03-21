@@ -13,10 +13,12 @@ import de.wirvsvirus.kek.service.diary.model.ContactEntry;
 import de.wirvsvirus.kek.service.diary.model.ContactEntryDTO;
 import de.wirvsvirus.kek.service.diary.model.Diary;
 import de.wirvsvirus.kek.service.diary.model.DiaryDTO;
+import de.wirvsvirus.kek.service.diary.model.Examination;
 import de.wirvsvirus.kek.service.diary.model.Symptom;
 import de.wirvsvirus.kek.service.diary.model.User;
 import de.wirvsvirus.kek.service.diary.repository.ContactEntryRepository;
 import de.wirvsvirus.kek.service.diary.repository.DiaryRepository;
+import de.wirvsvirus.kek.service.diary.repository.ExaminationRepository;
 import de.wirvsvirus.kek.service.diary.repository.SymptomRepository;
 import de.wirvsvirus.kek.service.diary.repository.UserRepository;
 
@@ -33,7 +35,7 @@ public class DiaryService {
     private ContactEntryRepository contactEntryRepo;
 
     @Autowired
-    private SymptomRepository symptomRepo;
+    private ExaminationRepository examinationRepository;
 
     public Collection<Diary> findAll() {
         return diaryRepository.findAll();
@@ -59,7 +61,10 @@ public class DiaryService {
         }
         diary.setCured(dto.isCured());
 
-        diary.getContacts().forEach(ce -> contactEntryRepo.delete(ce));
+        diary.getContacts().forEach(ce -> {
+            examinationRepository.delete(ce.getExamination());
+            contactEntryRepo.delete(ce);
+        });
         diary.getContacts().clear();
 
         dto.getContacts()
@@ -95,14 +100,9 @@ public class DiaryService {
         contractEntry.setCustomSymptom(dto.getCustomSymptom());
         contractEntry.setDescription(dto.getDescription());
 
-        contractEntry.setSymptoms(new ArrayList<Symptom>());
+        contractEntry.setExamination(Examination.toDomainObject(dto.getExamination()));
 
-        dto.getSymptoms().forEach(symptomID -> {
-            Optional<Symptom> symptom = symptomRepo.findById(symptomID);
-            if (symptom.isPresent()) {
-                contractEntry.getSymptoms().add(symptom.get());
-            }
-        });
+        examinationRepository.save(contractEntry.getExamination());
 
         return contractEntry;
     }

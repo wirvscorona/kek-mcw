@@ -14,18 +14,18 @@
 import ApiClient from '../ApiClient';
 
 /**
- * The ContactMethod model module.
- * @module model/ContactMethod
+ * The CorrespondenceDetails model module.
+ * @module model/CorrespondenceDetails
  * @version 1.0
  */
-class ContactMethod {
+class CorrespondenceDetails {
     /**
-     * Constructs a new <code>ContactMethod</code>.
-     * @alias module:model/ContactMethod
+     * Constructs a new <code>CorrespondenceDetails</code>.
+     * @alias module:model/CorrespondenceDetails
      */
     constructor() { 
         
-        ContactMethod.initialize(this);
+        CorrespondenceDetails.initialize(this);
     }
 
     /**
@@ -37,24 +37,21 @@ class ContactMethod {
     }
 
     /**
-     * Constructs a <code>ContactMethod</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>CorrespondenceDetails</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/ContactMethod} obj Optional instance to populate.
-     * @return {module:model/ContactMethod} The populated <code>ContactMethod</code> instance.
+     * @param {module:model/CorrespondenceDetails} obj Optional instance to populate.
+     * @return {module:model/CorrespondenceDetails} The populated <code>CorrespondenceDetails</code> instance.
      */
     static constructFromObject(data, obj) {
         if (data) {
-            obj = obj || new ContactMethod();
+            obj = obj || new CorrespondenceDetails();
 
             if (data.hasOwnProperty('contactMethodType')) {
                 obj['contactMethodType'] = ApiClient.convertToType(data['contactMethodType'], 'String');
             }
             if (data.hasOwnProperty('detail')) {
                 obj['detail'] = ApiClient.convertToType(data['detail'], 'String');
-            }
-            if (data.hasOwnProperty('id')) {
-                obj['id'] = ApiClient.convertToType(data['id'], 'Number');
             }
         }
         return obj;
@@ -64,19 +61,14 @@ class ContactMethod {
 }
 
 /**
- * @member {module:model/ContactMethod.ContactMethodTypeEnum} contactMethodType
+ * @member {module:model/CorrespondenceDetails.ContactMethodTypeEnum} contactMethodType
  */
-ContactMethod.prototype['contactMethodType'] = undefined;
+CorrespondenceDetails.prototype['contactMethodType'] = undefined;
 
 /**
  * @member {String} detail
  */
-ContactMethod.prototype['detail'] = undefined;
-
-/**
- * @member {Number} id
- */
-ContactMethod.prototype['id'] = undefined;
+CorrespondenceDetails.prototype['detail'] = undefined;
 
 
 
@@ -87,7 +79,7 @@ ContactMethod.prototype['id'] = undefined;
  * @enum {String}
  * @readonly
  */
-ContactMethod['ContactMethodTypeEnum'] = {
+CorrespondenceDetails['ContactMethodTypeEnum'] = {
 
     /**
      * value: "HOME"
@@ -110,5 +102,5 @@ ContactMethod['ContactMethodTypeEnum'] = {
 
 
 
-export default ContactMethod;
+export default CorrespondenceDetails;
 

@@ -1,4 +1,4 @@
-# ApiDocumentation.Symptom
+# ApiDocumentation.SymptomDTO
 
 ## Properties
 

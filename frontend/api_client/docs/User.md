@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contactMethods** | [**[ContactMethod]**](ContactMethod.md) |  | [optional] 
+**correspondenceDetails** | [**[CorrespondenceDetails]**](CorrespondenceDetails.md) |  | [optional] 
 **firstName** | **String** |  | [optional] 
 **id** | **Number** |  | [optional] 
 **lastName** | **String** |  | [optional] 

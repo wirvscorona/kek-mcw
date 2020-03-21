@@ -16,20 +16,19 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /**
- * The Symptom model module.
- * @module model/Symptom
+ * The CorrespondenceDetailsDTO model module.
+ * @module model/CorrespondenceDetailsDTO
  * @version 1.0
  */
-var Symptom = /*#__PURE__*/function () {
+var CorrespondenceDetailsDTO = /*#__PURE__*/function () {
   /**
-   * Constructs a new <code>Symptom</code>.
-   * All details about a symptom.
-   * @alias module:model/Symptom
+   * Constructs a new <code>CorrespondenceDetailsDTO</code>.
+   * @alias module:model/CorrespondenceDetailsDTO
    */
-  function Symptom() {
-    _classCallCheck(this, Symptom);
+  function CorrespondenceDetailsDTO() {
+    _classCallCheck(this, CorrespondenceDetailsDTO);
 
-    Symptom.initialize(this);
+    CorrespondenceDetailsDTO.initialize(this);
   }
   /**
    * Initializes the fields of this object.
@@ -38,33 +37,29 @@ var Symptom = /*#__PURE__*/function () {
    */
 
 
-  _createClass(Symptom, null, [{
+  _createClass(CorrespondenceDetailsDTO, null, [{
     key: "initialize",
     value: function initialize(obj) {}
     /**
-     * Constructs a <code>Symptom</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>CorrespondenceDetailsDTO</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/Symptom} obj Optional instance to populate.
-     * @return {module:model/Symptom} The populated <code>Symptom</code> instance.
+     * @param {module:model/CorrespondenceDetailsDTO} obj Optional instance to populate.
+     * @return {module:model/CorrespondenceDetailsDTO} The populated <code>CorrespondenceDetailsDTO</code> instance.
      */
 
   }, {
     key: "constructFromObject",
     value: function constructFromObject(data, obj) {
       if (data) {
-        obj = obj || new Symptom();
+        obj = obj || new CorrespondenceDetailsDTO();
 
-        if (data.hasOwnProperty('id')) {
-          obj['id'] = _ApiClient.default.convertToType(data['id'], 'Number');
+        if (data.hasOwnProperty('contactMethodType')) {
+          obj['contactMethodType'] = _ApiClient.default.convertToType(data['contactMethodType'], 'String');
         }
 
-        if (data.hasOwnProperty('name')) {
-          obj['name'] = _ApiClient.default.convertToType(data['name'], 'String');
-        }
-
-        if (data.hasOwnProperty('symptomType')) {
-          obj['symptomType'] = _ApiClient.default.convertToType(data['symptomType'], 'String');
+        if (data.hasOwnProperty('detail')) {
+          obj['detail'] = _ApiClient.default.convertToType(data['detail'], 'String');
         }
       }
 
@@ -72,42 +67,43 @@ var Symptom = /*#__PURE__*/function () {
     }
   }]);
 
-  return Symptom;
+  return CorrespondenceDetailsDTO;
 }();
 /**
- * @member {Number} id
+ * @member {module:model/CorrespondenceDetailsDTO.ContactMethodTypeEnum} contactMethodType
  */
 
 
-Symptom.prototype['id'] = undefined;
+CorrespondenceDetailsDTO.prototype['contactMethodType'] = undefined;
 /**
- * @member {String} name
+ * @member {String} detail
  */
 
-Symptom.prototype['name'] = undefined;
+CorrespondenceDetailsDTO.prototype['detail'] = undefined;
 /**
- * @member {module:model/Symptom.SymptomTypeEnum} symptomType
- */
-
-Symptom.prototype['symptomType'] = undefined;
-/**
- * Allowed values for the <code>symptomType</code> property.
+ * Allowed values for the <code>contactMethodType</code> property.
  * @enum {String}
  * @readonly
  */
 
-Symptom['SymptomTypeEnum'] = {
+CorrespondenceDetailsDTO['ContactMethodTypeEnum'] = {
   /**
-   * value: "NUMERICAL"
+   * value: "HOME"
    * @const
    */
-  "NUMERICAL": "NUMERICAL",
+  "HOME": "HOME",
 
   /**
-   * value: "STRING"
+   * value: "MOBILE"
    * @const
    */
-  "STRING": "STRING"
+  "MOBILE": "MOBILE",
+
+  /**
+   * value: "EMAIL"
+   * @const
+   */
+  "EMAIL": "EMAIL"
 };
-var _default = Symptom;
+var _default = CorrespondenceDetailsDTO;
 exports.default = _default;

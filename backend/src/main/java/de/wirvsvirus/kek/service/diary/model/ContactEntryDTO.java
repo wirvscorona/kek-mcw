@@ -1,9 +1,6 @@
 package de.wirvsvirus.kek.service.diary.model;
 
 import java.util.Date;
-import java.util.List;
-
-import javax.persistence.Id;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,14 +10,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactEntryDTO {
-    @Id
-    private Long id;
-
     private Date date;
 
     private String description;
 
-    private List<Long> symptoms;
+    private ExaminationDTO examination;
 
     private boolean customSymptomPresent;
     private String customSymptom;

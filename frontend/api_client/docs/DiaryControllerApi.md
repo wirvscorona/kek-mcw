@@ -7,9 +7,8 @@ Method | HTTP request | Description
 [**deleteDiaryUsingDELETE**](DiaryControllerApi.md#deleteDiaryUsingDELETE) | **DELETE** /api/diaries/{id} | Deletes diary object
 [**findDiariesUsingGET**](DiaryControllerApi.md#findDiariesUsingGET) | **GET** /api/diaries | Responds with a list of diaries
 [**findDiaryUsingGET**](DiaryControllerApi.md#findDiaryUsingGET) | **GET** /api/diaries/{id} | Responds with a diary object
-[**findUserUsingGET**](DiaryControllerApi.md#findUserUsingGET) | **GET** /api/diaries/user/{id} | Responds with a diary object
-[**newDiaryUsingPOST**](DiaryControllerApi.md#newDiaryUsingPOST) | **POST** /api/diaries/{id} | Saves new diary object
-[**replaceDiaryUsingPUT**](DiaryControllerApi.md#replaceDiaryUsingPUT) | **PUT** /api/diaries/{id} | Updates a diary object
+[**saveDiaryUsingPOST**](DiaryControllerApi.md#saveDiaryUsingPOST) | **POST** /api/diaries/ | Saves new diary object
+[**updateDiaryUsingPUT**](DiaryControllerApi.md#updateDiaryUsingPUT) | **PUT** /api/diaries/{id} | Updates a diary object
 
 
 
@@ -138,52 +137,9 @@ No authorization required
 - **Accept**: */*
 
 
-## findUserUsingGET
+## saveDiaryUsingPOST
 
-> User findUserUsingGET(id)
-
-Responds with a diary object
-
-### Example
-
-```javascript
-import ApiDocumentation from 'api_documentation';
-
-let apiInstance = new ApiDocumentation.DiaryControllerApi();
-let id = 789; // Number | id
-apiInstance.findUserUsingGET(id, (error, data, response) => {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log('API called successfully. Returned data: ' + data);
-  }
-});
-```
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **id** | **Number**| id | 
-
-### Return type
-
-[**User**](User.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
-
-
-## newDiaryUsingPOST
-
-> Diary newDiaryUsingPOST(createDiaryDTO)
+> Diary saveDiaryUsingPOST(diaryDTO)
 
 Saves new diary object
 
@@ -193,8 +149,8 @@ Saves new diary object
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.DiaryControllerApi();
-let createDiaryDTO = new ApiDocumentation.CreateDiaryDTO(); // CreateDiaryDTO | createDiaryDTO
-apiInstance.newDiaryUsingPOST(createDiaryDTO, (error, data, response) => {
+let diaryDTO = new ApiDocumentation.DiaryDTO(); // DiaryDTO | diaryDTO
+apiInstance.saveDiaryUsingPOST(diaryDTO, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -208,7 +164,7 @@ apiInstance.newDiaryUsingPOST(createDiaryDTO, (error, data, response) => {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **createDiaryDTO** | [**CreateDiaryDTO**](CreateDiaryDTO.md)| createDiaryDTO | 
+ **diaryDTO** | [**DiaryDTO**](DiaryDTO.md)| diaryDTO | 
 
 ### Return type
 
@@ -224,9 +180,9 @@ No authorization required
 - **Accept**: */*
 
 
-## replaceDiaryUsingPUT
+## updateDiaryUsingPUT
 
-> Diary replaceDiaryUsingPUT(id, newDiary)
+> Diary updateDiaryUsingPUT(id, diaryDTO)
 
 Updates a diary object
 
@@ -237,8 +193,8 @@ import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.DiaryControllerApi();
 let id = 789; // Number | id
-let newDiary = new ApiDocumentation.Diary(); // Diary | newDiary
-apiInstance.replaceDiaryUsingPUT(id, newDiary, (error, data, response) => {
+let diaryDTO = new ApiDocumentation.DiaryDTO(); // DiaryDTO | diaryDTO
+apiInstance.updateDiaryUsingPUT(id, diaryDTO, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -253,7 +209,7 @@ apiInstance.replaceDiaryUsingPUT(id, newDiary, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **id** | **Number**| id | 
- **newDiary** | [**Diary**](Diary.md)| newDiary | 
+ **diaryDTO** | [**DiaryDTO**](DiaryDTO.md)| diaryDTO | 
 
 ### Return type
 

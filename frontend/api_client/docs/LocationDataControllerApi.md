@@ -5,13 +5,13 @@ All URIs are relative to *http://127.0.0.1:8081*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**getMatchingLocationsUsingPOST**](LocationDataControllerApi.md#getMatchingLocationsUsingPOST) | **POST** /locations/check | Responds with a list of matched locations
-[**uploadLocationDataUsingPOST**](LocationDataControllerApi.md#uploadLocationDataUsingPOST) | **POST** /locations/{user}/upload | Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish
+[**uploadLocationDataUsingPOST**](LocationDataControllerApi.md#uploadLocationDataUsingPOST) | **POST** /locations/upload | Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish
 
 
 
 ## getMatchingLocationsUsingPOST
 
-> [LocationMatch] getMatchingLocationsUsingPOST(jsonData)
+> [LocationMatch] getMatchingLocationsUsingPOST(jsonData, opts)
 
 Responds with a list of matched locations
 
@@ -22,7 +22,11 @@ import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.LocationDataControllerApi();
 let jsonData = new ApiDocumentation.TimelineJsonRoot(); // TimelineJsonRoot | jsonData
-apiInstance.getMatchingLocationsUsingPOST(jsonData, (error, data, response) => {
+let opts = {
+  'maxDistanceInMeters': 100, // Number | maxDistanceInMeters
+  'virusPersistenceTimeInMillis': 1800000 // Number | virusPersistenceTimeInMillis
+};
+apiInstance.getMatchingLocationsUsingPOST(jsonData, opts, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -37,6 +41,8 @@ apiInstance.getMatchingLocationsUsingPOST(jsonData, (error, data, response) => {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **jsonData** | [**TimelineJsonRoot**](TimelineJsonRoot.md)| jsonData | 
+ **maxDistanceInMeters** | **Number**| maxDistanceInMeters | [optional] [default to 100]
+ **virusPersistenceTimeInMillis** | **Number**| virusPersistenceTimeInMillis | [optional] [default to 1800000]
 
 ### Return type
 
@@ -54,7 +60,7 @@ No authorization required
 
 ## uploadLocationDataUsingPOST
 
-> String uploadLocationDataUsingPOST(user, jsonData)
+> String uploadLocationDataUsingPOST(jsonData)
 
 Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish
 
@@ -64,9 +70,8 @@ Responds with a list of diaries, if parameters are set it will respond with a li
 import ApiDocumentation from 'api_documentation';
 
 let apiInstance = new ApiDocumentation.LocationDataControllerApi();
-let user = "user_example"; // String | user
 let jsonData = new ApiDocumentation.TimelineJsonRoot(); // TimelineJsonRoot | jsonData
-apiInstance.uploadLocationDataUsingPOST(user, jsonData, (error, data, response) => {
+apiInstance.uploadLocationDataUsingPOST(jsonData, (error, data, response) => {
   if (error) {
     console.error(error);
   } else {
@@ -80,7 +85,6 @@ apiInstance.uploadLocationDataUsingPOST(user, jsonData, (error, data, response) 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **user** | **String**| user | 
  **jsonData** | [**TimelineJsonRoot**](TimelineJsonRoot.md)| jsonData | 
 
 ### Return type

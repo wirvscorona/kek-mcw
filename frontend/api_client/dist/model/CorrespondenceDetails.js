@@ -16,19 +16,19 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /**
- * The ContactMethodDTO model module.
- * @module model/ContactMethodDTO
+ * The CorrespondenceDetails model module.
+ * @module model/CorrespondenceDetails
  * @version 1.0
  */
-var ContactMethodDTO = /*#__PURE__*/function () {
+var CorrespondenceDetails = /*#__PURE__*/function () {
   /**
-   * Constructs a new <code>ContactMethodDTO</code>.
-   * @alias module:model/ContactMethodDTO
+   * Constructs a new <code>CorrespondenceDetails</code>.
+   * @alias module:model/CorrespondenceDetails
    */
-  function ContactMethodDTO() {
-    _classCallCheck(this, ContactMethodDTO);
+  function CorrespondenceDetails() {
+    _classCallCheck(this, CorrespondenceDetails);
 
-    ContactMethodDTO.initialize(this);
+    CorrespondenceDetails.initialize(this);
   }
   /**
    * Initializes the fields of this object.
@@ -37,22 +37,22 @@ var ContactMethodDTO = /*#__PURE__*/function () {
    */
 
 
-  _createClass(ContactMethodDTO, null, [{
+  _createClass(CorrespondenceDetails, null, [{
     key: "initialize",
     value: function initialize(obj) {}
     /**
-     * Constructs a <code>ContactMethodDTO</code> from a plain JavaScript object, optionally creating a new instance.
+     * Constructs a <code>CorrespondenceDetails</code> from a plain JavaScript object, optionally creating a new instance.
      * Copies all relevant properties from <code>data</code> to <code>obj</code> if supplied or a new instance if not.
      * @param {Object} data The plain JavaScript object bearing properties of interest.
-     * @param {module:model/ContactMethodDTO} obj Optional instance to populate.
-     * @return {module:model/ContactMethodDTO} The populated <code>ContactMethodDTO</code> instance.
+     * @param {module:model/CorrespondenceDetails} obj Optional instance to populate.
+     * @return {module:model/CorrespondenceDetails} The populated <code>CorrespondenceDetails</code> instance.
      */
 
   }, {
     key: "constructFromObject",
     value: function constructFromObject(data, obj) {
       if (data) {
-        obj = obj || new ContactMethodDTO();
+        obj = obj || new CorrespondenceDetails();
 
         if (data.hasOwnProperty('contactMethodType')) {
           obj['contactMethodType'] = _ApiClient.default.convertToType(data['contactMethodType'], 'String');
@@ -61,41 +61,32 @@ var ContactMethodDTO = /*#__PURE__*/function () {
         if (data.hasOwnProperty('detail')) {
           obj['detail'] = _ApiClient.default.convertToType(data['detail'], 'String');
         }
-
-        if (data.hasOwnProperty('id')) {
-          obj['id'] = _ApiClient.default.convertToType(data['id'], 'Number');
-        }
       }
 
       return obj;
     }
   }]);
 
-  return ContactMethodDTO;
+  return CorrespondenceDetails;
 }();
 /**
- * @member {module:model/ContactMethodDTO.ContactMethodTypeEnum} contactMethodType
+ * @member {module:model/CorrespondenceDetails.ContactMethodTypeEnum} contactMethodType
  */
 
 
-ContactMethodDTO.prototype['contactMethodType'] = undefined;
+CorrespondenceDetails.prototype['contactMethodType'] = undefined;
 /**
  * @member {String} detail
  */
 
-ContactMethodDTO.prototype['detail'] = undefined;
-/**
- * @member {Number} id
- */
-
-ContactMethodDTO.prototype['id'] = undefined;
+CorrespondenceDetails.prototype['detail'] = undefined;
 /**
  * Allowed values for the <code>contactMethodType</code> property.
  * @enum {String}
  * @readonly
  */
 
-ContactMethodDTO['ContactMethodTypeEnum'] = {
+CorrespondenceDetails['ContactMethodTypeEnum'] = {
   /**
    * value: "HOME"
    * @const
@@ -114,5 +105,5 @@ ContactMethodDTO['ContactMethodTypeEnum'] = {
    */
   "EMAIL": "EMAIL"
 };
-var _default = ContactMethodDTO;
+var _default = CorrespondenceDetails;
 exports.default = _default;
