@@ -4,27 +4,21 @@ import de.wirvsvirus.kek.service.locations.repository.LocationHistory;
 import de.wirvsvirus.kek.service.locations.repository.LocationHistoryRepository;
 import feign.Response;
 import feign.codec.ErrorDecoder;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Bean;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
-
-import de.wirvsvirus.kek.service.diary.model.Diary;
-import de.wirvsvirus.kek.service.diary.repository.DiaryRepository;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2

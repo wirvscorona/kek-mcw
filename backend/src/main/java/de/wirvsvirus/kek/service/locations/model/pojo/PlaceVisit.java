@@ -26,8 +26,13 @@ public class PlaceVisit {
         this.centerLngE7 = centerLngE7;
     }
 
+    public Location getLocation() {return location;}
+
+    public void setLocation(Location location){this.location = location;}
+
     int centerLatE7;
     int centerLngE7;
     Duration duration;
+    Location location;
 
 }
