@@ -7,42 +7,37 @@ import net.sf.geographiclib.Geodesic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
 public class TrivialLocationMappingService {
-    private static final long VIRUS_PERSISTENCE_TIME = 1800000; // 30 minutes
-
     @Autowired
     LocationHistoryRepository locationHistoryRepository;
 
-    public List<LocationMatch> computeMatches(List<LocationHistory> locationHistories) {
+    public List<LocationMatch> computeMatches(List<LocationHistory> locationHistories, long virusPersistenceTime) {
         return locationHistories.stream()
                 .filter(locationHistory -> locationHistoryRepository
                         .findFirstByLatitudeAndLongitudeAndStartTimestampLessThanEqualAndEndTimestampGreaterThanEqual(
                                 locationHistory.getLatitude(),
                                 locationHistory.getLongitude(),
                                 locationHistory.getEndTimestamp(),
-                                locationHistory.getStartTimestamp() - VIRUS_PERSISTENCE_TIME) != null)
+                                locationHistory.getStartTimestamp() - virusPersistenceTime) != null)
                 .map(LocationMatch::fromLocationHistory)
                 .collect(Collectors.toList());
     }
 
-    public List<LocationMatch> computeNearbyMatches(List<LocationHistory> locationHistories, long maxDistanceInMeters) {
+    public List<LocationMatch> computeNearbyMatches(List<LocationHistory> locationHistories, long maxDistanceInMeters, long virusPersistenceTime) {
         return locationHistories.stream()
                 .filter(locationHistory -> !computeNearbyLocationHistories(
-                        locationHistory,
-                        maxDistanceInMeters
-                ).isEmpty())
+                        locationHistory, maxDistanceInMeters, virusPersistenceTime)
+                        .isEmpty())
                 .map(LocationMatch::fromLocationHistory)
                 .collect(Collectors.toList());
     }
 
-    private Collection<LocationHistory> computeNearbyLocationHistories(LocationHistory locationHistory, long distanceInMeters) {
+    private Collection<LocationHistory> computeNearbyLocationHistories(LocationHistory locationHistory, long distanceInMeters, long virusPersistenceTime) {
         double latitudeDegrees = convertLatitudeE7ToDegree(locationHistory.getLatitude());
         double longitudeDegrees = convertLongitudeE7ToDegree(locationHistory.getLongitude());
 
@@ -65,7 +60,7 @@ public class TrivialLocationMappingService {
                 minLatitudeE7, maxLatitudeE7,
                 minLongitudeE7, maxLongitudeE7,
                 locationHistory.getEndTimestamp(),
-                locationHistory.getStartTimestamp() - VIRUS_PERSISTENCE_TIME
+                locationHistory.getStartTimestamp() - virusPersistenceTime
         );
         return possibleLocationMatches.stream()
                 .filter(matchingLocationHistory -> isWithinRange(locationHistory, matchingLocationHistory, distanceInMeters))

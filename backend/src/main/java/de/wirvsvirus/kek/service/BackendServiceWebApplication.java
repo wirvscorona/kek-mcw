@@ -75,7 +75,7 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 				logger.info(queriedHistory.toString());
 			}
 
-			for (LocationMatch match : service.computeNearbyMatches(Lists.newArrayList(new LocationHistory(490147397, 83940415, 0, 10, -1)), 100)) {
+			for (LocationMatch match : service.computeNearbyMatches(Lists.newArrayList(new LocationHistory(490147397, 83940415, 0, 10, -1)), 100, 1800000)) {
 				logger.info(match.toString());
 			}
 		});
