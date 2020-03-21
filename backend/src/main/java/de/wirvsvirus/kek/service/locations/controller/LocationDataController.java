@@ -27,11 +27,15 @@ public class LocationDataController {
     private static final long DEFAULT_VIRUS_PERSISTENCE_TIME = 1800000; // 30 min
     private static final long DEFAULT_MAX_DISTANCE = 100;
 
-    @Autowired
-    private LocationHistoryRepository locationHistoryRepository;
+    private final LocationHistoryRepository locationHistoryRepository;
+
+    private final TrivialLocationMappingService trivialLocationMappingService;
 
     @Autowired
-    private TrivialLocationMappingService trivialLocationMappingService;
+    public LocationDataController(LocationHistoryRepository locationHistoryRepository, TrivialLocationMappingService trivialLocationMappingService) {
+        this.locationHistoryRepository = locationHistoryRepository;
+        this.trivialLocationMappingService = trivialLocationMappingService;
+    }
 
     @PostMapping("/locations/{user}/upload")
     @ApiOperation(value = "Responds with a list of diaries, if parameters are set it will respond with a list of contacts taken between start and finish")
@@ -44,7 +48,6 @@ public class LocationDataController {
         return new ResponseEntity<String>("Upload success", HttpStatus.OK);
     }
 
-    // FIXME GetMapping does not support @RequestBody
     @PostMapping("/locations/check")
     @ApiOperation(value = "Responds with a list of matched locations")
     public ResponseEntity<List<LocationMatch>> getMatchingLocations(@RequestBody TimelineJsonRoot jsonData,
