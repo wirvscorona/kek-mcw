@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
-import MovementTabel from './MovementTabel';
+import MovementTable from './MovementTable';
 import './MovementMap.css'
 import UploadMovementButton from './UploadMovementButton';
 
@@ -99,7 +99,7 @@ const MovementMap = props => {
                 <UploadMovementButton/>
             </div>
             <div className='movement-table'>
-                <MovementTabel {...markerBundle}/>
+                <MovementTable {...markerBundle}/>
             </div>
             <div>
                 <Map

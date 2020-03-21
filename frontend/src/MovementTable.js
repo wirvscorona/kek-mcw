@@ -109,7 +109,6 @@ const MovementTable = props => {
             </tbody>
         </Table>
     )
-
 }
 
 
