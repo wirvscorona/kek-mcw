@@ -5,6 +5,12 @@ import de.wirvsvirus.kek.service.locations.repository.LocationHistoryRepository;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.List;
+
+import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
@@ -23,7 +29,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 
+import de.wirvsvirus.kek.service.diary.model.ContactEntry;
 import de.wirvsvirus.kek.service.diary.model.Diary;
+import de.wirvsvirus.kek.service.diary.model.Symptom;
+import de.wirvsvirus.kek.service.diary.model.User;
 import de.wirvsvirus.kek.service.diary.repository.DiaryRepository;
 
 @SpringBootApplication
@@ -56,6 +65,11 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 		}
 	}
 
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
+
 	// FIXME: only for demo purposes, ensuring LocationRepository works as expected.
 	@Bean
 	public CommandLineRunner demo(LocationHistoryRepository repository) {
@@ -65,6 +79,23 @@ public class BackendServiceWebApplication extends SpringBootServletInitializer {
 			logger.info("Stored one new location history....");
 
 			for (LocationHistory queriedHistory : repository.findAll()) {
+				logger.info(queriedHistory.toString());
+			}
+		});
+	}
+
+	@Bean
+	public CommandLineRunner diaryTestData(DiaryRepository repository) {
+		return (args -> {
+			ArrayList<ContactEntry> contacts = new ArrayList<ContactEntry>();
+			contacts.add(new ContactEntry((long) 12, new Date(), new HashSet<ContactEntry.Kind>(), true, "test",
+					new HashSet<ContactEntry.Protection>(), new ArrayList<Symptom>(), true, "rote augen",
+					"peter lustig"));
+			repository.save(new Diary((long) 12, new User(), contacts, false));
+
+			logger.info("Stored one new location history....");
+
+			for (Diary queriedHistory : repository.findAll()) {
 				logger.info(queriedHistory.toString());
 			}
 		});
