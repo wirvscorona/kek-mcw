@@ -41,14 +41,14 @@ public class LocationDataController {
     }
 
     // FIXME GetMapping does not support @RequestBody
-    @PostMapping("/locations/check")
+    @PostMapping("/locations/check/{maxDistanceInMeters}")
     @ApiOperation(value = "Responds with a list of matched locations")
-    public ResponseEntity<List<LocationMatch>> getMatchingLocations(@RequestBody TimelineJsonRoot jsonData) {
+    public ResponseEntity<List<LocationMatch>> getMatchingLocations(@RequestBody TimelineJsonRoot jsonData, @PathVariable int maxDistanceInMeters) {
         List<LocationHistory> locationHistories = jsonData.getTimelineObjects().stream()
                 .filter(timeLineObject -> timeLineObject.getPlaceVisit() != null)
                 .map(this::extractData)
                 .collect(Collectors.toList());
-        List<LocationMatch> locationMatches = trivialLocationMappingService.computeMatches(locationHistories);
+        List<LocationMatch> locationMatches = trivialLocationMappingService.computeNearbyMatches(locationHistories, maxDistanceInMeters);
         return new ResponseEntity<List<LocationMatch>>(locationMatches, HttpStatus.OK);
     }
 
