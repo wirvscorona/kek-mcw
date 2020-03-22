@@ -16,13 +16,6 @@ class FurtherSteps extends React.Component {
                             Bitte führen Sie dieses Tagebuch fort, falls noch keine 14 Tage seit dem letzen Kontakt mit infizierten Personen oder Material vergangen sind.
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
-                        <Button onClick={this.props.callback()} href="/">
-                            Daten absenden
-                        </Button>
-                        </Col>
-                    </Row>
                 </Container>
             </div>
         );
