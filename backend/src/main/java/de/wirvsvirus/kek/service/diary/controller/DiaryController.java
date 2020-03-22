@@ -30,31 +30,31 @@ public class DiaryController {
     @Autowired
     private DiaryService diaryService;
 
-    @ApiOperation(value = "Responds with a list of diaries", response = Diary.class)
+    @ApiOperation(value = "Responds with a list of diaries")
     @GetMapping
     public ResponseEntity<Collection<Diary>> findDiaries() {
         return new ResponseEntity<Collection<Diary>>(diaryService.findAll(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Responds with a diary object", response = Diary.class)
+    @ApiOperation(value = "Responds with a diary object")
     @GetMapping("/{id}")
     public ResponseEntity<Diary> findDiary(@PathVariable Long id) {
         return new ResponseEntity<Diary>(diaryService.findById(id), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Saves new diary object", response = Diary.class)
+    @ApiOperation(value = "Saves new diary object")
     @PostMapping("/")
     public ResponseEntity<Diary> saveDiary(@RequestBody DiaryDTO diaryDTO) {
         return new ResponseEntity<Diary>(diaryService.saveFromDTO(diaryDTO), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Updates a diary object", response = Diary.class)
+    @ApiOperation(value = "Updates a diary object")
     @PutMapping("/{id}")
     public ResponseEntity<Diary> updateDiary(@RequestBody DiaryDTO diaryDTO, @PathVariable Long id) {
         return new ResponseEntity<Diary>(diaryService.updateFromDTO(diaryDTO, id), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Deletes diary object", response = Diary.class)
+    @ApiOperation(value = "Deletes diary object")
     @DeleteMapping("/{id}")
     public void deleteDiary(@PathVariable Long id) {
         diaryService.deleteById(id);

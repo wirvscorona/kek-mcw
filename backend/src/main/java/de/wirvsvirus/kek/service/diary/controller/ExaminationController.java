@@ -31,7 +31,7 @@ public class ExaminationController {
     @Autowired
     private ExaminationRepository examRepo;
 
-    @ApiOperation(value = "Responds with a list of examinations", response = Examination.class)
+    @ApiOperation(value = "Responds with a list of examinations")
     @GetMapping
     public ResponseEntity<Collection<Examination>> findExaminations(
             @ApiParam(name = "containssymptoms", value = "A comma seperated list of symptom ids that should be searched for") @RequestParam(name = "containssymptoms", required = false) List<Long> symptomsIDSearchList) {
@@ -48,7 +48,7 @@ public class ExaminationController {
         return new ResponseEntity<Collection<Examination>>(examinations, HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Saves new Examination object", response = Examination.class)
+    @ApiOperation(value = "Saves new Examination object")
     @PostMapping
     public ResponseEntity<Examination> saveExamination(@RequestBody ExaminationDTO newExaminationDTO) {
         Examination newExamination = Examination.toDomainObject(newExaminationDTO);
@@ -56,7 +56,7 @@ public class ExaminationController {
         return new ResponseEntity<Examination>(examRepo.save(newExamination), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Responds with an examination object", response = Examination.class)
+    @ApiOperation(value = "Responds with an examination object")
     @GetMapping("/{id}")
     public ResponseEntity<Examination> findExamination(@PathVariable Long id) {
         Optional<Examination> candidate = examRepo.findById(id);

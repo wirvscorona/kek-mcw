@@ -29,13 +29,13 @@ public class UserController {
     @Autowired
     private UserRepository userRepo;
 
-    @ApiOperation(value = "Responds with a list of users", response = User.class)
+    @ApiOperation(value = "Responds with a list of users")
     @GetMapping
     public ResponseEntity<Collection<User>> findUsers() {
         return new ResponseEntity<Collection<User>>(userRepo.findAll(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Saves new User object", response = User.class)
+    @ApiOperation(value = "Saves new User object")
     @PostMapping
     public ResponseEntity<User> saveUser(@RequestBody UserDTO newUserDTO) {
         User newUser = User.toDomainObject(newUserDTO);
@@ -43,7 +43,7 @@ public class UserController {
         return new ResponseEntity<User>(userRepo.save(newUser), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Responds with a user object", response = User.class)
+    @ApiOperation(value = "Responds with a user object")
     @GetMapping("/{id}")
     public ResponseEntity<User> findUser(@PathVariable Long id) {
         Optional<User> userCandidate = userRepo.findById(id);
@@ -55,7 +55,7 @@ public class UserController {
         return new ResponseEntity<User>(userCandidate.get(), HttpStatus.OK);
     }
 
-    @ApiOperation(value = "Updates a user object", response = User.class)
+    @ApiOperation(value = "Updates a user object")
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@RequestBody UserDTO updatedUserDTO, @PathVariable Long id) {
         Optional<User> userCandidate = userRepo.findById(id);

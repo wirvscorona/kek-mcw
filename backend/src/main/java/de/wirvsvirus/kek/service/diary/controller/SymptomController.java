@@ -30,7 +30,7 @@ public class SymptomController {
     @Autowired
     private SymptomRepository symptomRepo;
 
-    @ApiOperation(value = "Responds with a list of symptoms", response = Symptom.class)
+    @ApiOperation(value = "Responds with a list of symptoms")
     @GetMapping
     public ResponseEntity<Collection<Symptom>> findSymptoms(
             @ApiParam(name = "search", value = "The name of the symptom (or part of it) that should be searched") @RequestParam(name = "search", required = false) String symptomSearchQuery) {
@@ -51,7 +51,7 @@ public class SymptomController {
         }
     }
 
-    @ApiOperation(value = "Saves new Symptom object", response = Symptom.class)
+    @ApiOperation(value = "Saves new Symptom object")
     @PostMapping
     public ResponseEntity<Symptom> saveSymptom(@RequestBody SymptomDTO newSymptomDTO) {
         Symptom newSymptom = Symptom.toDomainObject(newSymptomDTO);
@@ -65,7 +65,7 @@ public class SymptomController {
         return new ResponseEntity<Symptom>(symptomRepo.save(newSymptom), HttpStatus.CREATED);
     }
 
-    @ApiOperation(value = "Responds with a symptom object", response = Symptom.class)
+    @ApiOperation(value = "Responds with a symptom object")
     @GetMapping("/{id}")
     public ResponseEntity<Symptom> findUser(@PathVariable Long id) {
         Optional<Symptom> candidate = symptomRepo.findById(id);
