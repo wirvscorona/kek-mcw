@@ -3,7 +3,7 @@ import MovementTable from './MovementTable';
 import './MovementMap.css'
 import UploadMovementButton from './UploadMovementButton';
 import UploadInfectedButton from './UploadInfectedButton';
-import { ArrowBarRight } from 'react-bootstrap-icons';
+import { ArrowBarRight, ArrowBarLeft } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 
 
@@ -57,32 +57,30 @@ function initMap() {
 }
 
 const onTableOpenClick = (event, props) => {
-    props.setSidebar(<OpenSideBar/>)
-    console.log("Hello")
+    props.setSidebar('open');
 }
 
-const onTableCloseClick = event => {
-    console.log("Hello")
+const onTableCloseClick = (event, props) => {
+    props.setSidebar('close');
 }
  
 const ClosedSideBar = props => {
-    console.log(props)
 
     return (
         <div className='movement-sidebar-closed'>
             <Button variant='secondary' className='movement-arrow-right-button' onClick={ e => onTableOpenClick(e, props)}>
-                <ArrowBarRight size={50} className='movement-arrow-right'/>
+                <ArrowBarRight size={50} className='movement-arrow'/>
             </Button>
         </div>
     )
 }
 
 const OpenSideBar = props => {
-    console.log(props)
+
     return (
         <div className='movement-sidebar-open'>
-            <Button variant='secondary' className='movement-arrow-right-button' onClick={e => onTableOpenClick(e, onTableCloseClick)}>
-                <ArrowBarRight size={50} className='movement-arrow-right'/>
+            <Button variant='secondary' className='movement-arrow-left-button' onClick={e => onTableCloseClick(e, props)}>
+                <ArrowBarLeft size={50} className='movement-arrow'/>
             </Button>
         </div>
     )
@@ -91,7 +89,7 @@ const OpenSideBar = props => {
 const MovementMap = props => {
     // const [ map, setMap ] = useState()
     const [ map, setMap ] = useState();
-    const [ sidebar, setSidebar ] = useState()
+    const [ sidebar, setSidebar ] = useState('close')
     
     const [ markerList, setMarkerList ] = useState([]);
     const [ selectedMarkerList, setSelectedMarkerList ] = useState([]);
@@ -120,8 +118,16 @@ const MovementMap = props => {
 
     useEffect(() => {
         setMap(initMap());
-        setSidebar(<ClosedSideBar setSidebar={setSidebar}/>)
     },[]);
+
+    const MovementTableBundle = _ => (
+        <>
+            <div className='movement-table'>
+                <MovementTable {...markerBundle}/>
+            </div>
+            <OpenSideBar setSidebar={setSidebar}/>
+        </>
+    )
 
     return (
         <div className='movement-container'>
@@ -130,10 +136,8 @@ const MovementMap = props => {
                 <UploadInfectedButton/>
             </div>
             <div className='movement-information'>
-                {sidebar}
-                {/* <div className='movement-table'>
-                    <MovementTable {...markerBundle}/>
-                </div> */}
+                { sidebar === 'open' && <MovementTableBundle/> }
+                { sidebar === 'close' && <ClosedSideBar setSidebar={setSidebar}/>}
                 <div className='movement-map' id='map'/>
             </div>
         </div>

@@ -73,11 +73,15 @@ html, body, #root {
     width: 100%;
 }
 
-.movement-arrow-right {
+.movement-arrow {
     padding-top: 6px;
     padding-left: 6px;
 }
 
 .movement-arrow-right-button {
+    padding: 0px !important;
+}
+
+.movement-arrow-left-button {
     padding: 0px !important;
 }
