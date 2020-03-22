@@ -55,10 +55,44 @@ function initMap() {
     return map;
     
 }
+
+const onTableOpenClick = (event, props) => {
+    props.setSidebar(<OpenSideBar/>)
+    console.log("Hello")
+}
+
+const onTableCloseClick = event => {
+    console.log("Hello")
+}
  
+const ClosedSideBar = props => {
+    console.log(props)
+
+    return (
+        <div className='movement-sidebar-closed'>
+            <Button variant='secondary' className='movement-arrow-right-button' onClick={ e => onTableOpenClick(e, props)}>
+                <ArrowBarRight size={50} className='movement-arrow-right'/>
+            </Button>
+        </div>
+    )
+}
+
+const OpenSideBar = props => {
+    console.log(props)
+    return (
+        <div className='movement-sidebar-open'>
+            <Button variant='secondary' className='movement-arrow-right-button' onClick={e => onTableOpenClick(e, onTableCloseClick)}>
+                <ArrowBarRight size={50} className='movement-arrow-right'/>
+            </Button>
+        </div>
+    )
+}
+
 const MovementMap = props => {
     // const [ map, setMap ] = useState()
     const [ map, setMap ] = useState();
+    const [ sidebar, setSidebar ] = useState()
+    
     const [ markerList, setMarkerList ] = useState([]);
     const [ selectedMarkerList, setSelectedMarkerList ] = useState([]);
 
@@ -86,6 +120,7 @@ const MovementMap = props => {
 
     useEffect(() => {
         setMap(initMap());
+        setSidebar(<ClosedSideBar setSidebar={setSidebar}/>)
     },[]);
 
     return (
@@ -95,12 +130,7 @@ const MovementMap = props => {
                 <UploadInfectedButton/>
             </div>
             <div className='movement-information'>
-                <div className='movement-sidebar'>
-                    <Button variant='secondary' className='movement-arrow-right-button'>
-                        <ArrowBarRight size={50} className='movement-arrow-right'/>
-                    </Button>
-
-                </div>
+                {sidebar}
                 {/* <div className='movement-table'>
                     <MovementTable {...markerBundle}/>
                 </div> */}

@@ -12,7 +12,7 @@ const Navigation = _ => (
         height="30"
         className="d-inline-block align-top"
     />{' '}
-    Coid-19 Dashboard
+    Covid-19 Dashboard
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

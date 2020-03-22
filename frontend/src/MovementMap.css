@@ -50,13 +50,22 @@ html, body, #root {
     padding-left: 6px;
 }
 
-.movement-sidebar {
+.movement-sidebar-closed {
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: #6c757d;
     height: 100%;
     padding-left: 5px;
+}
+
+.movement-sidebar-open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #6c757d;
+    height: 100%;
+    width: 100px;
 }
 
 .movement-map {

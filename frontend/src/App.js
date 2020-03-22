@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Card, Button, CardDeck } from 'react-bootstrap';
 
-
 function App() {
   return (
   <CardDeck className="mt-3 ml-3 mr-3">

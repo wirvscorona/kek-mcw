@@ -13,7 +13,7 @@ class FurtherSteps extends React.Component {
                 <Container fluid>
                     <Row>
                         <Col>
-                            Bitte führen Sie dieses Tagebuch fort falls noch keine 14 Tage seit dem letzen Kontakt mit infizierten Personen oder Material vergangen sind.
+                            Bitte führen Sie dieses Tagebuch fort, falls noch keine 14 Tage seit dem letzen Kontakt mit infizierten Personen oder Material vergangen sind.
                         </Col>
                     </Row>
                     <Row>
