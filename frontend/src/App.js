@@ -35,14 +35,20 @@ function App() {
       <Card.Body className="d-flex flex-column">
         <Card.Title>Kontakttagebuch</Card.Title>
         <Card.Text>
-          TODO UPDATE description!!!<br/><br/>
-          Kontakt Tagebücher digitalisieren: Aktuelle Situation:
-          Infizierte Leute geben eine excel Datei ab mit Kontaktdaten der getroffenen Leute der letzten 2 Wochen,
-          das RKI ruft die dann alle an (oder so ähnlich) Idee:
-          man kann online die Kontaktdaten der Leute angeben und diese werden automatisch kontaktiert mit Nachricht und Information was jetzt zu tun ist
-          -> nimmt dem RKI einiges an Arbeit fürs rumtelefonieren ab<br/>
+          Personen die positiv auf SARS-CoV-2 getestet wurden oder die Kontakt mit einer 
+          infizierten Person hatten, werden vom Robert-Koch-Institut gebeten ein Tagebuch zu führen.
+          In diesem Tagebuch werden eigene Symtpome, so wie Kontaktpersonen erfasst. 
+          <br/>
+          <br/>
+          Die Vorlage dieses Tagebuchs steht hier als einfache
+          step-by-step Version digital zur Verfügung.
+          <br/>
+          <br/>
+          Die Daten die der Nutzer einträgt können automatisch ausgewertet werden. 
+          Eine automatische Mail mit Informationen an angegebene Kontaktpersonen
+          wäre möglich und würde somit dem RKI die Arbeit erleichtern.
         </Card.Text>
-        <Button className="mt-auto" variant="primary">Goto Matching Map</Button>
+        <Button className="mt-auto" variant="primary">Goto Diary</Button>
       </Card.Body>
     </Card> 
     <Card>

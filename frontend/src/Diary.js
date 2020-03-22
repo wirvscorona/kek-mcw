@@ -5,7 +5,7 @@ import ContactPerson from './ContactPerson'
 import InfectCheck from './InfectCheck'
 import FurtherSteps from './FurtherSteps'
 import UploadMovementButton from './UploadMovementButton'
-import './styles/main.css';
+import './styles/Diary.css';
 
 import { DiaryControllerApi, SymptomControllerApi } from '@invi7x/api_documentation';
 
@@ -150,7 +150,7 @@ class DiaryEntries extends Component {
                             &nbsp;
                         </Col>
                         <Col lg={1}>
-                            <Button onClick={this.addEntryForm}>+</Button>
+                            <Button variant='secondary'  onClick={this.addEntryForm}>+</Button>
                         </Col>
                     </Row>
 
@@ -208,7 +208,7 @@ class ContactPersons extends Component {
         }
 
         return (
-            <div>
+            <div className="step">
                 <h3>Kontakpersonen</h3>
                 <hr />
                 {this.props.getStore().symptoms &&
@@ -241,7 +241,7 @@ class ContactPersons extends Component {
                             &nbsp;
                             </Col>
                         <Col lg={1}>
-                            <Button onClick={this.addPersonForm}>+</Button>
+                            <Button variant='secondary'  onClick={this.addPersonForm}>+</Button>
                         </Col>
                     </Row>
                     <Row>
@@ -250,9 +250,9 @@ class ContactPersons extends Component {
                             </Col>
                     </Row>
                     <Row>
-                        <Col lg={9}>
+                        <Col lg={7}>
                         </Col>
-                        <Col lg={2}>
+                        <Col lg={4}>
                             <UploadMovementButton />
                         </Col>
                     </Row>
@@ -284,7 +284,7 @@ class Diary extends Component {
             { name: 'Kontakttagebuch', component: <DiaryEntries callback={this.diaryEntryCallback.bind(this)} getStore={() => (this.getStore())} updateStore={(u) => { this.updateStore(u) }} /> },
             { name: 'Kontaktpersonen', component: <ContactPersons callback={this.contactsCallback.bind(this)} getStore={() => (this.getStore())} updateStore={(u) => { this.updateStore(u) }} /> },
             { name: 'Atemwegsinfekt', component: <InfectCheck callback={this.infectCallback.bind(this)} /> },
-            { name: 'Fertig', component: <FurtherSteps callback={this.finishedCallback.bind(this)} /> }
+            { name: 'Fertig', component: <FurtherSteps /> }
         ]
     }
 
@@ -302,11 +302,9 @@ class Diary extends Component {
     async infectCallback(infectData) {
         await this.setState({ infectCheck: infectData }, () => {
             console.log(this.state)
-        })
-    }
-
-    finishedCallback() {
         this.saveDiary()
+
+        })
     }
 
     personalInfoCallback(personalInfoData) {
@@ -331,6 +329,9 @@ class Diary extends Component {
                         preventEnterSubmission={true}
                         nextButtonText="Weiter"
                         backButtonText="Zurück"
+                        backButtonCls="btn btn-prev btn-secondary btn-lg pull-right mx-2"
+                        nextButtonCls="btn btn-next btn-secondary btn-lg pull-right"
+                        nextTextOnFinalActionStep="Daten speichern"
                     />
                 </div>
             </div>

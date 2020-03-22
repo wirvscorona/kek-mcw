@@ -85,3 +85,9 @@ html, body, #root {
 .movement-arrow-left-button {
     padding: 0px !important;
 }
+
+.movement-table {
+    overflow-x: auto;
+    overflow-y: scroll;
+    height: 100%;
+}
