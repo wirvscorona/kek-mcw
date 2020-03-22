@@ -4,3 +4,7 @@
 	left: 32px;
 	z-index: 5;
 }
+
+.symptom-container {
+	display: flex;
+}

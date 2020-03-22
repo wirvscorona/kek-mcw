@@ -1,26 +1,24 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 
-const symptomMockUp = [
-    {"id":1,"name":"Fieber","symptomType":"NUMERICAL"},{"id":2,"name":"trockener Husten","symptomType":"STRING"},{"id":3,"name":"Durchfall","symptomType":"STRING"},{"id":4,"name":"Laufende Nase","symptomType":"STRING"},{"id":5,"name":"Atembeschwerden","symptomType":"STRING"},{"id":6,"name":"Halsschmerzen","symptomType":"STRING"}
-]
-
 const onCheckChange = (e, props) => {
     const isChecked = e.target.checked;
+    const index = props.symptom.id;
     if (isChecked) {
-        console.log("Checked");
+        props.checkedSymptoms.add(index);
+
     } else {
-        console.log("Not checked");
+        props.checkedSymptoms.delete(index);
     }
+    props.checkedSymptomsChanged(props.checkedSymptoms);
 }
 
 const SymptomTableRowElement = props => {
 
-    const symptom = props.symptom;
+    const symptom = props.symptom; 
     
     const id = symptom.id;
     const name = symptom.name;
-    const symptomType = symptom.symptomType;
 
     return (
         <tr>
@@ -34,7 +32,6 @@ const SymptomTableRowElement = props => {
 }
 
 const SymptomTable = props => {
-    console.log(props)
     return (
         <Table striped bordered hover>
             <thead>
