@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { LocationDataControllerApi } from 'api_documentation';
+import { LocationDataControllerApi } from '@invi7x/api_documentation';
 
 function uploadLocationData(jsonData) {
     let apiInstance = new LocationDataControllerApi();
