@@ -23,3 +23,16 @@ Aktuell werden jedes mal alle hochgeladenen Bewegungsdaten gegen die Infizierten
 Backend:
  - Java Spring Boot https://spring.io/projects/spring-boot
  - Datenbank: In-Memory. Kann aber sehr leicht gegen eine persistente DB ausgetauscht werden
+
+# Build instructions
+Backend:
+ 1. Go to the `backend` folder
+ 2. run `mvn clean install`
+ 3. run `java -jar target/backendservice-0.0.1-SNAPSHOT.jar`
+
+Frontend:
+ 1. Go to the `frontend` folder
+ 2. run `npm install`
+ 3. run `npm start`
+
+ Site is available on `http://localhost:3000/`. Make sure you **disable Cross Origin Restrictions** in your browser!
