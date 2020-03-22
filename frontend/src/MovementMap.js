@@ -6,6 +6,14 @@ import UploadMovementButton from './UploadMovementButton';
 import UploadInfectedButton from './UploadInfectedButton';
 import markerMockUp from './MarkerMockUp'
 
+fetch('http://localhost:8081/api/symptoms?search=e')
+  .then((response) => {
+      return (response.json())
+}).then((data) => {
+    console.log(data);
+  });
+
+
 const generateSelectedMarker = (selectedMarkerList, markerList) => {
     var markerComponentList = []; 
     selectedMarkerList.forEach(markerId => {
@@ -53,31 +61,31 @@ const MovementMap = props => {
     const markerComponentList = generateSelectedMarker(selectedMarkerList, markerList)
 
     return (
-        <div className='collision'>
-            <div>
+        <div className='movement-container'>
+            <div className='movement-buttons'>
                 <UploadMovementButton setNewMarkerList={setNewMarkerList}/>
-            </div>
-            <div>
                 <UploadInfectedButton/>
             </div>
-            <div className='movement-table'>
-                <MovementTable {...markerBundle}/>
-            </div>
-            <div>
-                <Map
-                className='collision-map'
-                google={props.google}
-                zoom={12}
-                initialCenter={{ lat: 49.006, lng: 8.403 }}
-                >   
-                {markerComponentList.map(marker => {
-                    const index = marker.index
-                    const lat = marker.latitude;
-                    const long = marker.longitude;
-                    const position = { lat: lat, lng: long }
-                    return (<Marker index={index} position={position} />)
-                })}
-                </Map> 
+            <div className='movement-information'>
+                <div className='movement-table'>
+                    <MovementTable {...markerBundle}/>
+                </div>
+                <div>
+                    <Map
+                    className='collision-map'
+                    google={props.google}
+                    zoom={12}
+                    initialCenter={{ lat: 49.006, lng: 8.403 }}
+                    >   
+                    {markerComponentList.map(marker => {
+                        const index = marker.index
+                        const lat = marker.latitude;
+                        const long = marker.longitude;
+                        const position = { lat: lat, lng: long }
+                        return (<Marker index={index} position={position} />)
+                    })}
+                    </Map> 
+                </div>
             </div>
         </div>
     )
