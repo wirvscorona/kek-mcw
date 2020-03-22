@@ -10,7 +10,7 @@ const AppRouter = _ => (
     <Router>
         <Navigation/>
         <Switch>
-            <Route path='/app'>
+            <Route path='/'>
                 <App/>
             </Route>
         </Switch>
