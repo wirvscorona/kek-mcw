@@ -1,6 +1,6 @@
 import React from 'react'
 import Select from 'react-select'
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
@@ -60,10 +60,6 @@ class ContactPerson extends React.Component {
         this.handleBloodDrawAllowedChange = this.handleBloodDrawAllowedChange.bind(this)
 
         this.isValidated = this.isValidated.bind(this)
-    }
-
-    isValidated() {
-        this.props.callback(this.state)
     }
 
     handleInfectChange(infectValue) {
@@ -147,8 +143,15 @@ class ContactPerson extends React.Component {
         this.setState({ bloodDrawAllowed: newValue.value })
     }
 
+    isValidated() {
+        this.props.callback(this.state)
+    }
+
     render() {
         return (
+            <div>
+                <h3>Atemwegserkrankung</h3>
+                <hr/>
             <Container fluid className="mx-2 my-4">
                 <Row className="mb-2">
                     <Col lg={4}>
@@ -517,6 +520,7 @@ class ContactPerson extends React.Component {
                     </div>
                 }
             </Container>
+            </div>
         );
     }
 }

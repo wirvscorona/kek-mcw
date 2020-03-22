@@ -38,6 +38,10 @@ class PersonalInformation extends React.Component {
     render() {
         return (
             <div className="mx-4 my-4">
+                <h3>Risikogruppe</h3>
+                <hr/>
+                <div>Bitte nennen Sie uns zu welchen Risikogruppen Sie gehören.</div>
+                <hr/>
                 <Creatable
                     options={infoOptions}
                     onChange={this.handleInfoChange}

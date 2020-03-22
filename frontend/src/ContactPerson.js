@@ -14,7 +14,8 @@ class ContactPerson extends React.Component {
             city: '',
             plz: -1,
             email: '',
-            phone: ''
+            phone: '',
+            dates: []
         };
 
         this.handleFirstName = this.handleFirstName.bind(this)
@@ -24,6 +25,7 @@ class ContactPerson extends React.Component {
         this.handleAdress = this.handleAdress.bind(this)
         this.handleCity = this.handleCity.bind(this)
         this.handlePLZ = this.handlePLZ.bind(this)
+        this.handleDates = this.handleDates.bind(this)
     }
 
     handleFirstName(e) {
@@ -68,8 +70,14 @@ class ContactPerson extends React.Component {
         })
     }
 
+    handleDates(newDate) {
+        this.setState({ dates: [... this.state.dates, newDate] }, () => {
+            this.props.callback(this.state, this.props.index)
+        })
+    }
+
     render() {
-        const dates = this.props.dates.map(d => ({ value: d, label: d }))
+        const dates = this.props.getStore().dates.map(d => ({ value: d, label: d }))
         return (
             <Form>
                 <p className="font-bold text-muted">Kontaktperson {this.props.index + 1}</p>
@@ -115,14 +123,15 @@ class ContactPerson extends React.Component {
                     <Col lg={1}>
                         &nbsp;
                     </Col>
-                    <Col lg={4}>
-                        <Select
-                            options={dates}
-                            onChange={this.handleProtectionChange}
-                            isMulti="true"
-                            placeholder="Kontakt am..."
-                        />
-                    </Col>
+                    {dates.length > 0 && 
+                        <Col lg={4}>
+                            <Select
+                                options={dates}
+                                onChange={this.handleDates}
+                                isMulti="true"
+                                placeholder="Kontakt am..."
+                            />
+                        </Col>}
                 </Row>
             </Form>
         );

@@ -3,7 +3,12 @@ import DiaryTableEntry from './DiaryEntry'
 import PersonalInformation from './PersonalInformation'
 import ContactPerson from './ContactPerson'
 import InfectCheck from './InfectCheck'
+import FurtherSteps from './FurtherSteps'
+import UploadMovementButton from './UploadMovementButton'
 import './styles/main.css';
+
+import { DiaryControllerApi, SymptomControllerApi } from '@invi7x/api_documentation';
+
 
 import StepZilla from "react-stepzilla";
 
@@ -23,9 +28,30 @@ class DiaryEntries extends Component {
         this.addEntryForm = this.addEntryForm.bind(this)
         this.entryCallback = this.entryCallback.bind(this)
     }
-    
+
+    patientHasSymptoms() {
+        let symptoms = false
+        this.state.entries.forEach(e => {
+            if (e.fever > 0 || e.cough > 0 || e.soreThroat > 0 || e.shortnessOfBreath > 0 || e.otherSymptoms !== '') {
+                symptoms = true
+                return true
+            }
+        })
+        return symptoms
+    }
+
+    getDates() {
+        let dates = []
+        this.state.entries.forEach(e => {
+            dates.push(e.date.toDateString())
+        })
+        return dates
+    }
+
+
     isValidated() {
         this.props.callback(this.state.entries)
+        this.props.updateStore({ symptoms: this.patientHasSymptoms(), dates: this.getDates() })
     }
 
     addEntryForm() {
@@ -34,14 +60,14 @@ class DiaryEntries extends Component {
 
 
     entryCallback(entry, index) {
-        if(this.state.entries[index]) {
+        if (this.state.entries[index]) {
             let ens = this.state.entries
             ens[index] = entry
             this.setState({ entries: ens }, () => {
             })
         } else {
-            this.setState({ entries: [... this.state.entries, entry] }) 
-        }  
+            this.setState({ entries: [... this.state.entries, entry] })
+        }
 
     }
 
@@ -60,9 +86,12 @@ class DiaryEntries extends Component {
         }
         return (
             <div>
+                <h3>Kontaktagebuch</h3>
+                <hr />
                 <p>Der erste Eintrag ist der Tag an dem Sie den ersten Kontakt mit einer infizierten Person bzw. infektiösem Material hatten.</p>
                 <p>Füllen Sie für jeden seitdem vergangen Tag eine Zeile der Tabelle aus.</p>
                 <p>Sie müssen keine weiteren Zeilen ausfüllen wenn 14 Tage seit dem letzten Kontakt mit einer infizierten Person bzw. infektiösem Material vergangen sind.</p>
+                <hr />
                 <Container fluid>
                     <Row>
                         <Col lg={1}>
@@ -150,17 +179,17 @@ class ContactPersons extends Component {
     addPersonForm() {
         this.setState({ numChilds: this.state.numChilds + 1 })
     }
-    
+
 
     contactPersonCallback(contact, index) {
-        if(this.state.contacts[index]) {
+        if (this.state.contacts[index]) {
             let cons = this.state.contacts
             cons[index] = contact
             this.setState({ contacts: cons }, () => {
             })
         } else {
-            this.setState({ contacts: [... this.state.contacts, contact] }) 
-        }  
+            this.setState({ contacts: [... this.state.contacts, contact] })
+        }
 
     }
 
@@ -173,24 +202,58 @@ class ContactPersons extends Component {
                         className="mb-4"
                         callback={this.contactPersonCallback}
                         index={i}
-                        dates={this.props.dates}
+                        getStore={this.props.getStore}
                     />
                 </div>)
         }
 
         return (
             <div>
-                <p>Sie haben angegeben selbst Krankheitssymptome gezeigt zu haben.
-                    Bitte nennen Sie die Personen mit denen Sie an den entsprechenden Tagen Kontakt hatten.
-                    Geben Sie bitte deren Kontaktdaten, sowie die Tage an denen Sie Kontakt hatten an.</p>
+                <h3>Kontakpersonen</h3>
+                <hr />
+                {this.props.getStore().symptoms &&
+                    <div>
+                        <p>Sie haben angegeben selbst Krankheitssymptome gezeigt zu haben.
+                        Bitte nennen Sie die Personen mit denen Sie an den entsprechenden Tagen Kontakt hatten.
+                        Geben Sie bitte deren Kontaktdaten, sowie die Tage an denen Sie Kontakt hatten an.</p>
+                        <hr />
+                    </div>}
+                {!this.props.getStore().symptoms &&
+                    <div>
+                        <div>
+                            Da Sie angegeben haben keine Symptome bis 14 Tage nach dem letzten potentiell infektiösen Kontakt gehabt zu haben, müssen Sie keine Kontakpersonen angeben.
+                    </div>
+                        <div>
+                            SARS-CoV-2 kann sich jedeoach auch übertragen ohne Symptomatik auszulösen.
+                    </div>
+                        <div>
+                            Geben Sie Personen an mit denen Sie in den letzten Tagen häufigen und engen Kontakt hatten (z.B. Familienmitglieder, Freunde oder Arbeitskollegen)
+                    </div>
+                        <hr />
+
+                    </div>
+
+                }
                 <div>{persons}</div>
                 <Container fluid>
                     <Row>
                         <Col lg={11}>
                             &nbsp;
-                        </Col>
+                            </Col>
                         <Col lg={1}>
                             <Button onClick={this.addPersonForm}>+</Button>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col lg={9}>
+                            Wenn Sie uns Ihre Google Maps Bewegungsdaten zur Verfügung stellen, können wir mögliche weiter Kontaktpersonen feststellen und benachrichtigen.
+                            </Col>
+                    </Row>
+                    <Row>
+                        <Col lg={9}>
+                        </Col>
+                        <Col lg={2}>
+                            <UploadMovementButton />
                         </Col>
                     </Row>
                 </Container>
@@ -206,28 +269,44 @@ class Diary extends Component {
             personalInformation: [],
             diaryEntries: [],
             contactPersons: [],
-            infectCheck: [],
-            wizard: [
-                { name: 'Persönliche Informationen', component: <PersonalInformation passInfo={this.personalInfoCallback.bind(this)} /> },
-                { name: 'Kontakttagebuch', component: <DiaryEntries callback={this.diaryEntryCallback.bind(this)} /> },
-                { name: 'Kontaktpersonen', component: <ContactPersons callback={this.contactsCallback.bind(this)} dates={this.contactDates()}/> },
-                { name: 'Atemwegsinfekt', component: <InfectCheck callback={this.infectCallback.bind(this)}/> },
-                { name: 'Atemwegsinfekt', component: <InfectCheck callback={this.infectCallback.bind(this)}/> }
-            ]
+            infectCheck: []
         }
 
+        this.sampleStore = {
+            symptoms: false,
+            dates: []
+        };
+
+
+        this.prepareJson = this.prepareJson.bind(this)
+        this.state.wizard = [
+            { name: 'Persönliche Informationen', component: <PersonalInformation passInfo={this.personalInfoCallback.bind(this)} /> },
+            { name: 'Kontakttagebuch', component: <DiaryEntries callback={this.diaryEntryCallback.bind(this)} getStore={() => (this.getStore())} updateStore={(u) => { this.updateStore(u) }} /> },
+            { name: 'Kontaktpersonen', component: <ContactPersons callback={this.contactsCallback.bind(this)} getStore={() => (this.getStore())} updateStore={(u) => { this.updateStore(u) }} /> },
+            { name: 'Atemwegsinfekt', component: <InfectCheck callback={this.infectCallback.bind(this)} /> },
+            { name: 'Fertig', component: <FurtherSteps callback={this.finishedCallback.bind(this)} /> }
+        ]
     }
 
-    infectCallback(infectData) {
-        this.setState({ infectCheck: infectData }, () => {
+    getStore() {
+        return this.sampleStore;
+    }
+
+    updateStore(update) {
+        this.sampleStore = {
+            ...this.sampleStore,
+            ...update,
+        }
+    }
+
+    async infectCallback(infectData) {
+        await this.setState({ infectCheck: infectData }, () => {
             console.log(this.state)
         })
-        
     }
 
-    contactDates() {
-        const dates = [new Date('December 17, 1995 03:24:00'), new Date('1996-12-17T03:24:00')]
-        return dates.map(d => d.toDateString())
+    finishedCallback() {
+        this.saveDiary()
     }
 
     personalInfoCallback(personalInfoData) {
@@ -257,6 +336,56 @@ class Diary extends Component {
             </div>
 
         )
+    }
+
+    prepareJson() {
+        const cured = this.state.infectCheck.infectHealed
+        let json_contacts = []
+        let contacts = []
+        
+    }
+
+    async saveDiary(callback) {
+        let apiInstance = new DiaryControllerApi();
+
+        const jsonData= {
+            "contacts": [
+              {
+                "contactWith": "string",
+                "customSymptom": "string",
+                "customSymptomPresent": true,
+                "date": "2020-03-22T08:23:13.362Z",
+                "description": "string",
+                "examination": {
+                  "city": "string",
+                  "dateOfExamination": "2020-03-22T08:23:13.362Z",
+                  "latitudeE7": 0,
+                  "longitudeE7": 0,
+                  "streetname": "string",
+                  "symptomDescription": [
+                    "string"
+                  ],
+                  "symptomsID": [
+                    0
+                  ],
+                  "zipCode": "string"
+                }
+              }
+            ],
+            "cured": true,
+            "userId": 0
+          }
+        const result = await apiInstance.saveDiaryUsingPOST(jsonData, (error, data, response) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.log('API called successfully. Returned data: ' + data);
+                // callback(data)
+                return data
+            }
+        });
+    
+        console.log(result)
     }
 }
 

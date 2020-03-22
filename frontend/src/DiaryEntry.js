@@ -77,49 +77,59 @@ class DiaryTableEntry extends React.Component {
 
         return this.state
     }
+
     handleDateChange(newDate) {
-        this.setState({ date: newDate });
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ date: newDate }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
     handleContactChange(newContacts) {
-        this.setState({ contacts: newContacts });
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ contacts: newContacts }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
     handleProtectionChange(newProtections) {
-        this.setState({ protections: newProtections });
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ protections: newProtections }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
     handleFeverChange(feverValue) {
-        this.setState({ fever: feverValue.value });
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ fever: feverValue.value }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
     handleFeverTemperatureChange(e) {
-        this.setState({ feverTemp: e.target.value })
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ feverTemp: e.target.value }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
     handleCoughChange(coughValue) {
-        this.setState({ cough: coughValue.value })
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ cough: coughValue.value }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
     handleSoreThroathChange(soreThroatValue) {
-        this.setState({ soreThroat: soreThroatValue.value })
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ soreThroat: soreThroatValue.value }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
     handleShortnessOfBreathChange(shortnessOfBreathValue) {
-        this.setState({ shortnessOfBreath: shortnessOfBreathValue.value })
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ shortnessOfBreath: shortnessOfBreathValue.value }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
     handleOtherSymptoms(e) {
-        this.setState({ otherSymptoms: e.target.value })
-        this.props.callback(this.getState(), this.props.index)
+        this.setState({ otherSymptoms: e.target.value }, () => {
+            this.props.callback(this.getState(), this.props.index)
+        })
     }
 
 
