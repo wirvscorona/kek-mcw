@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { LocationDataControllerApi } from '@invi7x/api_documentation';
+import { CloudUpload } from 'react-bootstrap-icons';
 
 function uploadLocationData(jsonData) {
     let apiInstance = new LocationDataControllerApi();
@@ -12,7 +13,6 @@ function uploadLocationData(jsonData) {
       }
     });
 }
-
 
 function inputChanged(event) {
     var file = event.target.files[0];
@@ -28,8 +28,6 @@ function inputChanged(event) {
         var content = readerEvent.target.result; // this is the content!
         uploadLocationData(content)
     }
-
-
 }
 
 function uploadEvent() {
@@ -38,10 +36,16 @@ function uploadEvent() {
 
 function UploadInfectedButton() {
     return (
-        <div>
-             <Button variant='secondary' onClick={uploadEvent}>
-                Upload Timeline .json if you're infected
-            </Button>
+        <div className='upload-component'>
+            <div className='upload-text'>
+                Upload your timeline, if you are <br/>
+                infected and want to contribute.
+            </div>
+            <div className='upload-button'>
+                <Button variant='secondary' onClick={uploadEvent}>
+                    <CloudUpload className='upload-svg' size={40}/>
+                </Button>
+            </div>
             <input id="infected-file-input" type="file" name="name" style={{display: "none"}} onChange={inputChanged}/>
         </div>
     ) 

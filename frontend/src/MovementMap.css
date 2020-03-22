@@ -1,3 +1,7 @@
+html, body, #root {
+    height:100%;
+}
+
 .collision-map {
     width: 50% !important;
     height: 50% !important;
@@ -6,6 +10,8 @@
 .movement-container {
     display: flex;
     flex-direction: column;
+    height: 100%;
+
 }
 
 .movement-buttons {
@@ -16,7 +22,53 @@
 
 .movement-information {
     display: flex;
-
+    height: 100%;
 }
 
+.upload-component {
+    display: flex;
+    justify-content: space-evenly;
+}
 
+.upload-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1em;
+    border-left: 5px solid #ccc!important;
+    border-color: #6c757d !important;
+}
+
+.upload-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.upload-svg {
+    padding-top: 6px;
+    padding-left: 6px;
+}
+
+.movement-sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #6c757d;
+    height: 100%;
+    padding-left: 5px;
+}
+
+.movement-map {
+    height: 100%;
+    width: 100%;
+}
+
+.movement-arrow-right {
+    padding-top: 6px;
+    padding-left: 6px;
+}
+
+.movement-arrow-right-button {
+    padding: 0px !important;
+}

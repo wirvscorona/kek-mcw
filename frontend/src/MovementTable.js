@@ -1,12 +1,6 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
 import './MovementTable.css';
-import markerMockUp from './MarkerMockUp'
-
-// endTimeMillis: 1577911089000
-// latitudeE7: 0
-// longitudeE7: 0
-// startTimeMillis: 1577903429000
 
 const onCheckChange = (e, props) => {
     const isChecked = e.target.checked;
@@ -22,8 +16,6 @@ const onCheckChange = (e, props) => {
 const TableRowElement = props => {
 
     const marker = props.marker;
-
-    // console.log(marker)
     const index = marker.index;
     const lat = marker.latitude;
     const lng = marker.longitude;
