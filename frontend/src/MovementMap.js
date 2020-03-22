@@ -6,7 +6,6 @@ import UploadInfectedButton from './UploadInfectedButton';
 import { ArrowBarRight, ArrowBarLeft } from 'react-bootstrap-icons';
 import { Button } from 'react-bootstrap';
 
-
 const google = window.google;
 const MarkerClusterer = window.MarkerClusterer;
 
