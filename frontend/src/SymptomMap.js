@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import GoogleMapReact from 'google-map-react'
+import { SymptomControllerApi } from '@invi7x/api_documentation';
 
 import './SymptomMap.css'
 import SymptomTable from './SymptomTable';
@@ -23,7 +24,26 @@ import SymptomTable from './SymptomTable';
 
 const google = window.google;
 
+async function findSymptoms(callback) {
+    let apiInstance = new SymptomControllerApi();
+    let opts = {
+        'search': '' // String | The name of the symptom (or part of it) that should be searched
+    };
+    const result = await apiInstance.findSymptomsUsingGET(opts, (error, data, response) => {
+        if (error) {
+            console.error(error);
+        } else {
+            console.log('API called successfully. Returned data: ' + data);
+            // callback(data)
+            return data
+        }
+    });
+
+    console.log(result)
+}
+
 class HeatMap extends Component {
+
     static defaultProps = {
       center: {
         lat: 59.95,
@@ -36,11 +56,34 @@ class HeatMap extends Component {
         super(props)
         this.state = {
         heatmapVisible: true,
-            heatmapPoints: [
+        heatmapPoints: [
                     {lat: 59.95, lng: 30.33},
                     {lat: 59.96, lng: 30.32}
-                  ]
+            ],
+        symptoms: []
         }
+    }
+
+    setSymptoms(symptoms) {
+        this.setState(
+            {symptoms: symptoms}
+        )
+    }
+
+    componentDidMount() {
+        let apiInstance = new SymptomControllerApi();
+        let opts = {
+            'search': '' // String | The name of the symptom (or part of it) that should be searched
+        };
+        apiInstance.findSymptomsUsingGET(opts, (error, data, response) => {
+            if (error) {
+                console.error(error);
+            } else {
+                console.log('API called successfully. Returned data: ' + data);
+                this.setState({symptoms: data})
+            }
+        });
+        
     }
   
     onMapClick({x, y, lat, lng, event}) {
@@ -83,7 +126,7 @@ class HeatMap extends Component {
   
       return (
         <div style={{ height: '100vh', width: '70%' }}>
-            <SymptomTable/>
+            <SymptomTable symptoms={this.state.symptoms}/>
             <GoogleMapReact
                 ref={(el) => this._googleMap = el}
                 bootstrapURLKeys={apiKey}

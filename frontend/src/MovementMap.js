@@ -6,13 +6,6 @@ import UploadMovementButton from './UploadMovementButton';
 import UploadInfectedButton from './UploadInfectedButton';
 import markerMockUp from './MarkerMockUp'
 
-fetch('http://localhost:8081/api/symptoms?search=e')
-  .then((response) => {
-      return (response.json())
-}).then((data) => {
-    console.log(data);
-  });
-
 
 const generateSelectedMarker = (selectedMarkerList, markerList) => {
     var markerComponentList = []; 
