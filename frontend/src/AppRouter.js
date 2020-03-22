@@ -20,8 +20,8 @@ const AppRouter = _ => (
             </Route>
         </Switch>
         <Switch>
-            <Route path='/map/matching'>
-                <MovementMap/>
+            <Route path='/map/matching' className='movement-map'>
+                <MovementMap className='movement-map'/>
             </Route>
         </Switch>
         <Switch>

@@ -1,25 +1,41 @@
-import React, { useState } from 'react';
-import { Map, GoogleApiWrapper, Marker } from 'google-maps-react';
+import React, { useState, useEffect } from 'react';
 import MovementTable from './MovementTable';
 import './MovementMap.css'
 import UploadMovementButton from './UploadMovementButton';
 import UploadInfectedButton from './UploadInfectedButton';
-import markerMockUp from './MarkerMockUp'
+import { ArrowBarRight } from 'react-bootstrap-icons';
+import { Button } from 'react-bootstrap';
 
 
-const generateSelectedMarker = (selectedMarkerList, markerList) => {
+const google = window.google;
+const MarkerClusterer = window.MarkerClusterer;
+
+const generateSelectedMarker = (selectedMarkerList, markerList, map) => {
+      
     var markerComponentList = []; 
-    selectedMarkerList.forEach(markerId => {
+    selectedMarkerList.forEach(selectedMarker => {
         markerList.forEach(markerElement => {
-            if (markerId === markerElement.index) {
+            if (selectedMarker.index === markerElement.index) {
                 markerComponentList.push(markerElement)
             }
         })
     });
-    return markerComponentList;
+
+    var markers = markerComponentList.map(function(marker, i) {
+
+        const index = String(marker.index)
+        const lat = marker.latitude;
+        const long = marker.longitude;
+        const position = { lat: lat, lng: long }
+          return new google.maps.Marker({
+            position,
+            label: index
+          });
+    });
+    return markers;
 }
 
-const correctE7Values = markerList => {
+const correctAndFilterValues = markerList => {
     return markerList.filter(marker => {
         return marker.latitudeE7 !== 0 && marker.longitudeE7 !== 0;
     }).map((marker, index) => {
@@ -30,14 +46,26 @@ const correctE7Values = markerList => {
     });
 }
 
-const MovementMap = props => {
+function initMap() {
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 12,
+      center: { lat: 49.006, lng: 8.403 }
+    });
 
+    return map;
+    
+}
+ 
+const MovementMap = props => {
+    // const [ map, setMap ] = useState()
+    const [ map, setMap ] = useState();
     const [ markerList, setMarkerList ] = useState([]);
     const [ selectedMarkerList, setSelectedMarkerList ] = useState([]);
 
     const setNewMarkerList = newMarkerList => {
-        newMarkerList = correctE7Values(newMarkerList)
+        newMarkerList = correctAndFilterValues(newMarkerList);
         setMarkerList(newMarkerList);
+        setSelectedMarkerList(newMarkerList);
     }
 
     const addMarker = markerId => {
@@ -51,7 +79,14 @@ const MovementMap = props => {
     };
 
     const markerBundle = { markerList, addMarker, removeMarker };
-    const markerComponentList = generateSelectedMarker(selectedMarkerList, markerList)
+    const googleMarkerList = generateSelectedMarker(selectedMarkerList, markerList, map)
+
+    var markerCluster = new MarkerClusterer(map, googleMarkerList,
+        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+    useEffect(() => {
+        setMap(initMap());
+    },[]);
 
     return (
         <div className='movement-container'>
@@ -60,30 +95,21 @@ const MovementMap = props => {
                 <UploadInfectedButton/>
             </div>
             <div className='movement-information'>
-                <div className='movement-table'>
+                <div className='movement-sidebar'>
+                    <Button variant='secondary' className='movement-arrow-right-button'>
+                        <ArrowBarRight size={50} className='movement-arrow-right'/>
+                    </Button>
+
+                </div>
+                {/* <div className='movement-table'>
                     <MovementTable {...markerBundle}/>
-                </div>
-                <div>
-                    <Map
-                    className='collision-map'
-                    google={props.google}
-                    zoom={12}
-                    initialCenter={{ lat: 49.006, lng: 8.403 }}
-                    >   
-                    {markerComponentList.map(marker => {
-                        const index = marker.index
-                        const lat = marker.latitude;
-                        const long = marker.longitude;
-                        const position = { lat: lat, lng: long }
-                        return (<Marker index={index} position={position} />)
-                    })}
-                    </Map> 
-                </div>
+                </div> */}
+                <div className='movement-map' id='map'/>
             </div>
         </div>
     )
 }
 
 
-export default GoogleApiWrapper({ apiKey: 'AIzaSyD2BFWRom0XvQjkjvS6l6X5lbUS6JO3HpY' })(MovementMap);
+export default MovementMap;
 
